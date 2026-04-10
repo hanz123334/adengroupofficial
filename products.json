@@ -1,0 +1,16 @@
+[
+    { 
+        "name": "Koko Dewasa Panjang Amerta Laksmi", 
+        "brand": "ADEN HIJAB",
+        "price": "IDR 275,000", 
+        "img": "img/produk1.jpg", 
+        "url": "products/koko-amerta.html"
+    },
+    { 
+        "name": "Vastra Varna Prayer Set", 
+        "brand": "ADEN SIGNATURE",
+        "price": "IDR 695,000", 
+        "img": "img/mukena.jpg", 
+        "url": "products/vastra-varna.html"
+    }
+]

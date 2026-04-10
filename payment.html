@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aden Group Official | Payment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="icon" href="images/logo_aden_gold2.png" type="image/png">
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+<div class="bg-white w-full max-w-md rounded-xl shadow-xl overflow-hidden border border-gray-200">
+    <div class="p-6 border-b border-gray-100 bg-[#514136] sticky top-0 z-10">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-sm font-black text-white uppercase tracking-widest">Payment Methods</h1>
+        <div class="flex items-center gap-2 bg-stone-100 px-3 py-1 rounded-full border border-stone">
+            <span class="text-[12px] text-red-800 font-black uppercase">Pay within:</span>
+            <span id="countdown" class="text-[12px] text-red-600 font-black tabular-nums">00:60:00</span>
+        </div>
+    </div>
+    <div class="flex justify-between items-center">
+        <div>
+            <p id="invoice-id" class="text-[11px] text-stone-200 leading-none mb-1">INV-000000</p>
+            <p class="text-xl font-black text-white tracking-tight">Rp <span id="total-amount">0</span></p>
+        </div>
+<button onclick="toggleOrderDetails()" class="text-[11px] bg-[#90753a] px-3 py-2 rounded font-bold text-white hover:bg-[#765919] uppercase tracking-wider transition-all">
+    Details
+</button>
+
+<div id="details-modal" class="fixed inset-0 bg-black/40 backdrop-blur-[2px] hidden z-[999] flex items-center justify-center p-4 transition-all duration-300">
+    
+    <div class="bg-white w-full max-w-md rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 border border-gray-100">
+        
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white">
+            <h3 class="text-[11px] font-black uppercase tracking-[0.2em] text-gray-800">Order Summary</h3>
+            <button onclick="toggleOrderDetails()" class="text-gray-400 hover:text-gray-900 transition-colors p-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="modal-item-list" class="p-6 max-h-[50vh] overflow-y-auto space-y-4 bg-white">
+            </div>
+
+        <div class="p-6 bg-gray-50 border-t border-gray-100 space-y-3">
+            <div class="flex justify-between text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                <span>Shipping (<span id="modal-courier-name">-</span>)</span>
+                <span id="modal-shipping-cost">Rp 0</span>
+            </div>
+            
+            <div class="flex justify-between items-center pt-4 border-t border-dashed border-gray-300">
+                <span class="text-[13px] font-black text-gray-900 uppercase tracking-tight">Total Payment</span>
+                <span class="text-[16px] font-black text-gray-900">Rp <span id="modal-total-payment">0</span></span>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white border-t border-gray-50">
+            <button onclick="toggleOrderDetails()" class="w-full py-3 bg-stone-100 text-stone-600 rounded-lg font-bold text-[11px] uppercase tracking-widest hover:bg-stone-200 transition-all">
+                Close Details
+            </button>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+    <div class="p-4 space-y-2 max-h-[400px] overflow-y-auto bg-gray-50">
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2 mb-3">Bank Transfer</p>
+        
+        <button onclick="payNow('BNI')" class="w-full flex items-center justify-between p-4 bg-white hover:border-orange-500 border border-gray-100 rounded-xl transition-all group shadow-sm">
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-7 rounded flex items-center justify-center overflow-hidden">
+            <img src="https://i.pinimg.com/736x/ef/33/52/ef3352ee1f22a05508f2aa618bac5642.jpg" alt="BNI Logo" class="w-full h-full object-contain">
+        </div>
+        
+        <span class="text-xs font-bold text-gray-700">BNI Virtual Account</span>
+    </div>
+    <svg class="w-4 h-4 text-gray-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+    <button onclick="payNow('BRI')" class="w-full flex items-center justify-between p-4 bg-white hover:border-orange-500 border border-gray-100 rounded-xl transition-all group shadow-sm">
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-7 rounded flex items-center justify-center overflow-hidden">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Bendera_BRI_2025_%28Putih%29.svg/960px-Bendera_BRI_2025_%28Putih%29.svg.png?_=20251221004429" alt="BRI Logo" class="w-full h-full object-contain">
+        </div>
+        
+        <span class="text-xs font-bold text-gray-700">BRI Virtual Account</span>
+    </div>
+    <svg class="w-4 h-4 text-gray-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+    <button onclick="payNow('MANDIRI')" class="w-full flex items-center justify-between p-4 bg-white hover:border-orange-500 border border-gray-100 rounded-xl transition-all group shadow-sm">
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-7 rounded flex items-center justify-center overflow-hidden">
+            <img src="https://www.bankmandiri.co.id/documents/20143/44881086/ag-branding-logo-1.png/842d8cf8-b7fb-3014-9620-21f0f88d8377?t=1623309819034" alt="MANDIRI Logo" class="w-full h-full object-contain">
+        </div>
+        
+        <span class="text-xs font-bold text-gray-700">MANDIRI Virtual Account</span>
+    </div>
+    <svg class="w-4 h-4 text-gray-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+    <button onclick="payNow('BSI')" class="w-full flex items-center justify-between p-4 bg-white hover:border-orange-500 border border-gray-100 rounded-xl transition-all group shadow-sm">
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-7 rounded flex items-center justify-center overflow-hidden">
+            <img src="https://ridergalau.id/wp-content/uploads/2025/12/Logo-Bank-BSI-768x576.png" alt="BSI Logo" class="w-full h-full object-contain">
+        </div>
+        
+        <span class="text-xs font-bold text-gray-700">BSI Virtual Account</span>
+    </div>
+    <svg class="w-4 h-4 text-gray-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2 mt-4 mb-2">Instant Payment</p>
+    <button onclick="payNow('QRIS')" class="w-full flex items-center justify-between p-4 bg-white hover:border-pink-500 border border-gray-100 rounded-xl transition-all group shadow-sm">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-7 rounded flex items-center justify-center overflow-hidden">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/QRIS_Logo.svg/960px-QRIS_Logo.svg.png?_=20250310160237" alt="QRIS Logo" class="w-full h-full object-contain">
+        </div>
+            <span class="text-xs font-bold text-gray-700">QRIS Code</span>
+        </div>
+        <svg class="w-4 h-4 text-gray-300 group-hover:text-pink-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+</div>
+
+    <div class="p-6 bg-white border-t border-gray-100 flex items-center justify-center gap-2">
+        <svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"></path></svg>
+        <p class="text-[10px] text-gray-400 font-medium">Securely processed by Midtrans Simulation</p>
+    </div>
+</div>
+
+<script>
+    // Load Data Pesanan dari LocalStorage
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. AMBIL DATA PESANAN DARI LOCALSTORAGE
+    const orderData = JSON.parse(localStorage.getItem('lastOrder'));
+    
+    if (!orderData) {
+        window.location.href = 'index.html';
+        return;
+    }
+
+    // Tampilkan Invoice dan Total
+    document.getElementById('invoice-id').innerText = orderData.invoice;
+    document.getElementById('total-amount').innerText = orderData.total.toLocaleString('id-ID');
+
+    // 2. LOGIKA TIMER (RESET JIKA INVOICE BERBEDA)
+    const currentInvoice = orderData.invoice;
+    const savedInvoice = localStorage.getItem('activeInvoice');
+    let expiryTime = localStorage.getItem('paymentExpiry');
+
+    // JIKA: Pesanan baru (Invoice berbeda) ATAU Timer belum ada
+    if (currentInvoice !== savedInvoice || !expiryTime) {
+        // Set waktu kedaluwarsa baru: 60 menit dari sekarang
+        expiryTime = new Date().getTime() + (60 * 60 * 1000);
+        
+        localStorage.setItem('paymentExpiry', expiryTime);
+        localStorage.setItem('activeInvoice', currentInvoice); // Tandai invoice ini sebagai yang sedang diproses
+    }
+
+    const countdownElement = document.getElementById('countdown');
+
+    const updateTimer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = expiryTime - now;
+
+        // Jika waktu habis
+        if (distance <= 0) {
+            clearInterval(updateTimer);
+            countdownElement.innerText = "00:00:00";
+            localStorage.removeItem('paymentExpiry');
+            localStorage.removeItem('activeInvoice');
+            alert("Waktu pembayaran telah habis.");
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Hitung jam, menit, detik
+        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((distance / (1000 * 60)) % 60);
+        const seconds = Math.floor((distance / 1000) % 60);
+
+        // Update tampilan dengan format 00:00:00
+        countdownElement.innerText = 
+            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+});
+
+// 3. FUNGSI PEMBAYARAN (SIMULASI)
+function payNow(method) {
+    // 1. Ambil data order yang sudah ada
+    let orderData = JSON.parse(localStorage.getItem('lastOrder')) || {};
+    
+    // 2. Tambahkan metode pembayaran yang dipilih
+    orderData.paymentMethod = method;
+    
+    // 3. Simpan kembali ke localStorage
+    localStorage.setItem('lastOrder', JSON.stringify(orderData));
+
+    // 4. Simulasi Loading
+    const body = document.querySelector('body');
+    const loader = document.createElement('div');
+    loader.className = "fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]";
+    loader.innerHTML = `
+        <div class="bg-white p-8 rounded-2xl flex flex-col items-center shadow-2xl">
+            <div class="w-10 h-10 border-4 border-stone-800 border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p class="text-xs font-bold uppercase tracking-widest text-gray-600">Generating ${method} VA...</p>
+        </div>
+    `;
+    body.appendChild(loader);
+
+    // 5. Pindah ke halaman Virtual Account setelah 1.5 detik
+    setTimeout(() => {
+        window.location.href = 'virtual-account.html';
+    }, 1500);
+}
+
+// 4. FUNGSI MODAL DETAILS
+function toggleOrderDetails() {
+    const modal = document.getElementById('details-modal');
+    if (modal.classList.contains('hidden')) {
+        renderModalContent();
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    } else {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function renderModalContent() {
+    const orderData = JSON.parse(localStorage.getItem('lastOrder'));
+    const listContainer = document.getElementById('modal-item-list');
+    
+    if (!orderData || !orderData.items) return;
+
+    listContainer.innerHTML = orderData.items.map(item => {
+        const price = typeof item.price === 'string' ? 
+                      parseInt(item.price.replace(/[^0-9]/g, '')) : item.price;
+        return `
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-14 bg-gray-100 rounded-lg overflow-hidden shrink-0 border border-gray-100">
+                    <img src="${item.image}" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-grow">
+                    <h4 class="text-[11px] font-extrabold text-gray-800 uppercase leading-tight">${item.name}</h4>
+                    <p class="text-[11px] text-gray-600 uppercase font-semibold mt-0.5">${item.color} - ${item.size}</p>
+                    <p class="text-[12px] text-gray-400 mt-1">${item.qty} Pcs * Rp ${price.toLocaleString('id-ID')}</p>
+                </div>
+                <span class="text-[11px] font-bold text-gray-700">Rp ${(price * item.qty).toLocaleString('id-ID')}</span>
+            </div>
+        `;
+    }).join('');
+
+    // Mapping kurir (sesuaikan dengan harga di checkout)
+    const shippingRates = { 'JNE EXPRESS': 15000, 'JNT EXPRESS': 12000, 'SICEPAT GOKIL': 18000, 'ANTERAJA': 14000 };
+    const shippingCost = shippingRates[orderData.courier] || 0;
+
+    document.getElementById('modal-courier-name').innerText = orderData.courier || 'Standard';
+    document.getElementById('modal-shipping-cost').innerText = `Rp ${shippingCost.toLocaleString('id-ID')}`;
+    document.getElementById('modal-total-payment').innerText = orderData.total.toLocaleString('id-ID');
+}
+
+// Tutup modal jika klik luar
+document.getElementById('details-modal').addEventListener('click', function(e) {
+    if (e.target === this) toggleOrderDetails();
+});
+
+</script>
+
+</body>
+</html>

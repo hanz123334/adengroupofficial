@@ -1,0 +1,357 @@
+/* Custom Variables untuk konsistensi warna */
+:root {
+    --klamby-beige: #f5f5f4;
+    --klamby-dark: #1c1917;
+    --klamby-gold: #c5a059;
+}
+
+/* 1. Efek Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 2. Tipografi Premium */
+.serif {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -0.02em;
+}
+
+.tracking-extra {
+    letter-spacing: 0.3em;
+}
+
+/* 3. Animasi Gambar Produk (Zoom on Hover) */
+.product-card img {
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-card:hover img {
+    transform: scale(1.08);
+}
+
+/* 4. Overlay "Quick Add" yang Mulus */
+.quick-add-btn {
+    transform: translateY(100%);
+    transition: transform 0.4s ease-out, opacity 0.3s;
+    opacity: 0;
+}
+
+.product-card:hover .quick-add-btn {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 5. Custom Scrollbar agar tidak merusak estetika */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--aden);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5e5d5d;
+    border-radius: 10px;
+}
+
+/* 6. Efek Transisi Navbar */
+nav {
+    transition: all 0.3s ease-in-out;
+}
+
+/* 7. Skeleton Loading Style (Opsional untuk kesan pro) */
+.loading-shimmer {
+    background: linear-gradient(90deg, #f5f5f4 25%, #e7e5e4 50%, #f5f5f4 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+/* Warna Gold Solid */
+.text-gold {
+    color: #C5A059;
+}
+
+/* Warna Gold Gradient (Mewah/Berkilau) */
+.bg-gold-gradient {
+    background: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+    border: none;
+}
+
+/* Efek Gold Metalik pada Teks */
+.text-gold-metallic {
+    background: linear-gradient(to right, #BF953F 0%, #FCF6BA 50%, #B38728 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+/* Warna Solid */
+.bg-brown-dark {
+    background-color: #1C1917; /* Espresso */
+    color: #f5f4f4; /* Teks Putih Gading agar kontras */
+}
+
+.bg-brown-soft {
+    background-color: #6e5443; /* Dusty Brown */
+}
+
+/* Gradient Cokelat Mewah (Efek Semburat Cahaya) */
+.bg-brown-gradient {
+    background: linear-gradient(135deg, #44403C 0%, #1C1917 100%);
+}
+
+    /* Menyembunyikan Scrollbar tapi tetap bisa di-scroll */
+        .serif { font-family: 'Playfair Display', serif; }
+    
+    /* Lock scroll saat menu terbuka */
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /* Overlay agar muncul dengan halus */
+    #menu-overlay.active {
+        display: block !important;
+        opacity: 1 !important;
+    }
+
+    /* Scrollbar minimalis untuk menu */
+    #mobile-menu::-webkit-scrollbar {
+        width: 2px;
+    }
+    #mobile-menu::-webkit-scrollbar-thumb {
+        background: #e5e7eb;
+    }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Pattern background halus (Opsional) */
+        .bg-pattern {
+            background-color: #FDFBF7; /* Warna cream muda */
+            background-image: radial-gradient(#E5E7EB 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+  /* Pastikan body tidak pernah melebarkan scrollbar saat ada elemen translate */
+body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* Custom scrollbar untuk container cart agar lebih cantik */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #514136;
+}
+
+    /* Mencegah scroll saat menu terbuka */
+    body.menu-open {
+        overflow: hidden;
+        height: 100vh;
+    }
+    /* Kunci scroll untuk Desktop & HP */
+    .lock-scroll {
+        overflow: hidden !important;
+        height: 100% !important;
+        position: fixed !important; /* Solusi ampuh untuk iOS/Safari */
+        width: 100% !important;
+    }
+
+    /* Pastikan area suggestion tetap bisa di-scroll secara mandiri */
+    #drop-suggestion, #over-mobile {
+        overscroll-behavior: contain; /* Mencegah scroll tembus ke belakang */
+    }
+
+    
+    /* Memastikan teks nama produk 2 baris tetap rapi */
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
+    
+
+
+    /* Mempercantik scrollbar di dalam blok cart saja */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #514136;
+    }
+    /* Class tambahan untuk memastikan penguncian paksa */
+    .no-scroll {
+        overflow: hidden !important;
+        height: 100vh !important;
+        position: fixed; /* Solusi pamungkas untuk iOS */
+        width: 100%;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fade-in-up 0.8s ease-out forwards; }
+        
+        .product-card { opacity: 0; } /* Untuk staggered animation via JS */
+
+        @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.animate-fade-in {
+    animation: fadeInRight 0.5s ease forwards;
+}
+
+/* Efek Loading Berputar */
+.loading-spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgb(107, 107, 107);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Gambar yang terbang */
+.flying-item {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    transition: all 0.8s cubic-bezier(0.42, 0, 0.58, 1);
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Animasi Badge Bergetar saat barang masuk */
+@keyframes shake {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+}
+.cart-shake {
+    animation: shake 0.4s ease;
+}
+#cart-items-container {
+    -webkit-overflow-scrolling: touch; /* Membuat scroll di HP terasa halus (inertia scroll) */
+}
+
+/* Memastikan overlay benar-benar menutupi seluruh layar di HP */
+#cart-overlay {
+    backdrop-filter: blur(2px); /* Memberikan efek blur pada latar belakang agar fokus ke cart */
+    -webkit-backdrop-filter: blur(2px);
+}
+#side-cart {
+    /* Mencegah "pantulan" scroll saat sudah di ujung atas/bawah */
+    overscroll-behavior: contain;
+}
+
+#cart-items-container {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Scroll halus di iPhone */
+    overscroll-behavior: contain;
+}
+  /* Animasi halus saat ikon berganti */
+    .animate-reveal {
+        animation: reveal 0.3s ease-out;
+    }
+    @keyframes reveal {
+        from { opacity: 0; transform: scale(0.5) rotate(-90deg); }
+        to { opacity: 1; transform: scale(1) rotate(0); }
+    }
+    @font-face {
+    font-family: 'BlackChancery'; /* Nama bebas yang akan dipanggil nanti */
+    src: url('font/BLKCHCRY.ttf') format('truetype'); /* Arahkan ke lokasi file */
+    font-weight: normal;
+    font-style: normal;
+}
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    .animate-spin {
+        animation: spin 1s linear infinite;
+        display: inline-block;
+    }
+
+    @keyframes cart-shake {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2) rotate(5deg); }
+    50% { transform: scale(1.2) rotate(-5deg); }
+    100% { transform: scale(1); }
+}
+.cart-shake { animation: cart-shake 0.4s ease-in-out; }
+
+
+    #btn-plus {
+        transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .font-black {
+        font-weight: 900;
+        transform: scale(1.2);
+    }
+
+
+    /* Class untuk tombol yang stoknya habis */
+    .size-out-of-stock {
+        position: relative;
+        overflow: hidden;
+        opacity: 0.5;
+        background-color: #f5f5f5;
+        cursor: not-allowed !important;
+        border-color: #d1d1d1 !important;
+        color: #a1a1a1 !important;
+    }
+
+    /* Membuat garis merah diagonal */
+    .size-out-of-stock::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1.5px;
+        background-color: #ef4444; /* Warna merah Tailwind red-500 */
+        transform: rotate(-25deg);
+        pointer-events: none;
+    }
+
+
+        .fade-up-element {
+        opacity: 0;
+        transform: translateY(20px); /* Bergeser 20px ke bawah */
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        visibility: hidden; /* Mencegah elemen terlihat sebelum animasi */
+    }
+
+    /* State Akhir saat animasi berjalan (dipicu oleh JS) */
+    .fade-up-element.animate-in {
+        opacity: 1;
+        transform: translateY(0); /* Kembali ke posisi asli */
+        visibility: visible;
+    }

@@ -1,0 +1,56 @@
+
+coding Badge Wishlist Love pada Product card
+
+            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group relative" 
+     data-brand="Aden Hijab"
+     data-name="Dress Kids Lengan Panjang Amerta Laksmi"
+     data-colour="Indian Tan"
+     data-size="XXS" 
+     data-price="Rp 300.000" 
+     data-category="dress">
+    
+    <button onclick="addToWishlistFromCard(this, event)" 
+        class="wishlist-btn absolute top-3 right-3 z-20 p-2 bg-white/80 backdrop-blur-md rounded-full text-stone-400 hover:text-red-500 transition-all duration-300 shadow-sm focus:outline-none group/love">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover/love:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    </svg>
+</button>
+
+    <a href="../products/amerta-laksmi-dress-kids-lengan-panjang.html" class="flex flex-col h-full">
+        <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+            <img src="https://i.ibb.co.com/WWR8WB15/Screenshot-2026-01-16-at-14-04-38-Instagram.png" class="product-img-main w-full h-full object-cover transition duration-500">
+            <img src="https://i.ibb.co.com/qLfWr7Wb/Screenshot-2026-01-16-at-14-06-55-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+        </div>
+        <div class="p-3 md:p-4">
+            <h4 class="product-name-text text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Amerta Laksmi</h4>
+            <p class="text-stone-400 text-[9px] md:text-sm mt-1">Indian Tan</p>
+            <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 300.000</p>
+        </div>
+    </a>
+</div>
+
+
+
+
+Script Pre Order
+
+            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group relative" 
+         data-name="Dress Kids Lengan Panjang Rambat Raya Ivory" data-price="365000" data-category="dress">
+        
+        <span class="absolute top-2 left-2 z-10 bg-stone-800/80 backdrop-blur-sm text-white text-[8px] md:text-[10px] px-2 py-1 rounded-sm uppercase tracking-widest font-medium">
+            Pre-Order
+        </span>
+
+        <a href="../products/rambat-raya-dress-kids-lengan-panjang=ivory.html" class="flex flex-col h-full">
+            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+                <img src="https://i.ibb.co.com/YBzn84x3/ivory-dress-kids1.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <img src="https://i.ibb.co.com/DD7B4v5m/ivory-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+            </div>
+
+            <div class="p-3 md:p-4">
+                <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Rambat Raya</h4>
+                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Ivory</p>
+                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 125.000 - Rp 540.000</p>
+            </div>
+        </a>
+    </div>

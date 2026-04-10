@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - Aden Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="bg-stone-50 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border">
+        <h2 class="text-2xl font-bold mb-6 text-stone-800 uppercase tracking-widest">Tambah Produk Baru</h2>
+        
+        <form id="adminForm" class="grid grid-cols-2 gap-6">
+            <div class="col-span-2">
+                <label class="block text-xs font-bold uppercase mb-2">Foto Produk (Utama)</label>
+                <input type="file" id="pImg" accept="image/*" class="w-full border p-2 rounded" required>
+                <input type="hidden" id="pImgBase64">
+            </div>
+            
+            <div>
+                <label class="block text-xs font-bold uppercase mb-2">Nama Produk</label>
+                <input type="text" id="pName" class="w-full border p-2 rounded" placeholder="Contoh: Amerta Laksmi Dress" required>
+            </div>
+            
+            <div>
+                <label class="block text-xs font-bold uppercase mb-2">Harga (Angka saja)</label>
+                <input type="number" id="pPrice" class="w-full border p-2 rounded" placeholder="595000" required>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase mb-2">Warna</label>
+                <input type="text" id="pColor" class="w-full border p-2 rounded" placeholder="Dark Crimson" required>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase mb-2">Jenis Produk</label>
+                <select id="pType" class="w-full border p-2 rounded">
+                    <option value="Dress Kids">Dress Kids</option>
+                    <option value="Dress Mom">Dress Mom</option>
+                    <option value="Koko">Koko</option>
+                </select>
+            </div>
+
+            <div class="col-span-2">
+                <label class="block text-xs font-bold uppercase mb-2">Detail Produk (Gunakan Enter untuk baris baru)</label>
+                <textarea id="pDetail" class="w-full border p-2 rounded h-32" placeholder="Material: Silk, Busui Friendly, dll"></textarea>
+            </div>
+
+            <button type="submit" class="col-span-2 bg-[#90753a] text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-black transition">Simpan & Publikasikan</button>
+        </form>
+
+        <div class="mt-10">
+            <h3 class="font-bold mb-4">Daftar Produk Saat Ini</h3>
+            <div id="adminList" class="space-y-2"></div>
+        </div>
+    </div>
+
+    <script>
+        const fInput = document.getElementById('pImg');
+        fInput.onchange = e => {
+            const reader = new FileReader();
+            reader.onload = () => document.getElementById('pImgBase64').value = reader.result;
+            reader.readAsDataURL(e.target.files[0]);
+        };
+
+        const form = document.getElementById('adminForm');
+        form.onsubmit = e => {
+            e.preventDefault();
+            const products = JSON.parse(localStorage.getItem('aden_store')) || [];
+            
+            const newProduct = {
+                id: Date.now(),
+                name: document.getElementById('pName').value,
+                price: document.getElementById('pPrice').value,
+                color: document.getElementById('pColor').value,
+                type: document.getElementById('pType').value,
+                detail: document.getElementById('pDetail').value,
+                img: document.getElementById('pImgBase64').value
+            };
+
+            products.push(newProduct);
+            localStorage.setItem('aden_store', JSON.stringify(products));
+            alert('Produk berhasil ditambah!');
+            location.reload();
+        };
+
+        // Render List untuk hapus
+        const list = document.getElementById('adminList');
+        const saved = JSON.parse(localStorage.getItem('aden_store')) || [];
+        saved.forEach((p, i) => {
+            list.innerHTML += `<div class="flex justify-between border-b py-2 text-sm">
+                <span>${p.name} (${p.color})</span>
+                <button onclick="deleteP(${i})" class="text-red-500">Hapus</button>
+            </div>`;
+        });
+
+        function deleteP(i) {
+            const products = JSON.parse(localStorage.getItem('aden_store'));
+            products.splice(i, 1);
+            localStorage.setItem('aden_store', JSON.stringify(products));
+            location.reload();
+        }
+    </script>
+</body>
+</html>

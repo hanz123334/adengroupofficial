@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNI Virtual Account - Payment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfcfc; }
+        .snap-shadow { box-shadow: 0 8px 30px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-md bg-white rounded-2xl snap-shadow overflow-hidden border border-gray-100">
+        
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-10">
+            <div class="flex items-center gap-3">
+                <button onclick="window.history.back()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <h1 class="text-sm font-bold text-gray-800 uppercase tracking-widest">Bank Transfer</h1>
+            </div>
+            <div class="bg-red-50 px-3 py-1 rounded-full border border-red-100 flex items-center gap-2">
+                <span id="countdown" class="text-[11px] text-red-600 font-bold tabular-nums">23:59:59</span>
+            </div>
+        </div>
+
+        <div class="p-6 bg-gray-50 flex justify-between items-center border-b border-gray-100">
+            <div>
+                <p id="display-invoice" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">INV-XXXXX</p>
+                <p class="text-lg font-black text-gray-800">IDR <span id="display-total">0</span></p>
+            </div>
+            <button onclick="toggleDetails()" class="text-[10px] font-bold text-blue-600 uppercase border border-blue-200 px-3 py-1.5 rounded-lg hover:bg-blue-50">Details</button>
+        </div>
+
+        <div class="p-8">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-8 flex items-center justify-center overflow-hidden">
+                    <img id="bank-logo-va" src="" class="w-full h-full object-contain">
+                </div>
+                <h2 id="bank-name-display" class="text-sm font-bold text-gray-700 uppercase tracking-tight">BNI Virtual Account</h2>
+            </div>
+
+            <div class="space-y-2 mb-8">
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Virtual Account Number</label>
+                <div class="flex items-center justify-between p-5 bg-gray-50 border border-gray-200 rounded-xl group">
+                    <span id="va-number" class="text-xl font-mono font-bold text-gray
