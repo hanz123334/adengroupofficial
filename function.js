@@ -11,28 +11,7 @@ const products = [
         colour: 'Ivory', 
         price: 'Rp 125.000 - Rp 540.000'
     },
-
-    { 
-        name: 'Dress Kids Lengan Panjang Rambat Raya', 
-        brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
-        url: '/products/rambat-raya-dress-kids-lengan-panjang=ivory.html', 
-        img: '/images/rambat-raya/ivory-dress-kids1.jpg',
-        imgHover: '/images/rambat-raya/ivory-dress-kids.jpg',
-        colour: 'Ivory', 
-        price: 'Rp 125.000 - Rp 540.000'
-    },
-
-    { 
-        name: 'Dress Kids Lengan Panjang Rambat Raya', 
-        brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
-        url: '/products/rambat-raya-dress-kids-lengan-panjang=ivory.html', 
-        img: '/images/rambat-raya/ivory-dress-kids1.jpg',
-        imgHover: '/images/rambat-raya/ivory-dress-kids.jpg',
-        colour: 'Ivory', 
-        price: 'Rp 125.000 - Rp 540.000'
-    },
+    
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
