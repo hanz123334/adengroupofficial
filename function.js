@@ -2,14 +2,14 @@
 ////////////////////////////////////////////////////////////////////////* SCRIPT TOMBOL SEARCH//////////////////////////////////////////////////////////////////////////
 const products = [
     { 
-        name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
+        name: 'Dress Kids Lengan Panjang Rambat Raya', 
         brand: 'ADEN HIJAB',
         // Gunakan path dari root folder project Anda
-        url: '../products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html', 
-        img: '/images/amerta-laksmi/nature-black-dress-kids1.jpg',
-        imgHover: '/images/amerta-laksmi/nature-black-dress-kids2.jpg',
-        colour: 'Nature Black', 
-        price: 'Rp 100.000 - Rp 480.000'
+        url: '../products/rambat-raya-dress-kids-lengan-panjang=ivory.html', 
+        img: '../../images/rambat-raya/ivory-dress-kids1.jpg',
+        imgHover: '../../images/rambat-raya/ivory-dress-kids.jpg',
+        colour: 'Ivory', 
+        price: 'Rp 125.000 - Rp 540.000'
     },
     
 ];
