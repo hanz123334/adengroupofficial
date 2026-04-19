@@ -8,7 +8,7 @@ const products = [
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html', 
         img: '../../images/amerta-laksmi/nature-black-dress-kids1.jpg',
         imgHover: '../../images/amerta-laksmi/nature-black-dress-kids2.jpg',
-        colour: 'NatureBlack', 
+        colour: 'Nature Black', 
         price: 'Rp 100.000 - Rp 480.000'
     },
     
