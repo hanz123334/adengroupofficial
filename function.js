@@ -6,19 +6,12 @@ const products = [
         brand: 'ADEN HIJAB',
         // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html', 
-        img: '../../images/hx4CVM8G/nature-black-dress-kids1.jpg',
-        colour: 'NatureBlack', 
+        img: 'images/amerta-laksmi/nature-black-dress-kids1.jpg',
+        imgHover: 'images/amerta-laksmi/nature-black-dress-kids2.jpg',
+        colour: 'Nature Black', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-    { 
-        name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
-        brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
-        url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=straw.html', 
-        img: '../../images/pj3VPwRC/straw-dress-kids.jpg',
-        colour: 'Straw', 
-        price: 'Rp 100.000 - Rp 480.000'
-    },
+    
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,7 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="product-item h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group animate-fade-up relative z-50">
             <a href="${p.url}" class="flex flex-col h-full cursor-pointer">
                 <div class="relative bg-stone-200 overflow-hidden aspect-[3/4]">
-                    <img src="${p.img}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                    <img src="${p.img}" 
+                         class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                    
+                    <img src="${p.imgHover || p.img}" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105">
                 </div>
                 
                 <div class="p-3 md:p-4">
@@ -62,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h4 class="text-[11px] md:text-sm font-medium text-stone-800 line-clamp-2 h-[2.8em] leading-tight">
                         ${p.name}
                     </h4>
-                    <p class="text-stone-400 text-[9px] md:text-[11px] mt-1 italic">${p.colour}</p>
+                    <p class="text-stone-400 text-[9px] md:text-[11px] mt-1">${p.colour}</p>
                     <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">
                         ${p.price}
                     </p>
