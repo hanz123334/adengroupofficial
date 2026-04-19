@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     targetGrid.innerHTML = data.map(p => `
         <div class="product-item h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group animate-fade-up relative z-50">
             <a href="${p.url}" class="flex flex-col h-full cursor-pointer">
-                <div class="relative bg-stone-200 overflow-hidden aspect-[3/4]">
+                <div class="relative bg-stone-200 overflow-hidden">
                     <img src="${p.img}" 
                          class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
                     
