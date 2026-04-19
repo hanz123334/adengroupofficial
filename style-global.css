@@ -355,3 +355,32 @@ body {
         transform: translateY(0); /* Kembali ke posisi asli */
         visibility: visible;
     }
+
+
+    /* Coding Drag Slide You My Also Likepada halaman produk */
+    /* Hanya aktif pada layar mobile (di bawah 640px) */
+@media (max-width: 639px) {
+    .mobile-drag-scroll {
+        display: flex !important;       /* Paksa menjadi menyamping */
+        overflow-x: auto;              /* Izinkan scroll horizontal */
+        scroll-snap-type: x mandatory; /* Efek magnet saat digeser */
+        scrollbar-width: none;         /* Sembunyikan scrollbar (Firefox) */
+        -ms-overflow-style: none;      /* Sembunyikan scrollbar (IE/Edge) */
+        padding-bottom: 10px;          /* Ruang agar bayangan tidak terpotong */
+        padding-left: 5px;             /* Padding samping agar tidak menempel layar */
+    }
+
+    /* Sembunyikan scrollbar untuk Chrome, Safari, dan Opera */
+    .mobile-drag-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mobile-drag-scroll .product-item {
+        /* 46% memastikan tampil 2 produk dengan sedikit celah 
+           agar produk ke-3 terlihat sedikit (mengundang user untuk geser) */
+        flex: 0 0 46%;                 
+        min-width: 46%;
+        scroll-snap-align: start;      /* Berhenti tepat di awal kartu produk */
+        margin-right: 5px;             /* Jarak antar item */
+    }
+}
