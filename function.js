@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <a href="${p.url}" class="flex flex-col h-full cursor-pointer">
                 <div class="relative bg-stone-200 overflow-hidden">
                     <img src="${p.img}" 
-                         class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                         class="w-full h-full transition duration-500 group-hover:scale-105">
                     
                     <img src="${p.imgHover || p.img}" 
                          class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105">
