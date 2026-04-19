@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${p.name}
                     </h4>
                     <p class="text-stone-400 text-[9px] md:text-[11px] mt-1">${p.colour}</p>
-                    <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">
+                    <p class="text-stone-800 text-[9px] md:text-sm font-medium mt-1 tracking-tight">
                         ${p.price}
                     </p>
                 </div>
@@ -81,11 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const labelStatus = document.getElementById(labelId);
 
         if (val === "") {
-            labelStatus.innerText = "Cari Produk Kami";
+            labelStatus.innerText = "Find Products";
             render([], gridId, false);
         } else {
             const filtered = products.filter(p => p.name.toLowerCase().includes(val));
-            labelStatus.innerText = `Hasil untuk: "${val}"`;
+            labelStatus.innerText = `Result for: "${val}"`;
             render(filtered, gridId, true);
         }
     };
