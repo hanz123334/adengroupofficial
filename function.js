@@ -74,11 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const labelStatus = document.getElementById(labelId);
 
         if (val === "") {
-            labelStatus.innerText = "Cari Produk Kami";
+            labelStatus.innerText = "Find Product";
             render([], gridId, false);
         } else {
             const filtered = products.filter(p => p.name.toLowerCase().includes(val));
-            labelStatus.innerText = `Hasil untuk: "${val}"`;
+            labelStatus.innerText = `Result for: "${val}"`;
             render(filtered, gridId, true);
         }
     };
