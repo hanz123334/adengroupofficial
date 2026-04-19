@@ -5,6 +5,17 @@ const products = [
         name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
         // Gunakan path dari root folder project Anda
+        url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=straw.html', 
+        img: '../../images/amerta-laksmi/straw-dress-kids.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-dress-kids2.jpg',
+        colour: 'Straw', 
+        price: 'Rp 100.000 - Rp 480.000'
+    },
+
+    { 
+        name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html', 
         img: '../../images/amerta-laksmi/nature-black-dress-kids1.jpg',
         imgHover: '../../images/amerta-laksmi/nature-black-dress-kids2.jpg',
@@ -16,12 +27,35 @@ const products = [
         name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
         // Gunakan path dari root folder project Anda
-        url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html', 
-        img: '../../images/amerta-laksmi/nature-black-dress-kids1.jpg',
-        imgHover: '../../images/amerta-laksmi/nature-black-dress-kids2.jpg',
+        url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-dress-kids.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-dress-kids1.jpg',
         colour: 'Indian Tan', 
         price: 'Rp 100.000 - Rp 480.000'
     },
+
+    { 
+        name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        // Gunakan path dari root folder project Anda
+        url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-dress-kids.jpg',
+        imgHover: '../../images/amerta-laksmi/heliotrope-dress-kids2.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 100.000 - Rp 480.000'
+    },
+
+    { 
+        name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        // Gunakan path dari root folder project Anda
+        url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/crimson-dress-kids.jpg',
+        imgHover: '../../images/amerta-laksmi/crimson-dress-kids1.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 100.000 - Rp 480.000'
+    },
+    
     
 ];
 
