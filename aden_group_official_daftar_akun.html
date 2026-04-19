@@ -348,7 +348,7 @@ document.getElementById('menu-overlay').addEventListener('click', closeMobileMen
     </button>
         <div class="text-left">
             <a href="index.html" class="block ml-4 md:ml-8"> 
-                <img src="https://i.ibb.co.com/8Dbs8ZkX/logo-text-aden-hijab.png" alt="ADEN GROUP" class="h-6 md:h-6 w-auto object-contain">
+                <img src="images/logo_text_aden_hijab.png" alt="ADEN GROUP" class="h-6 md:h-6 w-auto object-contain">
             </a>
         </div>
     </div>
@@ -664,7 +664,7 @@ function toggleSubMenu(id) {
         <div class="flex items-center h-full min-w-[60px] justify-center">
             <div id="wa-icon-toggle" class="flex items-center justify-center">
                 <div id="icon-wrapper" class="w-8 h-8 flex items-center justify-center">
-                    <img src="https://i.ibb.co.com/HLGfWDJD/whatsapp-line-5.png" class="w-7 h-7 object-contain grayscale brightness-200">
+                    <img src="images/whatsapp-white-icon.png" class="w-7 h-7 object-contain grayscale brightness-200">
                 </div>
             </div>
         </div>
@@ -892,40 +892,6 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
         window.location.href = 'aden_group_official_login.html';
     });
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. AMBIL DATA USER DARI LOCALSTORAGE
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    if (currentUser) {
-        // 2. AUTO-FILL FORM (Email, First Name, Last Name)
-        const emailField = document.getElementById('email');
-        const firstNameField = document.getElementById('firstname');
-        const lastNameField = document.getElementById('lastname');
-
-        if (emailField) emailField.value = currentUser.email || '';
-        if (firstNameField) firstNameField.value = currentUser.firstName || '';
-        if (lastNameField) lastNameField.value = currentUser.lastName || '';
-
-        // 3. HILANGKAN TOMBOL/TEKS LOGIN
-        // Mencari paragraf yang berisi instruksi login di bagian atas form
-        const loginContainer = document.querySelector('p.text-xs.text-stone-500');
-        if (loginContainer && loginContainer.textContent.includes('Log in')) {
-            loginContainer.style.display = 'none';
-        }
-
-        // 4. JALANKAN SAVE OTOMATIS
-        // Agar data yang terisi otomatis langsung tersimpan di sistem draft checkout Anda
-        if (typeof saveCheckoutData === "function") {
-            saveCheckoutData();
-        }
-    }
-
-    // --- CODING ASLI ANDA DI BAWAH INI (JANGAN DIHAPUS) ---
-    if (typeof loadCheckoutData === "function") {
-        loadCheckoutData();
-    }
-});
 </script>
 
 <!-------------------------------------------------------------------------FOOTER-------------------------------------------------------------------------------->
@@ -969,4 +935,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     <i class="fa fa-youtube-play"></i>
                 </a>
                 <a href="https://www.tiktok.com/@aden_hijab" target="_blank" rel="noopener noreferrer" class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="roun
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                    </svg>
+                </a>
+            </div>
+            <p class="mt-4 text-[13px] space-y-2">Get the latest info from our social media</p>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/10 text-center text-[10px] uppercase tracking-[0.2em]">
+        &copy; 2026 Aden Group Official
+    </div>
+</footer>
+    </body>
+    </html>
