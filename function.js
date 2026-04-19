@@ -6,7 +6,7 @@ const products = [
         brand: 'ADEN HIJAB',
         // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html', 
-        img: 'https://i.ibb.co.com/hx4CVM8G/nature-black-dress-kids1.jpg',
+        img: '../../images/hx4CVM8G/nature-black-dress-kids1.jpg',
         colour: 'NatureBlack', 
         price: 'Rp 100.000 - Rp 480.000'
     },
@@ -15,7 +15,7 @@ const products = [
         brand: 'ADEN HIJAB',
         // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=straw.html', 
-        img: 'https://i.ibb.co.com/pj3VPwRC/straw-dress-kids.jpg',
+        img: '../../images/pj3VPwRC/straw-dress-kids.jpg',
         colour: 'Straw', 
         price: 'Rp 100.000 - Rp 480.000'
     },
@@ -164,18 +164,24 @@ function saveCartToStorage() {
     const rows = document.querySelectorAll('.cart-item-row');
     
     rows.forEach(row => {
+        const priceAttr = row.querySelector('.side-cart-price').getAttribute('data-unit-price');
         cartItems.push({
-            brand: row.querySelector('.item-brand-info').innerText, // Ambil Brand
+            brand: row.querySelector('.item-brand-info').innerText,
             name: row.querySelector('.item-name-info').innerText,
             color: row.querySelector('.item-color-info').innerText.split(': ')[1] || row.querySelector('.item-color-info').innerText,
             size: row.querySelector('.item-size-info').innerText.split(': ')[1] || row.querySelector('.item-size-info').innerText,
             qty: parseInt(row.querySelector('.qty-value').innerText),
-            price: parseInt(row.querySelector('.side-cart-price').getAttribute('data-unit-price')),
+            price: parseInt(priceAttr),
             image: row.querySelector('img').src,
             link: row.querySelector('a') ? row.querySelector('a').href : "#"
         });
     });
+    
     localStorage.setItem('myCart', JSON.stringify(cartItems));
+
+    if (document.getElementById('order-list-content')) {
+        renderProfileCart();
+    }
 }
 
 function renderCartFromStorage() {
@@ -545,7 +551,7 @@ function renderWishlist() {
         return `
         <div class="flex gap-4 border-b border-stone-100 pb-6 relative group">
             <a href="${productLink}" class="w-20 h-28 bg-stone-50 overflow-hidden shrink-0 block">
-                <img src="${item.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <img src="${item.image}" class="w-full h-full group-hover:scale-110 transition-transform duration-500">
             </a>
 
             <div class="flex-grow flex flex-col justify-between py-0.5">
@@ -601,10 +607,25 @@ function removeFromWishlist(id) {
     wishlist = wishlist.filter(item => item.id !== id);
     localStorage.setItem('myWishlist', JSON.stringify(wishlist));
     
+    // 1. Update UI Side Wishlist
     renderWishlist();
     updateWishlistBadge();
-    syncWishlistIcons(); // Update love icon di card
-    updateDetailWishlistBtn(); // Update tombol Save/Remove di halaman detail
+    syncWishlistIcons(); 
+    updateDetailWishlistBtn(); 
+
+    // 2. UPDATE UI PROFIL SECARA INSTAN
+    // Cek apakah elemen 'order-list-content' (kontainer di profil) ada di halaman saat ini
+    const profileContainer = document.getElementById('order-list-content');
+    if (profileContainer) {
+        // Jika fungsi renderProfileWishlist tersedia, panggil untuk update tab profil
+        if (typeof renderProfileWishlist === "function") {
+            renderProfileWishlist();
+        } 
+        // Atau jika Anda menggunakan sistem switchTab, panggil ini:
+        else if (typeof switchTab === "function") {
+            switchTab('wishlist');
+        }
+    }
 }
 
    function openWishlist() {
@@ -755,10 +776,16 @@ function moveWishlistToCart(id) {
         // --- UPDATE SEMUA TAMPILAN ---
         if (typeof renderCartFromStorage === "function") renderCartFromStorage();
         updateCartBadge();
-        renderWishlist(); // Render ulang agar tombol berubah jadi "View on Cart"
-        
-        // Opsional: Langsung buka cart setelah klik add
-        // setTimeout(() => { closeWishlist(); openCart(); }, 300);
+        if (typeof renderWishlist === "function") renderWishlist();
+        if (document.getElementById('order-list-content')) {
+            // Jika user sedang berada di halaman login/profil, render ulang isinya
+            if (typeof renderProfileCart === "function") {
+                renderProfileCart();
+            }
+        }
+        if (typeof switchTab === "function" && document.getElementById('btn-cart')) {
+            switchTab('myCart');
+        }
     }
 }
 
@@ -1232,6 +1259,150 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 100 + (index * 100)); 
         });
     });
+
+//////////////////////////*SCRIPT MYCART PROFILE////////////////////////////////////////
+
+// FUNGSI UNTUK MERENDER "MY CART" DI HALAMAN PROFIL
+function renderProfileCart() {
+    const container = document.getElementById('order-list-content');
+    if (!container) return;
+
+    const cartData = JSON.parse(localStorage.getItem('myCart')) || [];
+
+    if (cartData.length === 0) {
+        container.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-20 text-center">
+                <svg class="w-12 h-12 text-stone-200 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-width="1.5"></path>
+                </svg>
+                <p class="text-[10px] uppercase tracking-widest text-stone-400">No items found in your myCart</p>
+            </div>`;
+        return;
+    }
+
+    // Render list item TANPA tombol hapus
+    container.innerHTML = cartData.map((item, index) => `
+        <div class="flex items-center justify-between pb-6 border-b border-stone-50 animate-fade-up last:border-0">
+            <div class="flex items-center gap-6">
+                <div class="w-20 h-24 bg-stone-50 border border-stone-100 overflow-hidden shrink-0">
+                    <img src="${item.image}" class="w-full h-full">                
+                </div>
+                <div>
+                    <p class="text-[11px] text-stone-400 uppercase tracking-widest mb-1">${item.brand || 'Aden Hijab'}</p>
+                    <h4 class="text-[12px] font-bold uppercase tracking-widest text-stone-800">${item.name}</h4>
+                    <div class="flex gap-2">
+                        <span class="text-[11px] text-stone-400 uppercase">${item.color}</span>
+                        <span class="text-[11px] text-stone-400">|</span>
+                        <span class="text-[11px] text-stone-400 uppercase">${item.size}</span>
+                    </div>
+                    <p class="text-[12px] text-stone-700 font-bold">Qty: ${item.qty}</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="text-[12px] text-stone-800 font-black tracking-tight">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+// FUNGSI HAPUS YANG SINKRON DENGAN SIDECART
+// FUNGSI HAPUS YANG SINKRON DENGAN SIDECART & AUTO-SWITCH TAB PROFIL
+function removeItemFromGlobalCart(index) {
+    let cartData = JSON.parse(localStorage.getItem('myCart')) || [];
+    cartData.splice(index, 1);
+    localStorage.setItem('myCart', JSON.stringify(cartData));
+
+    // 1. Update tampilan Sidecart (jika fungsi tersedia)
+    if (typeof renderCartFromStorage === "function") {
+        renderCartFromStorage();
+    }
+    
+    // 2. Update badge angka keranjang di navbar
+    updateCartBadge();
+
+    // 3. LOGIKA AUTO-SWITCH TAB DI HALAMAN PROFIL
+    // Cek apakah kita sedang berada di halaman profil (ditandai dengan adanya tombol tab-cart)
+    const btnCart = document.getElementById('btn-cart');
+    const orderListContent = document.getElementById('order-list-content');
+
+    if (btnCart && orderListContent) {
+        // Jika user sedang di tab Wishlist atau History, pindahkan ke tab My Cart
+        // Kita panggil fungsi switchTab yang biasanya ada di script profil Anda
+        if (typeof switchTab === "function") {
+            switchTab('myCart'); 
+        } else {
+            // Jika fungsi switchTab tidak terdeteksi, kita trigger klik pada tombol tab cart secara manual
+            btnCart.click();
+        }
+
+        // Render ulang isi cart di profil agar data terbaru muncul
+        if (typeof renderProfileCart === "function") {
+            renderProfileCart();
+        }
+    }
+}
+
+window.addEventListener('storage', (event) => {
+    if (event.key === 'myCart') {
+        // Jika ada perubahan di tab lain, update UI di tab ini
+        if (document.getElementById('cart-items-container')) {
+            renderCartFromStorage();
+        }
+        if (document.getElementById('order-list-content')) {
+            renderProfileCart();
+        }
+        updateCartBadge();
+    }
+});
+
+
+//////////////////////////*SCRIPT WISHLIST PROFILE////////////////////////////////////////
+// FUNGSI UNTUK MERENDER "WISHLIST" DI HALAMAN PROFIL
+function renderProfileWishlist() {
+    const container = document.getElementById('order-list-content'); // Menggunakan kontainer yang sama dengan Cart
+    if (!container) return;
+
+    // AMBIL DATA DARI KEY 'myWishlist'
+    const wishlistData = JSON.parse(localStorage.getItem('myWishlist')) || [];
+
+    if (wishlistData.length === 0) {
+        container.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-20 text-center">
+                <svg class="w-12 h-12 text-stone-200 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-width="1.5"></path>
+                </svg>
+                <p class="text-[10px] uppercase tracking-widest text-stone-400">No items found in your wishlist</p>
+            </div>`;
+        return;
+    }
+
+    // Render list item (Tanpa tombol hapus sesuai permintaan sebelumnya, atau bisa tambahkan tombol "Add to Cart")
+    container.innerHTML = wishlistData.map((item, index) => `
+        <div class="flex items-center justify-between py-6 border-b border-stone-50 last:border-0 group">
+            <div class="flex items-center gap-6">
+                <div class="w-20 h-24 bg-stone-50 border border-stone-100 overflow-hidden shrink-0">
+                    <img src="${item.image}" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <p class="text-[9px] text-stone-400 uppercase tracking-widest mb-1">${item.brand}</p>
+                    <h4 class="text-[11px] font-bold text-stone-800 uppercase tracking-widest mb-1">${item.name}</h4>
+                    <p class="text-[10px] text-stone-500 uppercase mb-1">${item.color} | ${item.size}</p>
+                    <p class="text-[10px] text-[#90753a] font-bold">${item.price}</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-end gap-2">
+                <button onclick="moveWishlistToCart('${item.id}')" class="text-[9px] font-bold uppercase tracking-widest bg-stone-800 text-white px-3 py-2 hover:bg-[#90753a] transition-colors">
+                    Add to Cart
+                <button onclick="removeFromWishlist(${item.id})" class="text-[9px] text-red-400 uppercase hover:text-red-600 transition-colors">
+                Remove Item
+            </button>
+        </div>
+    </div>
+`).join('');
+}
+
+
+
 
     
     
