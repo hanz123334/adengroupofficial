@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                          class="w-full h-full transition duration-500 group-hover:scale-105">
                     
                     <img src="${p.imgHover || p.img}" 
-                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105">
+                         class="absolute inset-0 w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105">
                 </div>
                 
                 <div class="p-3 md:p-4">
