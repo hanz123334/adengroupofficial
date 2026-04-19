@@ -675,7 +675,7 @@ function toggleSubMenu(id) {
         <div class="flex items-center h-full min-w-[60px] justify-center">
             <div id="wa-icon-toggle" class="flex items-center justify-center">
                 <div id="icon-wrapper" class="w-8 h-8 flex items-center justify-center">
-                    <img src="https://i.ibb.co.com/HLGfWDJD/whatsapp-line-5.png" class="w-7 h-7 object-contain grayscale brightness-200">
+                    <img src="images/whatsapp-white-icon.png" class="w-7 h-7 object-contain grayscale brightness-200">
                 </div>
             </div>
         </div>
@@ -914,7 +914,7 @@ function toggleWA() {
                 </div>
                 <div class="flex-grow">
                     <h3 class="text-[13px] font-medium text-stone-800 uppercase leading-tight tracking-wide">${item.name}</h3>
-                    <p class="text-[11px] text-stone-400 uppercase mt-1">${item.color} - ${item.size}</p>
+                    <p class="text-[11px] text-stone-400 uppercase mt-1">${item.color} | ${item.size}</p>
                 </div>
                 <span class="text-[13px] font-medium">Rp ${(rawPrice * item.qty).toLocaleString('id-ID')}</span>
             </div>
@@ -1087,32 +1087,6 @@ function toggleWA() {
         }
     }
 
-    // 6. INISIALISASI EVENT LISTENERS
-    document.addEventListener('DOMContentLoaded', () => {
-        loadOrder(); 
-        updateFinalTotal();
-
-        // Listener untuk Input Alamat & Postal
-        const addressInput = document.querySelector('textarea[placeholder="Address"]');
-        const postalInput = document.querySelector('input[placeholder="Postal code"]');
-        if(addressInput) addressInput.addEventListener('input', cekKelengkapanAlamat);
-        if(postalInput) postalInput.addEventListener('input', cekKelengkapanAlamat);
-
-        // Listener untuk Radio Button Kurir
-        const courierOptions = document.querySelectorAll('input[name="courier"]');
-        courierOptions.forEach(radio => {
-            radio.addEventListener('change', updateFinalTotal);
-        });
-
-        // Listener untuk reset warna merah saat user mengetik kembali
-        const allFormInputs = document.querySelectorAll('input, textarea');
-        allFormInputs.forEach(input => {
-            input.addEventListener('input', function() {
-                this.classList.remove('border-red-500');
-            });
-        });
-    });
-
     // 1. Daftar ID yang ingin dipantau dan disimpan
 const checkoutFields = ['checkout-email', 'first-name', 'last-name', 'address', 'postal-code', 'phone'];
 
@@ -1162,10 +1136,33 @@ function loadCheckoutData() {
 
 // 4. Inisialisasi Event Listeners (Gabungkan ke DOMContentLoaded Anda)
 document.addEventListener('DOMContentLoaded', () => {
-    // Jalankan auto-fill saat halaman pertama kali dimuat
+    // 1. Ambil data user yang sedang login dari localStorage
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    // 2. Jika ada user yang login, isi field secara otomatis
+    if (currentUser) {
+        // Ambil elemen input berdasarkan ID
+        const emailField = document.getElementById('email');
+        const firstNameField = document.getElementById('firstname');
+        const lastNameField = document.getElementById('lastname');
+
+        // Isi nilai input jika elemen ditemukan
+        if (emailField) emailField.value = currentUser.email || '';
+        if (firstNameField) firstNameField.value = currentUser.firstName || '';
+        if (lastNameField) lastNameField.value = currentUser.lastName || '';
+
+        // Opsional: Jika ingin menjalankan validasi alamat atau kurir secara otomatis 
+        // setelah data terisi, Anda bisa memanggil fungsi terkait di sini.
+        if (typeof cekKelengkapanAlamat === "function") {
+            cekKelengkapanAlamat();
+        }
+    }
+
+    // Kode inisialisasi checkout lainnya (seperti loadCheckoutData) tetap di bawahnya
     loadCheckoutData();
 
-    // Pantau perubahan pada setiap kolom input
+    // 3. Pantau perubahan pada setiap kolom input (Event Listeners)
+    // Pastikan variabel 'checkoutFields' sudah didefinisikan di bagian atas script Anda
     checkoutFields.forEach(id => {
         const field = document.getElementById(id);
         if (field) {
@@ -1173,7 +1170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Pantau perubahan pada checkbox save itu sendiri
+    // 4. Pantau perubahan pada checkbox 'Save this information'
     const saveCheckbox = document.getElementById('save-info');
     if (saveCheckbox) {
         saveCheckbox.addEventListener('change', saveCheckoutData);
