@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h4 class="text-[11px] md:text-sm font-medium text-stone-800 line-clamp-2 h-[2.8em] leading-tight">
                         ${p.name}
                     </h4>
-                    <p class="text-stone-400 text-[9px] md:text-[11px] mt-1 italic">${p.colour}</p>
+                    <p class="text-stone-400 text-[9px] md:text-[11px] mt-1">${p.colour}</p>
                     <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">
                         ${p.price}
                     </p>
