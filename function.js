@@ -2,14 +2,14 @@
 ////////////////////////////////////////////////////////////////////////* SCRIPT TOMBOL SEARCH//////////////////////////////////////////////////////////////////////////
 const products = [
     { 
-        name: 'Dress Kids Lengan Panjang Rambat Raya', 
+        name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
         // Gunakan path dari root folder project Anda
-        url: '/products/rambat-raya-dress-kids-lengan-panjang=ivory.html', 
-        img: '/images/rambat-raya/ivory-dress-kids1.jpg',
-        imgHover: '/images/rambat-raya/ivory-dress-kids.jpg',
-        colour: 'Ivory', 
-        price: 'Rp 125.000 - Rp 540.000'
+        url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-dress-kids1.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-dress-kids2.jpg',
+        colour: 'NatureBlack', 
+        price: 'Rp 100.000 - Rp 480.000'
     },
     
 ];
@@ -46,12 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
     targetGrid.innerHTML = data.map(p => `
         <div class="product-item h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group animate-fade-up relative z-50">
             <a href="${p.url}" class="flex flex-col h-full cursor-pointer">
-                <div class="relative bg-stone-200 overflow-hidden">
-                    <img src="${p.img}" 
-                         class="w-full h-full transition duration-500 group-hover:scale-105">
-                    
-                    <img src="${p.imgHover || p.img}" 
-                         class="absolute inset-0 w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105">
+                <div class="relative bg-stone-200 overflow-hidden aspect-[3/4]">
+                    <img src="${p.img}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
                 </div>
                 
                 <div class="p-3 md:p-4">
@@ -59,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h4 class="text-[11px] md:text-sm font-medium text-stone-800 line-clamp-2 h-[2.8em] leading-tight">
                         ${p.name}
                     </h4>
-                    <p class="text-stone-400 text-[9px] md:text-[11px] mt-1">${p.colour}</p>
+                    <p class="text-stone-400 text-[9px] md:text-[11px] mt-1 italic">${p.colour}</p>
                     <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">
                         ${p.price}
                     </p>
@@ -74,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const labelStatus = document.getElementById(labelId);
 
         if (val === "") {
-            labelStatus.innerText = "Find Product";
+            labelStatus.innerText = "Cari Produk Kami";
             render([], gridId, false);
         } else {
             const filtered = products.filter(p => p.name.toLowerCase().includes(val));
-            labelStatus.innerText = `Result for: "${val}"`;
+            labelStatus.innerText = `Hasil untuk: "${val}"`;
             render(filtered, gridId, true);
         }
     };
