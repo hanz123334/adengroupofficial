@@ -110,6 +110,17 @@ const products = [
         colour: 'Dark Crimson', 
         price: 'Rp 100.000 - Rp 480.000'
     },
+
+    { 
+        name: 'Dress Mom Style 1 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        // Gunakan path dari root folder project Anda
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=straw.html', 
+        img: '../../images/amerta-laksmi/straw-style-14.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-style-15.jpg',
+        colour: 'Straw', 
+        price: 'Rp 545.000'
+    },
       
 ];
 
