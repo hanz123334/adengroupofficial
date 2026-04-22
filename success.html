@@ -9,7 +9,19 @@
     <link rel="icon" href="images/logo_aden_gold2.png" type="image/png">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        @media print { .no-print { display: none; } }
+        @media print {
+        /* Sembunyikan elemen dengan class no-print saat mencetak */
+        .no-print {
+            display: none !important;
+        }
+        /* Opsional: Hilangkan shadow dan border berlebih agar hemat tinta */
+        .shadow-xl {
+            shadow: none !important;
+        }
+        body {
+            background: white !important;
+        }
+    }
     </style>
 </head>
 <body class="bg-stone-50 pb-20">
