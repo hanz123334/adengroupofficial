@@ -121,6 +121,39 @@ const products = [
         colour: 'Straw', 
         price: 'Rp 545.000'
     },
+
+    { 
+        name: 'Dress Mom Style 1 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        // Gunakan path dari root folder project Anda
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-style-1.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-style-11.jpg',
+        colour: 'Nature Black', 
+        price: 'Rp 545.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 1 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        // Gunakan path dari root folder project Anda
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-style-1.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-style-12.jpg',
+        colour: 'Indian Tan', 
+        price: 'Rp 545.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 1 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        // Gunakan path dari root folder project Anda
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-style-1.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-style-12.jpg',
+        colour: 'Indian Tan', 
+        price: 'Rp 545.000'
+    },
       
 ];
 
