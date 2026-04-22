@@ -112,11 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 <div class="p-3 md:p-4">
                     <p class="text-stone-400 text-[10px] uppercase tracking-widest mb-1">${p.brand}</p>
-                    <h4 class="text-[10px] md:text-sm font-medium text-stone-800 line-clamp-2 h-[2.8em] leading-tight">
+                    <h4 class="text-[8px] md:text-sm font-medium text-stone-800 line-clamp-2 h-[2.8em] leading-tight">
                         ${p.name}
                     </h4>
-                    <p class="text-stone-400 text-[10px] md:text-[11px] mt-1">${p.colour}</p>
-                    <p class="text-stone-800 text-[9px] md:text-sm font-medium mt-1 tracking-tight">
+                    <p class="text-stone-400 text-[11px] md:text-[11px] mt-1">${p.colour}</p>
+                    <p class="text-stone-800 text-[7px] md:text-sm font-medium mt-1 tracking-tight">
                         ${p.price}
                     </p>
                 </div>
