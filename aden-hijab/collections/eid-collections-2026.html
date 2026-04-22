@@ -39,6 +39,23 @@
     /* Menghilangkan scrollbar tapi tetap bisa di-scroll di mobile */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .swiper-slide {
+        height: auto; /* Biarkan flex-grow bekerja */
+    }
+    
+    /* Membuat teks judul tidak berantakan jika terlalu panjang */
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Memastikan gambar selalu proposional */
+    .aspect-\[3\/4\] {
+        aspect-ratio: 3 / 4;
+    }
 </style>
 </head>
 <script src="../../function.js"></script>
@@ -638,10 +655,10 @@ function toggleSubMenu(id) {
 <!-------------------------------------------------------------------------TOMBOL WHATSAPP-------------------------------------------------------------------------------->
 <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
     <div id="wa-contact-list" 
-         class="hidden opacity-0 translate-y-4 transition-all duration-500 bg-white shadow-2xl border border-white p-5 w-[280px] flex flex-col gap-4 rounded-t-2xl border-b-0">
+         class="hidden opacity-0 translate-y-4 transition-all duration-500 bg-white shadow-2xl border border-stone-100 p-5 w-[280px] flex flex-col gap-4 rounded-t-2xl">
         
-        <a href="https://api.whatsapp.com/send/?phone=6287716224545" target="_blank" class="flex items-center gap-4 hover:bg-stone-100 p-3 rounded-xl transition-colors group">
-            <div class="w-10 h-10 rounded-full flex items-center text-green-600 justify-center">
+        <a href="https://api.whatsapp.com/send/?phone=6287716224545" target="_blank" class="flex items-center gap-4 hover:bg-stone-50 p-3 rounded-xl transition-colors group">
+            <div class="w-10 h-10 rounded-full flex items-center text-green-600 justify-center bg-green-50">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.672 1.433 5.66 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
@@ -655,19 +672,19 @@ function toggleSubMenu(id) {
     <div id="wa-container" 
          onclick="toggleWA()"
          class="flex items-center bg-[#90753a] text-white shadow-xl hover:bg-[#765919] transition-all duration-500 border border-white/20 overflow-hidden w-[60px] h-[60px] cursor-pointer rounded-full" 
-         style="transition: width 0.5s ease, border-radius 0.5s ease;">
+         style="transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
         
-        <div class="flex items-center h-full">
-            <div id="wa-icon-toggle" class="px-[14px] h-full flex items-center justify-center">
+        <div class="flex items-center h-full min-w-[60px] justify-center">
+            <div id="wa-icon-toggle" class="flex items-center justify-center">
                 <div id="icon-wrapper" class="w-8 h-8 flex items-center justify-center">
-                    <img src="https://i.ibb.co.com/HLGfWDJD/whatsapp-line-5.png" class="w-8 h-8 object-contain grayscale brightness-200">
+                    <img src="../../images/whatsapp-white-icon.png" class="w-7 h-7 object-contain grayscale brightness-200">
                 </div>
             </div>
-            <span id="wa-text" 
-               class="pr-8 py-4 text-[11px] uppercase tracking-[0.2em] font-bold whitespace-nowrap opacity-0 transition-all duration-500 pointer-events-none">
-                Contact Us
-            </span>
         </div>
+        <span id="wa-text" 
+           class="pr-10 text-[11px] uppercase tracking-[0.2em] font-bold whitespace-nowrap opacity-0 transition-opacity duration-300 pointer-events-none">
+            Contact Us
+        </span>
     </div>
 </div>
 
@@ -675,38 +692,40 @@ function toggleSubMenu(id) {
 let isWAOpen = false;
 const waContainer = document.getElementById('wa-container');
 const waText = document.getElementById('wa-text');
-const iconWrapper = document.getElementById('icon-wrapper');
 const waContactList = document.getElementById('wa-contact-list');
-
-// Tetap menggunakan ikon WA yang sama baik buka maupun tutup
-const waIcon = `
-    <img src="https://i.ibb.co.com/HLGfWDJD/whatsapp-line-5.png" class="w-6 h-6 object-contain grayscale brightness-200 animate-reveal">
-`;
 
 function toggleWA() {
     isWAOpen = !isWAOpen;
 
     if (isWAOpen) {
+        // Tampilkan List
         waContactList.classList.remove('hidden');
         setTimeout(() => {
             waContactList.classList.remove('opacity-0', 'translate-y-4');
             waContactList.classList.add('opacity-100', 'translate-y-0');
         }, 10);
 
+        // Animasi Tombol Jadi Panjang
         waContainer.style.width = '280px';
         waContainer.style.borderRadius = '0 0 1rem 1rem'; 
-        waText.style.opacity = '1';
-        // Ikon tetap WA, tidak berubah jadi X
-        iconWrapper.innerHTML = waIcon; 
+        
+        // Munculkan Teks
+        setTimeout(() => {
+            waText.style.opacity = '1';
+        }, 200);
+
     } else {
+        // Sembunyikan Teks dulu agar tidak berantakan saat menciut
+        waText.style.opacity = '0';
+
+        // Sembunyikan List
         waContactList.classList.remove('opacity-100', 'translate-y-0');
         waContactList.classList.add('opacity-0', 'translate-y-4');
         setTimeout(() => waContactList.classList.add('hidden'), 500);
 
-        waContainer.style.width = '56px';
+        // Kembalikan Tombol ke Bulat Semula (60px x 60px)
+        waContainer.style.width = '60px';
         waContainer.style.borderRadius = '9999px'; 
-        waText.style.opacity = '0';
-        iconWrapper.innerHTML = waIcon;
     }
 }
 </script>
@@ -723,7 +742,7 @@ function toggleWA() {
         <div class="group cursor-pointer bg-white overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-all duration-300">
         <div class="relative overflow-hidden mb-0 bg-stone-200">     
         <a href="larasmaya.html" class="block h-full">
-            <img src="https://i.ibb.co.com/Zpk2thQX/fams-jingga1.jpg" class="w-full product-image object-cover transition duration-500 group-hover:scale-105">
+            <img src="../../images/larasmaya/fams-jingga1.jpg" class="w-full product-image object-cover transition duration-500 group-hover:scale-105">
             <button class="absolute bottom-0 left-0 right-0 bg-white/90 py-3 text-[10px] md:text-xs tracking-widest uppercase translate-y-full">Quick View</button>
         </a>
         </div>
@@ -732,16 +751,7 @@ function toggleWA() {
         <div class="group cursor-pointer bg-white overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-all duration-300">
         <div class="relative overflow-hidden mb-0 bg-stone-200">     
         <a href="sandhangan-jiwa.html" class="block h-full">
-            <img src="https://i.ibb.co.com/twFxhHmb/Sandhangan-Jiwa-Fams-Eboni.jpg" class="w-full product-image object-cover transition duration-500 group-hover:scale-105">
-            <button class="absolute bottom-0 left-0 right-0 bg-white/90 py-3 text-[10px] md:text-xs tracking-widest uppercase translate-y-full">Quick View</button>
-        </a>
-        </div>
-        </div>
-
-        <div class="group cursor-pointer bg-white overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-all duration-300">
-        <div class="relative overflow-hidden mb-0 bg-stone-200">     
-        <a href="rambat-raya.html" class="block h-full">
-            <img src="https://i.ibb.co.com/3ysdKDXD/fams-ivory2.jpg" class="w-full product-image object-cover transition duration-500 group-hover:scale-105">
+            <img src="../../images/sandhangan-jiwa/Sandhangan-Jiwa-Fams-Eboni.jpg" class="w-full product-image object-cover transition duration-500 group-hover:scale-105">
             <button class="absolute bottom-0 left-0 right-0 bg-white/90 py-3 text-[10px] md:text-xs tracking-widest uppercase translate-y-full">Quick View</button>
         </a>
         </div>
@@ -750,7 +760,16 @@ function toggleWA() {
         <div class="group cursor-pointer bg-white overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-all duration-300">
         <div class="relative overflow-hidden mb-0 bg-stone-200">     
         <a href="amerta-laksmi.html" class="block h-full">
-            <img src="https://i.ibb.co.com/ZppyqgPm/fams-straw7.jpg" class="w-full product-image object-cover transition duration-500 group-hover:scale-105">
+            <img src="../../images/amerta-laksmi/fams-straw7.jpg" class="w-full product-image object-cover transition duration-500 group-hover:scale-105">
+            <button class="absolute bottom-0 left-0 right-0 bg-white/90 py-3 text-[10px] md:text-xs tracking-widest uppercase translate-y-full">Quick View</button>
+        </a>
+        </div>
+        </div>
+
+        <div class="group cursor-pointer bg-white overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-all duration-300">
+        <div class="relative overflow-hidden mb-0 bg-stone-200">     
+        <a href="rambat-raya.html" class="block h-full">
+            <img src="../../images/rambat-raya/fams-ivory2.jpg" class="w-full product-image object-cover transition duration-500 group-hover:scale-105">
             <button class="absolute bottom-0 left-0 right-0 bg-white/90 py-3 text-[10px] md:text-xs tracking-widest uppercase translate-y-full">Quick View</button>
         </a>
         </div>
@@ -762,125 +781,122 @@ function toggleWA() {
 
 <!-------------------------------------------------------------------------IED COLLECTIONS 2026 ADEN HIJAB-------------------------------------------------------------------------------->
 <main class="max-w-9xl mx-auto px-2 py-2 sm:px-6 lg:px-0">
-        <div class="max-w-8xl mx-auto px-6 h-14 flex items-center justify-between text-[11px] font-medium uppercase tracking-widest">
+        <div class="max-w-8xl mx-auto px-6 h-14 flex items-center justify-between text-[11px] font-medium uppercase tracking-widest fade-up-element">
     </div>                
 
     <!--AMERTA LAKSMI--> 
-    <div class="relative flex justify-between items-center mb-5 mt-10 px-4">
+    <div class="relative flex justify-between items-center mb-5 mt-10 px-4 fade-up-element">
     <div class="w-20 md:w-32 invisible"></div>
-
     <h3 class="absolute left-1/2 -translate-x-1/2 text-2xl md:text-3xl font-serif text-stone-600 tracking-wide whitespace-nowrap">
         Amerta Laksmi
     </h3>
-
     <a href="../collections/amerta-laksmi.html" 
-       class="inline-block bg-[#90753a] text-white text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] px-4 py-3 md:px-10 md:py-4 hover:bg-[#765919] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 z-10">
+       class="inline-block bg-[#90753a] text-white text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] px-4 py-3 md:px-10 md:py-4 hover:bg-[#765919] transition-all duration-300 shadow-lg z-10">
         View More
     </a>
 </div>
 
-    <div class="max-w-8xl mx-auto px-4 py-2">
-    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 fade-up-element">
-
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Dress Kids Lengan Pendek Amerta Laksmi Indian Tan" data-price="100000-480000" data-category="dress">
+<div class="max-w-8xl mx-auto px-4 py-2 overflow-hidden fade-up-element">
+    <div class="swiper productSwiper">
+        <div class="swiper-wrapper mb-10">
+            
+            <div class="swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group border border-stone-100 rounded-sm">
                 <a href="../products/amerta-laksmi-dress-kids-lengan-pendek=indian-tan.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/Pzm3QXsm/indian-dress-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/2YfdqCQ6/indian-dress-kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Pendek Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Indian Tan</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 100.000 - Rp 480.000</p>
-            </div>
+                    <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+                        <img src="../../images/amerta-laksmi/indian-dress-kids.jpg" class="w-full h-full transition duration-500">
+                        <img src="../../images/amerta-laksmi/indian-dress-kids1.jpg" class="absolute inset-0 w-full h-full opacity-0 transition-all duration-400 group-hover:opacity-100">
+                    </div>
+                    <div class="p-3 md:p-4">
+                        <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Pendek Amerta Laksmi</h4>
+                        <p class="text-stone-400 text-[9px] md:text-sm mt-1">Indian Tan</p>
+                        <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 100.000 - Rp 480.000</p>
+                    </div>
                 </a>
             </div>
 
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Dress Mom Style 1 Set Scarf Amerta Laksmi Nature Black" data-price="740000" data-category="dress">
+            <div class="swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group border border-stone-100 rounded-sm">
                 <a href="../products/amerta-laksmi-dress-mom-style1-set-scarf=nature-black.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/sDwddwT/nature-black-style-1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/XZXLQvSf/nature-black-style-11.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Dress Mom Style 1 Set Scarf Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Nature Black</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 740.000</p>
-            </div>
+                    <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+                        <img src="../../images/amerta-laksmi/nature-black-style-1.jpg" class="w-full h-full transition duration-500">
+                        <img src="../../images/amerta-laksmi/nature-black-style-11.jpg" class="absolute inset-0 w-full h-full opacity-0 transition-all duration-400 group-hover:opacity-100">
+                    </div>
+                    <div class="p-3 md:p-4">
+                        <h4 class="text-[11px] md:text-sm font-medium">Dress Mom Style 1 Set Scarf Amerta Laksmi</h4>
+                        <p class="text-stone-400 text-[9px] md:text-sm mt-1">Nature Black</p>
+                        <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 740.000</p>
+                    </div>
                 </a>
             </div>
 
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Dress Mom Style 2 Set Scarf Amerta Laksmi Dark Indian Tan" data-price="640000-1025000" data-category="dress">
+            <div class="swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group border border-stone-100 rounded-sm">
                 <a href="../products/amerta-laksmi-dress-mom-style2-set-scarf=indian-tan.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/C5FC0zT6/indian-style-21.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/zWB7qQ6t/indian-style-23.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Dress Mom Style 2 Set Scarf Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Indian Tan</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 640.000 - Rp 1.025.000</p>
-            </div>
+                    <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+                        <img src="../../images/amerta-laksmi/indian-style-21.jpg" class="w-full h-full transition duration-500">
+                        <img src="../../images/amerta-laksmi/indian-style-23.jpg" class="absolute inset-0 w-full h-full opacity-0 transition-all duration-400 group-hover:opacity-100">
+                    </div>
+                    <div class="p-3 md:p-4">
+                        <h4 class="text-[11px] md:text-sm font-medium">Dress Mom Style 2 Set Scarf Amerta Laksmi</h4>
+                        <p class="text-stone-400 text-[9px] md:text-sm mt-1">Indian Tan</p>
+                        <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 640.000 - Rp 1.025.000</p>
+                    </div>
                 </a>
             </div>
 
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Koko Dewasa Lengan Pendek Amerta Laksmi Nature Black" data-price="330000" data-category="koko">
+            <div class="swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group border border-stone-100 rounded-sm">
                 <a href="../products/amerta-laksmi-koko-dewasa-lengan-pendek=straw.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/zWFM75jp/straw-koko-dad-pendek1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/vvRFfYbn/straw-koko-dad-pendek3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Koko Dewasa Lengan Pendek Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Straw</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 330.000</p>
-            </div>
+                    <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+                        <img src="../../images/amerta-laksmi/straw-koko-dad-pendek1.jpg" class="w-full h-full transition duration-500">
+                        <img src="../../images/amerta-laksmi/straw-koko-dad-pendek3.jpg" class="absolute inset-0 w-full h-full opacity-0 transition-all duration-400 group-hover:opacity-100">
+                    </div>
+                    <div class="p-3 md:p-4">
+                        <h4 class="text-[11px] md:text-sm font-medium">Koko Dewasa Lengan Pendek Amerta Laksmi</h4>
+                        <p class="text-stone-400 text-[9px] md:text-sm mt-1">Straw</p>
+                        <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 330.000</p>
+                    </div>
                 </a>
             </div>
 
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Koko Kids Lengan Panjang Amerta Laksmi Heliotrope" data-price="275000" data-category="koko">
+            <div class="swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group border border-stone-100 rounded-sm">
                 <a href="../products/amerta-laksmi-koko-kids-lengan-panjang=heliotrope.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/PZ6ZLsHz/heliotrope-koko-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/60Q3fMMg/heliotrope-koko-kids3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Panjang Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Heliotrope</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 275.000</p>
-            </div>
+                    <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+                        <img src="../../images/amerta-laksmi/heliotrope-koko-kids1.jpg" class="w-full h-full transition duration-500">
+                        <img src="../../images/amerta-laksmi/heliotrope-koko-kids3.jpg" class="absolute inset-0 w-full h-full opacity-0 transition-all duration-400 group-hover:opacity-100">
+                    </div>
+                    <div class="p-3 md:p-4">
+                        <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Panjang Amerta Laksmi</h4>
+                        <p class="text-stone-400 text-[9px] md:text-sm mt-1">Heliotrope</p>
+                        <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 275.000</p>
+                    </div>
                 </a>
             </div>
-            </div>
 
-    <!--SANDHANGAN JIWA-->
-   <div class="relative flex justify-between items-center mb-5 mt-10 px-4">
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+</div>
+
+<!--SANDHANGAN JIWA--> 
+    <div class="relative flex justify-between items-center mb-5 mt-10 px-4 fade-up-element">
     <div class="w-20 md:w-32 invisible"></div>
-
     <h3 class="absolute left-1/2 -translate-x-1/2 text-2xl md:text-3xl font-serif text-stone-600 tracking-wide whitespace-nowrap">
         Sandhangan Jiwa
     </h3>
-
     <a href="../collections/sandhangan-jiwa.html" 
-       class="inline-block bg-[#90753a] text-white text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] px-4 py-3 md:px-10 md:py-4 hover:bg-[#765919] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 z-10">
+       class="inline-block bg-[#90753a] text-white text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] px-4 py-3 md:px-10 md:py-4 hover:bg-[#765919] transition-all duration-300 shadow-lg z-10">
         View More
     </a>
 </div>
 
-    <div class="max-w-8xl mx-auto px-4 py-2">
-    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 fade-up-element">
-
+<div class="max-w-8xl mx-auto px-4 py-2 overflow-hidden fade-up-element">
+    <div class="swiper productSwiper">
+        <div class="swiper-wrapper mb-10">
+            
             <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
                  data-name="Dress Kids Lengan Panjang Sandhangan Jiwa Randu" data-price="395000" data-category="dress">
                 <a href="../products/sandhangan-jiwa-dress-kids-lengan-panjang=randu.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/ynrd1qmc/Screenshot-2026-03-16-at-11-04-30-Instagram.png" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/dsTqdZ7X/Screenshot-2026-03-16-at-11-04-47-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-11-04-30-Instagram.png" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-11-04-47-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Sandhangan Jiwa</h4>
@@ -894,8 +910,8 @@ function toggleWA() {
                  data-name="Dress Mom Style 2 Sandhangan Jiwa Eboni" data-price="695000" data-category="dress">
                 <a href="../products/sandhangan-jiwa-dress-mom-style2=eboni.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/xqKZBtxM/Screenshot-2026-03-16-at-10-59-19-Instagram.png" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/HpHkBqPx/Screenshot-2026-03-16-at-10-59-26-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-10-59-19-Instagram.png" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-10-59-26-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Mom Style 2 Sandhangan Jiwa</h4>
@@ -909,8 +925,8 @@ function toggleWA() {
                  data-name="Dress Mom Style 3 Sandhangan Jiwa Seroja" data-price="675000" data-category="dress">
                 <a href="../products/sandhangan-jiwa-dress-mom-style3=seroja.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/G3BtsBfM/Screenshot-2026-03-16-at-11-06-30-Instagram.png" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/xKNrqJ3G/Screenshot-2026-03-16-at-11-06-23-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-11-06-30-Instagram.png" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-11-06-23-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Mom Style 3 Sandhangan Jiwa</h4>
@@ -924,8 +940,8 @@ function toggleWA() {
                  data-name="Koko Dewasa Motif Lengan Pendek Sandhangan Jiwa Delima" data-price="405000" data-category="koko">
                 <a href="../products/sandhangan-jiwa-koko-dewasa-motif-lengan-pendek=delima.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/wZYL6YtY/Screenshot-2026-03-16-at-10-55-10-Instagram.png" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/spTXxdnq/Screenshot-2026-03-16-at-10-55-03-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-10-55-10-Instagram.png" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-10-55-03-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Dewasa Motif Lengan Pendek Sandhangan Jiwa</h4>
@@ -939,8 +955,8 @@ function toggleWA() {
                  data-name="Koko Kids Polos Lengan Pendek Sandhangan Jiwa Wuluh" data-price="295000" data-category="koko">
                 <a href="../products/sandhangan-jiwa-koko-kids-polos-lengan-pendek=wuluh.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/9xFPZ4w/Screenshot-2026-03-16-at-10-49-21-Instagram.png" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/KQjbkyc/Screenshot-2026-03-16-at-10-49-16-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-10-49-21-Instagram.png" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/sandhangan-jiwa/Screenshot-2026-03-16-at-10-49-16-Instagram.png" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Polos Lengan Pendek Sandhangan Jiwa</h4>
@@ -949,32 +965,37 @@ function toggleWA() {
             </div>
                 </a>
             </div>
-            </div>
-            </div>
+
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+</div>
+
+
+
 
     <!--RAMBAT RAYA-->
-   <div class="relative flex justify-between items-center mb-5 mt-10 px-4">
+<div class="relative flex justify-between items-center mb-5 mt-10 px-4 fade-up-element">
     <div class="w-20 md:w-32 invisible"></div>
-
     <h3 class="absolute left-1/2 -translate-x-1/2 text-2xl md:text-3xl font-serif text-stone-600 tracking-wide whitespace-nowrap">
         Rambat Raya
     </h3>
-
     <a href="../collections/rambat-raya.html" 
-       class="inline-block bg-[#90753a] text-white text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] px-4 py-3 md:px-10 md:py-4 hover:bg-[#765919] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 z-10">
+       class="inline-block bg-[#90753a] text-white text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] px-4 py-3 md:px-10 md:py-4 hover:bg-[#765919] transition-all duration-300 shadow-lg z-10">
         View More
     </a>
 </div>
 
-    <div class="max-w-8xl mx-auto px-4 py-2">
-    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 fade-up-element">
-
+<div class="max-w-8xl mx-auto px-4 py-2 overflow-hidden fade-up-element">
+    <div class="swiper productSwiper">
+        <div class="swiper-wrapper mb-10">
+            
             <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
                  data-name="Dress Kids Lengan Panjang Rambat Raya Ivory" data-price="365000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-panjang=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/YBzn84x3/ivory-dress-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/DD7B4v5m/ivory-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-dress-kids1.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Rambat Raya</h4>
@@ -988,8 +1009,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Set Scarf Rambat Raya Shadow" data-price="790000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1-set-scarf=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/XrL7dnvF/shadow-sty-13.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/QFyqz5SL/shadow-sty-14.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-sty-13.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-sty-14.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Set Scarf Rambat Raya</h4>
@@ -1003,8 +1024,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Rambat Raya Maple" data-price="595000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2=Maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/rRWCVMFd/maple-st-2-4.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/dJW8QH7Z/maple-st-2-6.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-st-2-4.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-st-2-6.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Rambat Raya</h4>
@@ -1018,8 +1039,8 @@ function toggleWA() {
                  data-name="Koko Lengan Panjang Rambat Raya Sky Blue" data-price="415000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-panjang=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/tTQZ3nYN/sky-koko-dad-panjang1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/4DK6Kcz/sky-koko-dad-panjang3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-koko-dad-panjang1.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-koko-dad-panjang3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Panjang Rambat Raya</h4>
@@ -1033,8 +1054,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Pendek Rambat Raya Dark Mahogany" data-price="310000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-pendek=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/LXtBxnMQ/koko-mahogani-Kids3.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/G39R2CJV/koko-mahogani-Kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/koko-mahogani-Kids3.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/koko-mahogani-Kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Pendek Rambat Raya</h4>
@@ -1043,32 +1064,35 @@ function toggleWA() {
             </div>
                 </a>
             </div>
-            </div>
-            </div>
+
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+</div>
 
             <!--LARASMAYA--> 
-    <div class="relative flex justify-between items-center mb-5 mt-10 px-4">
-    <div class="w-20 md:w-32 invisible"></div>
 
+<div class="relative flex justify-between items-center mb-5 mt-10 px-4 fade-up-element">
+    <div class="w-20 md:w-32 invisible"></div>
     <h3 class="absolute left-1/2 -translate-x-1/2 text-2xl md:text-3xl font-serif text-stone-600 tracking-wide whitespace-nowrap">
         Larasmaya
     </h3>
-
     <a href="../collections/larasmaya.html" 
-       class="inline-block bg-[#90753a] text-white text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] px-4 py-3 md:px-10 md:py-4 hover:bg-[#765919] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 z-10">
+       class="inline-block bg-[#90753a] text-white text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] px-4 py-3 md:px-10 md:py-4 hover:bg-[#765919] transition-all duration-300 shadow-lg z-10">
         View More
     </a>
 </div>
 
-    <div class="max-w-8xl mx-auto px-4 py-2">
-    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 fade-up-element">
-
+<div class="max-w-8xl mx-auto px-4 py-2 overflow-hidden fade-up-element">
+    <div class="swiper productSwiper">
+        <div class="swiper-wrapper mb-10">
+            
             <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
                  data-name="Dress Kids Lengan Panjang Larasmaya Safir" data-price="125000-560000" data-category="dress">
                 <a href="../products/larasmaya-dress-kids-lengan-panjang=safir.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/jvSq0Wtd/dress-kids-panjang4.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/YFwS0h7N/dress-kids-panjang1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/larasmaya/safir-dress-kids-panjang4.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/larasmaya/safir-dress-kids-panjang1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Larasmaya</h4>
@@ -1082,8 +1106,8 @@ function toggleWA() {
                  data-name="Dress Mom Style 1 Inner Outer Larasmaya Pualam" data-price="960000" data-category="dress">
                 <a href="../products/larasmaya-dress-mom-style1-inner+outer=pualam.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/BVpyF1tf/st-1-inner-outer1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/zH4xqKmP/st-1-inner-outer3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/larasmaya/pualam-st-1-inner-outer1.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/larasmaya/pualam-st-1-inner-outer3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Mom Style 1 Inner Outer Larasmaya</h4>
@@ -1097,8 +1121,8 @@ function toggleWA() {
                  data-name="Dress Mom Style 2 Inner Outer Larasmaya Legam" data-price="950000" data-category="dress">
                 <a href="../products/larasmaya-dress-mom-style2-inner+outer=legam.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/r2hrw6tc/style-2-inner-outer1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/yFgcnZtn/style-2-inner-outer2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/larasmaya/legam-style-2-inner-outer1.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/larasmaya/legam-style-2-inner-outer2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Mom Style 2 Inner Outer Larasmaya</h4>
@@ -1112,8 +1136,8 @@ function toggleWA() {
                  data-name="Koko Dewasa Lengan Pendek Jingga" data-price="385000" data-category="koko">
                 <a href="../products/larasmaya-koko-dewasa-lengan-pendek=jingga.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/6JBMzRTN/koko-dewasa-lengan-pendek2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/zVyXTkVS/koko-dewasa-lengan-pendek5.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/larasmaya/jingga-koko-dewasa-lengan-pendek2.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/larasmaya/jingga-koko-dewasa-lengan-pendek5.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Dewasa Lengan Pendek Larasmaya</h4>
@@ -1127,8 +1151,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Pendek Pralin" data-price="295000" data-category="koko">
                 <a href="../products/larasmaya-koko-kids-lengan-pendek=pralin.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/hJbDWZ9Y/koko-kids-lengan-pendek1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/GQ1nxsvZ/koko-kids-lengan-pendek3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/larasmaya/pralin-koko-kids-lengan-pendek1.jpg" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/larasmaya/pralin-koko-kids-lengan-pendek3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Pendek Larasmaya</h4>
@@ -1137,9 +1161,11 @@ function toggleWA() {
             </div>
                 </a>
             </div>
-            </div>
 
-            
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+</div>          
 
         </div>
     </div>
@@ -1192,6 +1218,26 @@ function filterCategory(category, element) {
         }
     });
 }
+
+  var swiper = new Swiper(".productSwiper", {
+    slidesPerView: 2.2, // Menampilkan 2 produk dan sedikit potongan produk ke-3 agar user tahu bisa digeser
+    spaceBetween: 15,   // Jarak antar produk di mobile
+    grabCursor: true,   // Kursor tangan saat drag
+    mousewheel: {
+        forceToAxis: true,
+    },
+    scrollbar: {
+      el: ".swiper-scrollbar",
+      hide: true,
+    },
+    breakpoints: {
+      // Ketika lebar layar >= 768px (Desktop)
+      768: {
+        slidesPerView: 5,
+        spaceBetween: 30,
+      },
+    },
+  });
 </script>
 
 <!-------------------------------------------------------------------------FOOTER-------------------------------------------------------------------------------->
