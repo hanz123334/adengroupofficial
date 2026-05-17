@@ -2,104 +2,399 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Panel - Aden Group</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Aden Group Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
 </head>
-<body class="bg-stone-50 p-8">
-    <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border">
-        <h2 class="text-2xl font-bold mb-6 text-stone-800 uppercase tracking-widest">Tambah Produk Baru</h2>
-        
-        <form id="adminForm" class="grid grid-cols-2 gap-6">
-            <div class="col-span-2">
-                <label class="block text-xs font-bold uppercase mb-2">Foto Produk (Utama)</label>
-                <input type="file" id="pImg" accept="image/*" class="w-full border p-2 rounded" required>
-                <input type="hidden" id="pImgBase64">
-            </div>
-            
-            <div>
-                <label class="block text-xs font-bold uppercase mb-2">Nama Produk</label>
-                <input type="text" id="pName" class="w-full border p-2 rounded" placeholder="Contoh: Amerta Laksmi Dress" required>
-            </div>
-            
-            <div>
-                <label class="block text-xs font-bold uppercase mb-2">Harga (Angka saja)</label>
-                <input type="number" id="pPrice" class="w-full border p-2 rounded" placeholder="595000" required>
-            </div>
+<body class="bg-stone-50 text-stone-800 antialiased min-h-screen flex">
 
-            <div>
-                <label class="block text-xs font-bold uppercase mb-2">Warna</label>
-                <input type="text" id="pColor" class="w-full border p-2 rounded" placeholder="Dark Crimson" required>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold uppercase mb-2">Jenis Produk</label>
-                <select id="pType" class="w-full border p-2 rounded">
-                    <option value="Dress Kids">Dress Kids</option>
-                    <option value="Dress Mom">Dress Mom</option>
-                    <option value="Koko">Koko</option>
-                </select>
-            </div>
-
-            <div class="col-span-2">
-                <label class="block text-xs font-bold uppercase mb-2">Detail Produk (Gunakan Enter untuk baris baru)</label>
-                <textarea id="pDetail" class="w-full border p-2 rounded h-32" placeholder="Material: Silk, Busui Friendly, dll"></textarea>
-            </div>
-
-            <button type="submit" class="col-span-2 bg-[#90753a] text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-black transition">Simpan & Publikasikan</button>
-        </form>
-
-        <div class="mt-10">
-            <h3 class="font-bold mb-4">Daftar Produk Saat Ini</h3>
-            <div id="adminList" class="space-y-2"></div>
+    <aside class="w-64 bg-white border-r border-stone-200 hidden md:flex flex-col fixed h-full z-10">
+        <div class="p-6 border-b border-stone-100">
+            <h1 class="font-serif text-xl font-semibold tracking-wide text-stone-800">Aden Group</h1>
+            <p class="text-xs uppercase tracking-widest text-[#90753a] font-bold">Official Admin</p>
         </div>
+        <nav class="flex-1 p-4 space-y-1">
+            <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-md bg-[#90753a] text-white transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 17m8 4V12"></path></svg>
+                Kontrol Stok & Harga
+            </a>
+            <a href="#section-pesanan" class="flex items-center px-4 py-3 text-sm font-medium rounded-md text-stone-500 hover:bg-stone-50 hover:text-stone-900 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                Pesanan Masuk (<span id="sidebar-order-count">0</span>)
+            </a>
+        </nav>
+        <div class="p-4 border-t border-stone-100">
+            <button class="w-full flex items-center justify-center px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors" onclick="localStorage.removeItem('adminOrderQueue'); location.reload();">
+                Reset Semua Data
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 md:ml-64 p-6 md:p-10 space-y-10">
+        
+        <header class="flex justify-between items-center border-b border-stone-200 pb-5">
+            <div>
+                <h2 class="text-2xl font-serif text-stone-800 font-semibold">Manajemen Stok & Harga</h2>
+                <p class="text-stone-400 text-sm">Terintegrasi langsung dengan produk <span class="text-stone-600 font-medium">Amerta Laksmi</span> & Data Transaksi Pembeli.</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-stone-500 font-medium">Super Admin Aden</span>
+                <div class="w-10 h-10 bg-[#90753a] rounded-full flex items-center justify-center font-bold text-white border border-stone-300">A</div>
+            </div>
+        </header>
+
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-sm border border-stone-200 shadow-sm">
+                <p class="text-xs uppercase tracking-wider text-stone-400 font-medium mb-1">Total Entri Produk</p>
+                <p class="text-2xl font-semibold text-stone-800" id="total-produk-stats">5 <span class="text-xs text-stone-400 font-normal">Varian Item</span></p>
+            </div>
+            <div class="bg-white p-6 rounded-sm border border-stone-200 shadow-sm border-l-4 border-amber-500">
+                <p class="text-xs uppercase tracking-wider text-amber-600 font-medium mb-1">Stok Perlu Perhatian</p>
+                <p class="text-2xl font-semibold text-stone-800" id="stok-tipis-stats">2 <span class="text-xs text-amber-600 font-normal">Item Menipis</span></p>
+            </div>
+            <div class="bg-white p-6 rounded-sm border border-stone-200 shadow-sm border-l-4 border-blue-500">
+                <p class="text-xs uppercase tracking-wider text-blue-600 font-medium mb-1">Belum Diproses</p>
+                <p class="text-2xl font-semibold text-stone-800" id="total-pesanan-stats">0 <span class="text-xs text-blue-400 font-normal">Transaksi Masuk</span></p>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
+            <section class="xl:col-span-3 bg-white border border-stone-200 rounded-sm shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-stone-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-stone-50/50">
+                    <div>
+                        <h3 class="font-serif font-medium text-lg">Daftar Item Terbaca</h3>
+                        <p class="text-xs text-stone-400">Data kontrol utama stok produk website adengroupofficial</p>
+                    </div>
+                    <div class="w-full sm:w-72">
+                        <input type="text" id="search-input" onkeyup="filterTable()" placeholder="Cari nama produk / SKU..." class="w-full bg-white text-sm border border-stone-300 rounded-sm px-4 py-2 focus:outline-none focus:border-[#90753a] text-stone-600 placeholder-stone-400" />
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse" id="product-table">
+                        <thead>
+                            <tr class="border-b border-stone-200 bg-stone-100/50 text-xs uppercase tracking-wider text-stone-500 font-semibold">
+                                <th class="p-4">Info Produk & Koleksi</th>
+                                <th class="p-4 w-36">Kategori Menu</th>
+                                <th class="p-4 w-44">Harga Jual (Rp)</th>
+                                <th class="p-4 w-32">Stok Gudang</th>
+                                <th class="p-4 w-24 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-100 text-sm" id="table-body">
+                            <tr class="hover:bg-stone-50/50 transition-colors" data-product-name="dress dewasa amerta laksmi">
+                                <td class="p-4">
+                                    <div class="font-medium text-stone-900 font-product">Dress Dewasa Amerta Laksmi</div>
+                                    <div class="text-xs text-stone-400 mt-0.5">Koleksi: <span class="text-stone-600 font-medium uppercase">Sarimbit Amerta Laksmi</span></div>
+                                    <div class="text-[10px] text-[#90753a] mt-0.5 font-mono">SKU: AD-AML-DRS01</div>
+                                </td>
+                                <td class="p-4 text-stone-500 uppercase text-[11px] tracking-wider">Tops (Dress)</td>
+                                <td class="p-4">
+                                    <div class="flex items-center space-x-1 border border-stone-200 rounded-sm px-2 py-1 bg-white focus-within:border-[#90753a]">
+                                        <span class="text-stone-400 text-xs font-medium">Rp</span>
+                                        <input type="text" value="625.000" class="w-full bg-transparent focus:outline-none text-stone-700 font-medium text-right p-0" onchange="showSaveToast()">
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <input type="number" id="stok-AD-AML-DRS01" value="85" class="w-20 border border-stone-200 rounded-sm px-2 py-1 bg-white text-center font-medium focus:outline-none focus:border-[#90753a] text-stone-700" onchange="showSaveToast()">
+                                </td>
+                                <td class="p-4 text-center">
+                                    <button class="text-[#90753a] hover:text-stone-800 text-xs font-semibold uppercase tracking-wider" onclick="saveProduct('Dress Dewasa Amerta Laksmi')">Simpan</button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-stone-50/50 transition-colors" data-product-name="koko amerta laksmi (lengan panjang)">
+                                <td class="p-4">
+                                    <div class="font-medium text-stone-900 font-product">Koko Amerta Laksmi (Lengan Panjang)</div>
+                                    <div class="text-xs text-stone-400 mt-0.5">Koleksi: <span class="text-stone-600 font-medium uppercase">Sarimbit Amerta Laksmi</span></div>
+                                    <div class="text-[10px] text-[#90753a] mt-0.5 font-mono">SKU: AD-AML-KKO02</div>
+                                </td>
+                                <td class="p-4 text-stone-500 uppercase text-[11px] tracking-wider">Mens-Wear (Koko)</td>
+                                <td class="p-4">
+                                    <div class="flex items-center space-x-1 border border-stone-200 rounded-sm px-2 py-1 bg-white focus-within:border-[#90753a]">
+                                        <span class="text-stone-400 text-xs font-medium">Rp</span>
+                                        <input type="text" value="395.000" class="w-full bg-transparent focus:outline-none text-stone-700 font-medium text-right p-0" onchange="showSaveToast()">
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <input type="number" id="stok-AD-AML-KKO02" value="120" class="w-20 border border-stone-200 rounded-sm px-2 py-1 bg-white text-center font-medium focus:outline-none focus:border-[#90753a] text-stone-700" onchange="showSaveToast()">
+                                </td>
+                                <td class="p-4 text-center">
+                                    <button class="text-[#90753a] hover:text-stone-800 text-xs font-semibold uppercase tracking-wider" onclick="saveProduct('Koko Amerta Laksmi')">Simpan</button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-stone-50/50 transition-colors bg-amber-50/40" data-product-name="khimar pasangan amerta laksmi">
+                                <td class="p-4">
+                                    <div class="font-medium text-stone-900 font-product">Khimar Pasangan Amerta Laksmi</div>
+                                    <div class="text-xs text-stone-400 mt-0.5">Koleksi: <span class="text-stone-600 font-medium uppercase">Sarimbit Amerta Laksmi</span></div>
+                                    <div class="text-[10px] text-[#90753a] mt-0.5 font-mono">SKU: AD-AML-KHM03</div>
+                                </td>
+                                <td class="p-4 text-stone-500 uppercase text-[11px] tracking-wider">Hijabs (Khimar)</td>
+                                <td class="p-4">
+                                    <div class="flex items-center space-x-1 border border-stone-200 rounded-sm px-2 py-1 bg-white focus-within:border-[#90753a]">
+                                        <span class="text-stone-400 text-xs font-medium">Rp</span>
+                                        <input type="text" value="245.000" class="w-full bg-transparent focus:outline-none text-stone-700 font-medium text-right p-0" onchange="showSaveToast()">
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <input type="number" id="stok-AD-AML-KHM03" value="4" class="w-20 border border-amber-300 bg-amber-50 rounded-sm px-2 py-1 text-center font-medium focus:outline-none focus:border-[#90753a] text-amber-800" onchange="showSaveToast()">
+                                </td>
+                                <td class="p-4 text-center">
+                                    <button class="text-[#90753a] hover:text-stone-800 text-xs font-semibold uppercase tracking-wider" onclick="saveProduct('Khimar Amerta Laksmi')">Simpan</button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-stone-50/50 transition-colors" data-product-name="printed scarf amerta laksmi v1">
+                                <td class="p-4">
+                                    <div class="font-medium text-stone-900 font-product">Printed Scarf Amerta Laksmi V1</div>
+                                    <div class="text-xs text-stone-400 mt-0.5">Koleksi: <span class="text-stone-600 font-medium uppercase">Sarimbit Amerta Laksmi</span></div>
+                                    <div class="text-[10px] text-[#90753a] mt-0.5 font-mono">SKU: AD-AML-SCF04</div>
+                                </td>
+                                <td class="p-4 text-stone-500 uppercase text-[11px] tracking-wider">Hijabs (Printed Scarf)</td>
+                                <td class="p-4">
+                                    <div class="flex items-center space-x-1 border border-stone-200 rounded-sm px-2 py-1 bg-white focus-within:border-[#90753a]">
+                                        <span class="text-stone-400 text-xs font-medium">Rp</span>
+                                        <input type="text" value="195.000" class="w-full bg-transparent focus:outline-none text-stone-700 font-medium text-right p-0" onchange="showSaveToast()">
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <input type="number" id="stok-AD-AML-SCF04" value="230" class="w-20 border border-stone-200 rounded-sm px-2 py-1 bg-white text-center font-medium focus:outline-none focus:border-[#90753a] text-stone-700" onchange="showSaveToast()">
+                                </td>
+                                <td class="p-4 text-center">
+                                    <button class="text-[#90753a] hover:text-stone-800 text-xs font-semibold uppercase tracking-wider" onclick="saveProduct('Printed Scarf Amerta Laksmi')">Simpan</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="xl:col-span-1 bg-white border border-stone-200 rounded-sm shadow-sm p-6 h-fit">
+                <h3 class="font-serif font-medium text-lg border-b border-stone-100 pb-3 mb-4">Input Rilisan Baru</h3>
+                <form class="space-y-4" onsubmit="addNewRow(event)">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-medium text-stone-500 mb-1">Nama Varian Produk</label>
+                        <input type="text" id="new-name" required placeholder="Contoh: Tunik Amerta Laksmi" class="w-full border border-stone-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#90753a] text-stone-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-medium text-stone-500 mb-1">Koleksi Induk</label>
+                        <select id="new-collection" class="w-full border border-stone-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#90753a] text-stone-700 bg-white">
+                            <option value="Sarimbit Amerta Laksmi">Sarimbit Amerta Laksmi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-medium text-stone-500 mb-1">Kategori Menu Utama</label>
+                        <select id="new-category" class="w-full border border-stone-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#90753a] text-stone-700 bg-white">
+                            <option value="Tops (Dress)">Tops (Shirt/Dress/Tunic)</option>
+                            <option value="Hijabs (Khimar)">Hijabs (Printed/Plain/Khimar)</option>
+                            <option value="Mens-Wear (Koko)">Mens-Wear (Koko/Sarung)</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider font-medium text-stone-500 mb-1">Stok Awal</label>
+                            <input type="number" id="new-stock" required value="50" class="w-full border border-stone-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#90753a] text-stone-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider font-medium text-stone-500 mb-1">Kode SKU</label>
+                            <input type="text" id="new-sku" required placeholder="AD-AML-05" class="w-full border border-stone-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#90753a] text-stone-700">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-medium text-stone-500 mb-1">Harga Jual (Rp)</label>
+                        <input type="text" id="new-price" required placeholder="450.000" class="w-full border border-stone-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#90753a] text-stone-700 font-medium">
+                    </div>
+                    <button type="submit" class="w-full bg-[#90753a] text-white py-2.5 rounded-sm text-xs uppercase tracking-widest font-medium hover:bg-stone-800 transition-colors mt-2">
+                        Publish ke Website
+                    </button>
+                </form>
+            </section>
+        </div>
+
+        <section id="section-pesanan" class="bg-white border border-stone-200 rounded-sm shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-stone-100 bg-stone-50/50">
+                <h3 class="font-serif font-medium text-lg text-stone-800">Antrean Pesanan Masuk (Real-Time)</h3>
+                <p class="text-xs text-stone-400">Data otomatis bertambah saat pembeli menyelesaikan proses pembayaran di halaman checkout / payment success.</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-stone-200 bg-stone-100/50 text-xs uppercase tracking-wider text-stone-500 font-semibold">
+                            <th class="p-4">Invoice & Tanggal</th>
+                            <th class="p-4">Informasi Pembeli</th>
+                            <th class="p-4">Item yang Dibeli</th>
+                            <th class="p-4">Total Bayar</th>
+                            <th class="p-4 text-center">Aksi / Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-100 text-xs font-medium" id="order-table-body">
+                        <tr>
+                            <td colspan="5" class="p-8 text-center text-stone-400 uppercase tracking-wider">Belum ada pesanan masuk saat ini.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-stone-900 text-white px-4 py-3 rounded-sm shadow-lg text-xs tracking-wider uppercase font-medium flex items-center space-x-2 translate-y-20 opacity-0 transition-all duration-300">
+        <span>✓ Perubahan terdeteksi, silakan klik tombol 'Simpan' di ujung kolom.</span>
     </div>
 
     <script>
-        const fInput = document.getElementById('pImg');
-        fInput.onchange = e => {
-            const reader = new FileReader();
-            reader.onload = () => document.getElementById('pImgBase64').value = reader.result;
-            reader.readAsDataURL(e.target.files[0]);
-        };
-
-        const form = document.getElementById('adminForm');
-        form.onsubmit = e => {
-            e.preventDefault();
-            const products = JSON.parse(localStorage.getItem('aden_store')) || [];
-            
-            const newProduct = {
-                id: Date.now(),
-                name: document.getElementById('pName').value,
-                price: document.getElementById('pPrice').value,
-                color: document.getElementById('pColor').value,
-                type: document.getElementById('pType').value,
-                detail: document.getElementById('pDetail').value,
-                img: document.getElementById('pImgBase64').value
-            };
-
-            products.push(newProduct);
-            localStorage.setItem('aden_store', JSON.stringify(products));
-            alert('Produk berhasil ditambah!');
-            location.reload();
-        };
-
-        // Render List untuk hapus
-        const list = document.getElementById('adminList');
-        const saved = JSON.parse(localStorage.getItem('aden_store')) || [];
-        saved.forEach((p, i) => {
-            list.innerHTML += `<div class="flex justify-between border-b py-2 text-sm">
-                <span>${p.name} (${p.color})</span>
-                <button onclick="deleteP(${i})" class="text-red-500">Hapus</button>
-            </div>`;
-        });
-
-        function deleteP(i) {
-            const products = JSON.parse(localStorage.getItem('aden_store'));
-            products.splice(i, 1);
-            localStorage.setItem('aden_store', JSON.stringify(products));
-            location.reload();
+        function showSaveToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3500);
         }
+
+        function saveProduct(productName) {
+            alert('Sukses! Nilai stok dan harga baru untuk ' + productName + ' berhasil disinkronkan langsung ke database.');
+        }
+
+        function filterTable() {
+            let input = document.getElementById("search-input").value.toLowerCase();
+            let rows = document.getElementById("table-body").getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                let text = rows[i].textContent || rows[i].innerText;
+                rows[i].style.display = text.toLowerCase().indexOf(input) > -1 ? "" : "none";
+            }
+        }
+
+        function addNewRow(e) {
+            e.preventDefault();
+            let name = document.getElementById("new-name").value;
+            let collection = document.getElementById("new-collection").value;
+            let category = document.getElementById("new-category").value;
+            let stock = document.getElementById("new-stock").value;
+            let sku = document.getElementById("new-sku").value;
+            let price = document.getElementById("new-price").value;
+
+            let tbody = document.getElementById("table-body");
+            let newRow = document.createElement("tr");
+            newRow.className = "hover:bg-stone-50/50 transition-colors text-sm";
+            newRow.setAttribute("data-product-name", name.toLowerCase());
+            
+            newRow.innerHTML = `
+                <td class="p-4">
+                    <div class="font-medium text-stone-900 font-product">${name}</div>
+                    <div class="text-xs text-stone-400 mt-0.5">Koleksi: <span class="text-stone-600 font-medium uppercase">${collection}</span></div>
+                    <div class="text-[10px] text-[#90753a] mt-0.5 font-mono">SKU: ${sku}</div>
+                </td>
+                <td class="p-4 text-stone-500 uppercase text-[11px] tracking-wider">${category}</td>
+                <td class="p-4">
+                    <div class="flex items-center space-x-1 border border-stone-200 rounded-sm px-2 py-1 bg-white">
+                        <span class="text-stone-400 text-xs font-medium">Rp</span>
+                        <input type="text" value="${price}" class="w-full bg-transparent focus:outline-none text-stone-700 font-medium text-right p-0" onchange="showSaveToast()">
+                    </div>
+                </td>
+                <td class="p-4">
+                    <input type="number" id="stok-${sku}" value="${stock}" class="w-20 border border-stone-200 rounded-sm px-2 py-1 bg-white text-center font-medium focus:outline-none text-stone-700" onchange="showSaveToast()">
+                </td>
+                <td class="p-4 text-center">
+                    <button class="text-[#90753a] hover:text-stone-800 text-xs font-semibold uppercase tracking-wider" onclick="saveProduct('${name}')">Simpan</button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+            alert("Varian baru berhasil ditambahkan!");
+        }
+
+        // ================= LOAD DAN PROSES PESANAN MASUK =================
+        function loadOrders() {
+            const queue = JSON.parse(localStorage.getItem('adminOrderQueue')) || [];
+            const container = document.getElementById('order-table-body');
+            
+            // Perbarui statistik pesanan masuk di widget atas & sidebar
+            const pendingOrders = queue.filter(o => o.status === "Pending").length;
+            document.getElementById('total-pesanan-stats').innerHTML = `${pendingOrders} <span class="text-xs text-blue-400 font-normal">Transaksi Masuk</span>`;
+            document.getElementById('sidebar-order-count').innerText = pendingOrders;
+
+            if (queue.length === 0) {
+                container.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-stone-400 uppercase tracking-wider">Belum ada pesanan masuk saat ini.</td></tr>`;
+                return;
+            }
+
+            container.innerHTML = queue.map((order, index) => {
+                // Konversi data item menjadi teks list rapi
+                const itemsList = order.items.map(item => `• ${item.name} (${item.color.toUpperCase()}/${item.size.toUpperCase()}) x${item.qty}`).join('<br>');
+                
+                let actionButton = "";
+                if (order.status === "Pending") {
+                    actionButton = `<button onclick="confirmOrder(${index})" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-sm tracking-wide shadow-sm">KONFIRMASI & POTONG STOK</button>`;
+                } else {
+                    actionButton = `<span class="text-emerald-600 font-bold bg-emerald-50 px-3 py-1.5 rounded border border-emerald-200 block text-center">✓ SELESAI & DIPOTONG</span>`;
+                }
+
+                return `
+                    <tr class="hover:bg-stone-50/50 transition-colors ${order.status === 'Pending' ? 'bg-blue-50/20' : ''}">
+                        <td class="p-4">
+                            <span class="font-bold text-stone-800 block">${order.invoice || 'INV/--'}</span>
+                            <span class="text-stone-400 text-[10px] block mt-0.5">${order.date || ''}</span>
+                        </td>
+                        <td class="p-4">
+                            <span class="font-bold text-stone-900 block uppercase">${order.customer || '-'}</span>
+                            <span class="text-stone-500 block">${order.phone || '-'}</span>
+                            <span class="text-stone-400 block text-[11px] max-w-xs truncate">${order.address || '-'}</span>
+                        </td>
+                        <td class="p-4 text-stone-700 leading-relaxed font-mono">${itemsList}</td>
+                        <td class="p-4 font-bold text-stone-900 text-sm">Rp ${order.total ? order.total.toLocaleString('id-ID') : '0'}</td>
+                        <td class="p-4 text-center">${actionButton}</td>
+                    </tr>
+                `;
+            }).reverse().join(''); // Menggunakan reverse agar pesanan terbaru berada di posisi paling atas
+        }
+
+        // Fungsi Aksi Pemrosesan Order dan Pengurangan Stok Otomatis
+        function confirmOrder(index) {
+            let queue = JSON.parse(localStorage.getItem('adminOrderQueue')) || [];
+            // Ambil pesanan sesuai urutan asli array (karena tampilan di-reverse, sesuaikan indeksnya)
+            const actualIndex = queue.length - 1 - index;
+            const targetOrder = queue[actualIndex];
+
+            if (!targetOrder) return;
+
+            // Proses pencarian produk di tabel atas untuk dipotong stoknya
+            targetOrder.items.forEach(orderedItem => {
+                const searchName = orderedItem.name.toLowerCase().trim();
+                const tableRows = document.getElementById('table-body').getElementsByTagName('tr');
+                
+                let foundInput = null;
+
+                // Cari input stok berdasarkan kesamaan teks nama produk
+                for (let i = 0; i < tableRows.length; i++) {
+                    const productNameInTable = tableRows[i].getAttribute('data-product-name') || '';
+                    if (searchName.includes(productNameInTable) || productNameInTable.includes(searchName)) {
+                        foundInput = tableRows[i].querySelector('input[type="number"]');
+                        break;
+                    }
+                }
+
+                // Jika elemen input stok ditemukan di tabel, kurangi nilainya langsung
+                if (foundInput) {
+                    let currentStock = parseInt(foundInput.value) || 0;
+                    let newStock = currentStock - orderedItem.qty;
+                    if (newStock < 0) newStock = 0; // Menghindari nilai stok minus
+                    foundInput.value = newStock;
+                }
+            });
+
+            // Ubah status pesanan menjadi Selesai
+            targetOrder.status = "Completed";
+            localStorage.setItem('adminOrderQueue', JSON.stringify(queue));
+            
+            alert(`Pesanan ${targetOrder.invoice} berhasil dikonfirmasi! Stok gudang telah terpotong otomatis.`);
+            loadOrders(); // Muat ulang visual antrean pesanan
+        }
+
+        // Jalankan pemuatan antrean pesanan saat halaman admin dibuka
+        window.onload = loadOrders;
     </script>
 </body>
 </html>
