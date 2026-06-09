@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aden Group Official | Virtual Account Billing</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="images/logo_aden_gold2.png" type="image/png">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
@@ -27,38 +27,31 @@
         </div>
 
         <div class="p-5 space-y-4">
-            
             <div class="text-center">
                 <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Total Amount to Pay</p>
                 <h3 class="text-xl font-black text-gray-900 tracking-tight">Rp <span id="va-total">0</span></h3>
                 <div id="copy-toast" class="fixed left-1/2 -translate-x-1/2 bg-gray-500 text-white text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-full shadow-2xl opacity-0 transition-all duration-300 pointer-events-none z-[9999]">
-            Copied!
-            </div>
-            </div>
-
-
-
-            <div id="payment-code-container" class="bg-gray-50 rounded-xl p-4 border border-gray-100 relative text-center">
+                    Copied!
                 </div>
+            </div>
+
+            <div id="payment-code-container" class="bg-gray-50 rounded-xl p-4 border border-gray-100 relative text-center"></div>
 
             <div class="space-y-2">
                 <h4 class="text-[9px] font-black text-gray-800 uppercase tracking-[0.15em]">Payment Instructions</h4>
-                <div id="instructions-list" class="space-y-1.5">
-                    </div>
+                <div id="instructions-list" class="space-y-1.5"></div>
             </div>
         </div>
 
         <div class="p-4 bg-gray-50 border-t border-gray-100 flex flex-col gap-2">
-    <button onclick="window.location.href='success.html'" class="w-full py-3 bg-green-600 text-white rounded-lg font-black text-[11px] uppercase tracking-widest hover:bg-green-700 transition-all shadow-md shadow-green-100">
-        CONFIRM
-    </button>
-    
-    <button onclick="backToPaymentSelection()" class="w-full py-1.5 text-gray-400 font-bold text-[10px] uppercase tracking-widest hover:text-gray-600 transition-colors">
-        Change Payment Method
-    </button>
-</div>
+            <button onclick="window.location.href='success.html'" class="w-full py-3 bg-green-600 text-white rounded-lg font-black text-[11px] uppercase tracking-widest hover:bg-green-700 transition-all shadow-md shadow-green-100">
+                CONFIRM
+            </button>
+            <button onclick="backToPaymentSelection()" class="w-full py-1.5 text-gray-400 font-bold text-[10px] uppercase tracking-widest hover:text-gray-600 transition-colors">
+                Change Payment Method
+            </button>
+        </div>
     </div>
-</body>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -78,12 +71,10 @@
             document.getElementById('va-total').innerText = total.toLocaleString('id-ID');
 
             if (method === 'QRIS') {
-                // Konfigurasi Tampilan QRIS
                 billingTitle.innerText = "Instant Payment QRIS";
                 bankDisplay.innerText = "Scan QR Code";
                 logoContainer.innerHTML = `<div class="bg-gradient-to-tr from-pink-500 to-purple-600 px-3 py-1 rounded text-[10px] text-white font-black italic">QRIS</div>`;
 
-                // Tampilkan QR Code (Simulasi menggunakan API QR gratis)
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${invoice}`;
                 paymentCodeContainer.innerHTML = `
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4 text-left">QRIS Scan Code</p>
@@ -93,7 +84,6 @@
                     <p class="text-[9px] text-gray-400 mt-4 uppercase font-bold italic">Support: GoPay, OVO, ShopeePay, Dana, LinkAja</p>
                 `;
 
-                // Instruksi QRIS
                 instructionsList.innerHTML = `
                     <div class="flex gap-4 items-start">
                         <span class="w-5 h-5 rounded-full bg-stone-100 text-[10px] flex items-center justify-center font-bold shrink-0">1</span>
@@ -108,9 +98,7 @@
                         <p class="text-[12px] text-gray-500 leading-relaxed">Pilih menu <strong class="text-gray-700">Scan / Bayar</strong> lalu unggah gambar QR Code tadi.</p>
                     </div>
                 `;
-
             } else {
-                // Konfigurasi Tampilan Bank (VA)
                 const bankConfigs = {
                     'BNI': { name: 'BNI Virtual Account', prefix: '8806', logo: 'https://i.pinimg.com/736x/ef/33/52/ef3352ee1f22a05508f2aa618bac5642.jpg' },
                     'BRI': { name: 'BRI Virtual Account', prefix: '128', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Bendera_BRI_2025_%28Putih%29.svg/960px-Bendera_BRI_2025_%28Putih%29.svg.png?_=20251221004429' },
@@ -132,7 +120,6 @@
                     </div>
                 `;
 
-                // Instruksi VA
                 instructionsList.innerHTML = `
                     <div class="flex gap-4 items-start">
                         <span class="w-5 h-5 rounded-full bg-stone-100 text-[10px] flex items-center justify-center font-bold shrink-0">1</span>
@@ -145,65 +132,82 @@
                 `;
             }
 
-            // --- LOGIKA HITUNG MUNDUR SYNC ---
-const countdownElement = document.getElementById('countdown');
-// Ambil waktu kedaluwarsa yang sudah dibuat di halaman sebelumnya
-let expiryTime = localStorage.getItem('paymentExpiry');
+            const countdownElement = document.getElementById('countdown');
+            let expiryTime = localStorage.getItem('paymentExpiry');
 
-if (expiryTime) {
-    const updateTimer = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = expiryTime - now;
+            if (expiryTime) {
+                const updateTimer = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = expiryTime - now;
 
-        // Jika waktu habis
-        if (distance <= 0) {
-            clearInterval(updateTimer);
-            if(countdownElement) countdownElement.innerText = "00:00:00";
-            localStorage.removeItem('paymentExpiry');
-            localStorage.removeItem('activeInvoice');
-            alert("Waktu pembayaran telah habis.");
-            window.location.href = 'index.html'; // Kembali ke awal
-            return;
-        }
+                    if (distance <= 0) {
+                        clearInterval(updateTimer);
+                        if(countdownElement) countdownElement.innerText = "00:00:00";
+                        localStorage.removeItem('paymentExpiry');
+                        alert("Waktu pembayaran telah habis.");
+                        window.location.href = 'index.html';
+                        return;
+                    }
 
-        // Hitung jam, menit, detik
-        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((distance / (1000 * 60)) % 60);
-        const seconds = Math.floor((distance / 1000) % 60);
+                    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+                    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+                    const seconds = Math.floor((distance / 1000) % 60);
 
-        // Update tampilan (pastikan ID 'countdown' ada di HTML)
-        if(countdownElement) {
-            countdownElement.innerText = 
-                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-    }, 1000);
-}
-
+                    if(countdownElement) {
+                        countdownElement.innerText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    }
+                }, 1000);
+            }
         });
 
         function copyText(text) {
-    // Proses Salin ke Clipboard
-    navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('copy-toast');
-        
-        // Munculkan Pop-up
-        toast.classList.remove('opacity-0', 'translate-y-4');
-        toast.classList.add('opacity-100', '-translate-y-2');
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('copy-toast');
+                toast.classList.remove('opacity-0', 'translate-y-4');
+                toast.classList.add('opacity-100', '-translate-y-2');
 
-        // Hilangkan Pop-up setelah 2 detik
-        setTimeout(() => {
-            toast.classList.remove('opacity-100', '-translate-y-2');
-            toast.classList.add('opacity-0', 'translate-y-4');
-        }, 2000);
-    });
-}
+                setTimeout(() => {
+                    toast.classList.remove('opacity-100', '-translate-y-2');
+                    toast.classList.add('opacity-0', 'translate-y-4');
+                }, 2000);
+            });
+        }
+
         function backToPaymentSelection() {
-    // 1. Simpan tanda bahwa user hanya ingin merubah metode (bukan generate baru)
-    sessionStorage.setItem('skip_va_loading', 'true');
-    
-    // 2. Kembali ke halaman metode pembayaran/pilihan bank sebelumnya
-    window.history.back();
-}
+            // Mengirimkan sinyal instruksi bypass loading ke halaman checkout/pilihan pembayaran
+            sessionStorage.setItem('skip_va_loading', 'true');
+            window.history.back();
+        }
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Mengecek apakah terdapat bendera 'skip_va_loading' dari halaman billing
+    const skipVaLoading = sessionStorage.getItem('skip_va_loading');
+
+    if (skipVaLoading === 'true') {
+        // 1. Hapus bendera secepatnya agar tidak merusak alur transaksi baru berikutnya
+        sessionStorage.removeItem('skip_va_loading');
+
+        // 2. Sembunyikan elemen atau container Animasi Loading Generating VA milik Anda
+        // Ganti 'id-loading-va' dengan id elemen layar loading milik Anda
+        const loadingScreen = document.getElementById('id-loading-va'); 
+        if (loadingScreen) {
+            loadingScreen.classList.add('hidden'); // Menyembunyikannya langsung
+        }
+
+        // 3. Tampilkan paksa layout pilihan bank Anda jika tersembunyi
+        const paymentMenu = document.getElementById('id-menu-pilihan-bank');
+        if (paymentMenu) {
+            paymentMenu.classList.remove('hidden');
+        }
+
+        console.log("Aksi ganti pembayaran dideteksi, loading generate VA berhasil dilewati.");
+    } else {
+        // ALUR NORMAL (Jika user baru masuk pertama kali dari cart, bukan dari tombol kembali)
+        // Jalankan fungsi loading / generate VA bawaan Anda di sini jika ada
+        // contoh: jalankanProsesLoadingVA();
+    }
+});
+        
     </script>
 </body>
 </html>
