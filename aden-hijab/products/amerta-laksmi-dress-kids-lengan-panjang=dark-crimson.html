@@ -714,7 +714,6 @@ function toggleWA() {
 </script>
 
 
-    <!-------------------------------------------------------------------------DETAIL PRODUK-------------------------------------------------------------------------------->
 <!-------------------------------------------------------------------------DETAIL PRODUK-------------------------------------------------------------------------------->
 <main class="max-w-7xl mx-auto px-4 md:px-10 lg:px-10 py-8 md:py-20 pb-44 lg:pb-20">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-20 md:mb-32">
@@ -814,6 +813,21 @@ function toggleWA() {
                     </div>
                 </div>
 
+                <div id="sizeModal" class="fixed inset-0 z-[100] hidden items-center justify-center">
+    <div class="bg-white max-w-md w-full relative">
+        <button onclick="closeSizeModal()" class="absolute top-4 right-4">
+<span class="text-xl">×</span>
+        </button>
+        
+        <div class="p-8">
+            <div class="overflow-hidden bg-stone-50">
+                
+                <img src="https://i.ibb.co.com/C5gg1CbF/Size-Chart-Dress-Kids-Amerta-Laksmi.jpg" alt="Size Guide" class="w-full h-auto">
+            </div>
+        </div>
+    </div>
+</div>
+
                 <!-- QUANTITY SELECTION -->
                 <div class="space-y-1 lg:space-y-2 mt-2 lg:mt-4">
                     <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600 hidden lg:block">Quantity</p>
@@ -855,7 +869,8 @@ function toggleWA() {
         </div>
     </div>
 
-<div class="pt-10 border-t border-stone-200">
+
+    <div class="pt-10 border-t border-stone-200">
     <h3 class="text-[12px] font-bold uppercase tracking-[0.2em] text-center mb-16 text-stone-600">You May Also Like</h3>
     
     <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5">
@@ -983,7 +998,6 @@ function toggleWA() {
 
         </div>
     </div>
-
 </main>
 
 <script>
@@ -1039,6 +1053,7 @@ function selectSizeHandler(price, sizeLabel, element) {
         toggleMobileSizeDrawer();
     }
 }
+
 </script>
 
 <!-------------------------------------------------------------------------FOOTER-------------------------------------------------------------------------------->
