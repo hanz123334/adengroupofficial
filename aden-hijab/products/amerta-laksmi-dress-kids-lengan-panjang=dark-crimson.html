@@ -715,27 +715,28 @@ function toggleWA() {
 
 
     <!-------------------------------------------------------------------------DETAIL PRODUK-------------------------------------------------------------------------------->
-<main class="max-w-7xl mx-auto px-4 md:px-10 lg:px-10 py-8 md:py-20">
+<!-------------------------------------------------------------------------DETAIL PRODUK-------------------------------------------------------------------------------->
+<main class="max-w-7xl mx-auto px-4 md:px-10 lg:px-10 py-8 md:py-20 pb-44 lg:pb-20">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-20 md:mb-32">
         
-<div class="lg:col-span-6 space-y-4">
+        <!-- GALERI FOTO (KIRI) -->
+        <div class="lg:col-span-6 space-y-4">
             <div class="relative group overflow-hidden bg-stone-50 border border-stone-100">
                 <button onclick="prevSlide()" class="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
                 </button>
 
-                <img id="main-product-image" src="../../images/amerta-laksmi/crimson-dress-kids.jpg" 
-                     class="w-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <img id="main-product-image" src="https://i.ibb.co.com/fYTM9MQY/crimson-dress-kids.jpg" class="w-full object-cover transition-transform duration-700 group-hover:scale-110">
 
                 <button onclick="nextSlide()" class="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
             </div>
 
-            <div id="thumb-gallery" class="grid grid-cols-5 gap-2">
-                </div>
+            <div id="thumb-gallery" class="grid grid-cols-5 gap-2"></div>
         </div>
 
+        <!-- DETAIL PRODUK & OPSI (KANAN) -->
         <div class="lg:col-span-5 space-y-6">
             <div>
                 <p id="product-brand" class="text-[14px] text-stone-400 tracking-[0.2em] uppercase mb-1">Aden Hijab</p>
@@ -749,210 +750,252 @@ function toggleWA() {
             <div class="space-y-2">
                 <p class="text-[14px] font-bold uppercase tracking-widest text-stone-600">Colour:
                 <span id="color-label" class="font-normal text-stone-400">Dark Crimson</span></p>
-                
             </div>
 
-<div class="space-y-3">
-                <div class="flex justify-between items-end">
-        <p class="text-[12px] font-bold uppercase tracking-widest text-stone-600">Size </p>
-        <button onclick="openSizeModal()" class="text-[11px] text-stone-600 uppercase tracking-widest border-b border-stone-400 hover:text-stone-800 hover:border-stone-800 transition-all pb-0.5">
-            Size Chart
-        </button>
-    </div>
-                <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600">>Dress Kids Lengan Panjang</p>
-                <div class="grid grid-cols-5 gap-2">
-                    <button onclick="updatePriceSize(300000, 'XXS', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">XXS</button>
-                    <button onclick="updatePriceSize(345000, 'XS', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">XS</button>
-                    <button onclick="updatePriceSize(345000, 'S', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">S</button>
-                    <button onclick="updatePriceSize(345000, 'M', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">M</button>
-                    <button onclick="updatePriceSize(365000, 'L', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">L</button>
-                    <button onclick="updatePriceSize(365000, 'XL', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">XL</button>
-                    <button onclick="updatePriceSize(365000, 'XXL', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">XXL</button>
+            <!-- CONTAINER STICKY BOTTOM UNTUK MOBILE / NORMAL UNTUK DESKTOP -->
+            <div id="sticky-action-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-stone-200 p-4 shadow-[0_-5px_20px_rgba(0,0,0,0.1)] lg:static lg:p-0 lg:border-none lg:shadow-none lg:bg-transparent lg:z-auto">
+                
+                <!-- HEADER SELECTION & TOGGLE SIZE (HANYA DITAMPILKAN DI MOBILE) -->
+                <div class="flex justify-between items-center mb-2 lg:hidden">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] font-bold uppercase tracking-widest text-stone-600">Size:</span>
+                        <span id="selected-size-badge" class="text-[11px] font-semibold text-[#90753a] bg-stone-100 px-2 py-0.5 rounded">XXS</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="openSizeModal()" class="text-[10px] text-stone-500 uppercase tracking-widest underline">Size Chart</button>
+                        <button id="toggle-size-btn" onclick="toggleMobileSizeDrawer()" class="flex items-center gap-1 text-[11px] font-bold text-stone-700 bg-stone-100 px-2.5 py-1 rounded hover:bg-stone-200 transition-all">
+                            <span>Pilih Size</span>
+                            <svg id="arrow-icon" xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 transition-transform duration-300 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600">>SET KHIMAR</p>
-                    <div class="grid grid-cols-4 gap-2">
-                        <button onclick="updatePriceSize(400000, 'XXS SET KHIMAR', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">XXS SET KHIMAR</button>
-                        <button onclick="updatePriceSize(470000, 'XS SET KHIMAR', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">XS SET KHIMAR</button>
-                        <button onclick="updatePriceSize(470000, 'S SET KHIMAR', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">S SET KHIMAR</button>
-                        <button onclick="updatePriceSize(470000, 'M SET KHIMAR', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">M SET KHIMAR</button>
-                        <button onclick="updatePriceSize(510000, 'L SET KHIMAR', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">L SET KHIMAR</button>
-                        <button onclick="updatePriceSize(510000, 'XL SET KHIMAR', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">XL SET KHIMAR</button>
-                        <button onclick="updatePriceSize(510000, 'XXL SET KHIMAR', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">XXL SET KHIMAR</button>
+                <!-- PANEL SIZE OPTIONS (COLLAPSIBLE DI MOBILE, NORMAL DI DESKTOP) -->
+                <div id="size-options-panel" class="hidden lg:block max-h-[40vh] overflow-y-auto space-y-3 pr-1 my-2 lg:max-h-none lg:overflow-visible lg:my-0 border-b border-stone-100 lg:border-none pb-3 lg:pb-0 transition-all duration-300">
+                    <div class="hidden lg:flex justify-between items-end mb-2">
+                        <p class="text-[12px] font-bold uppercase tracking-widest text-stone-600">Size</p>
+                        <button onclick="openSizeModal()" class="text-[11px] text-stone-600 uppercase tracking-widest border-b border-stone-400 hover:text-stone-800 hover:border-stone-800 transition-all pb-0.5">
+                            Size Chart
+                        </button>
                     </div>
 
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600">>HIJAB ONLY</p>
-                    <div class="grid grid-cols-4 gap-2">
-                        <button onclick="updatePriceSize(195000, 'SCARF (ONLY)', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">SCARF (ONLY)</button>
-                        <button onclick="updatePriceSize(195000, 'KHIMAR (ONLY)', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">KHIMAR (ONLY)</button>
-                        <button onclick="updatePriceSize(175000, 'SEGIEMPAT OVAL (ONLY)', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">SEGIEMPAT OVAL (ONLY)</button>
-                        <button onclick="updatePriceSize(100000, 'KHIMAR TOODLER (ONLY) XXS', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">KHIMAR TOODLER (ONLY) XXS</button>
-                        <button onclick="updatePriceSize(125000, 'KHIMAR KIDS (ONLY) SIZE 1 XS-M', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">KHIMAR KIDS (ONLY) SIZE 1 XS-M</button>
-                        <button onclick="updatePriceSize(145000, 'KHIMAR KIDS (ONLY) SIZE 2 L-XXL', this)" data-stock="12" class="size-btn py-3 border border-stone-200 text-[10px] hover:border-stone-800">KHIMAR KIDS (ONLY) SIZE 2 L-XXL</button>
-
-                </div>
-            </div>
-
-            <div id="sizeModal" class="fixed inset-0 z-[100] hidden items-center justify-center">
-    <div class="bg-white max-w-md w-full relative">
-        <button onclick="closeSizeModal()" class="absolute top-4 right-4">
-<span class="text-xl">×</span>
-        </button>
-        
-        <div class="p-8">
-            <div class="overflow-hidden bg-stone-50">
-                
-                <img src="../../images/amerta-laksmi/SizeChart-DressKids_Amerta-Laksmi.jpg" alt="Size Guide" class="w-full h-auto">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="stock-warning-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/50 backdrop-blur-sm">
-    <div class="bg-white p-8 max-w-sm w-full mx-4 shadow-2xl text-center space-y-4 transform transition-all">
-        <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-red-600">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-            </svg>
-        </div>
-        <h3 class="text-lg font-bold text-stone-800 uppercase tracking-widest">Stock Limited</h3>
-        <p id="modal-msg" class="text-stone-600 text-sm">Maaf, jumlah pesanan melebihi stok yang tersedia.</p>
-        <button onclick="closeStockModal()" class="w-full bg-[#90753a] text-white py-3 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-[#765919] transition-all">
-            Continue
-        </button>
-    </div>
-</div>
-
-            <div class="space-y-3">
-                <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600">Quantity</p>
-                <div class="flex items-center gap-8">
-                    <div class="flex items-center border border-stone-200">
-                        <button onclick="changeQty(-1)" class="px-5 py-2.5 text-stone-500 hover:text-stone-800 transition-colors">-</button>
-                        <span id="qty-count" class="w-10 text-center text-xs font-bold">1</span>
-                        <button id="btn-plus" onclick="changeQty(1)" class="px-5 py-2.5 text-stone-500 hover:text-stone-800 transition-all">+</button>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600">&gt; Dress Kids Lengan Panjang</p>
+                    <div class="grid grid-cols-5 gap-2">
+                        <button onclick="selectSizeHandler(300000, 'XXS', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">XXS</button>
+                        <button onclick="selectSizeHandler(345000, 'XS', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">XS</button>
+                        <button onclick="selectSizeHandler(345000, 'S', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">S</button>
+                        <button onclick="selectSizeHandler(345000, 'M', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">M</button>
+                        <button onclick="selectSizeHandler(365000, 'L', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">L</button>
+                        <button onclick="selectSizeHandler(365000, 'XL', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">XL</button>
+                        <button onclick="selectSizeHandler(365000, 'XXL', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">XXL</button>
                     </div>
-                    <p class="text-[14px] text-stone-600"><span id="current-stock-text">12</span> Stocks</p>
-                </div>
-            </div> 
 
-            <div class="flex flex-col gap-3 pt-1">
-                <button onclick="confirmAddToCart()" class="w-full bg-[#90753a] text-white py-5 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-[#765919] transition-all">
-                    Add To Cart
-                </button>
-                <button id="detail-wishlist-btn" onclick="addToWishlist()" class="w-full border border-stone-200 text-stone-800 py-5 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-[#aaa595] hover:text-white transition-all">
-    Save To Wishlist
-</button>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600">&gt; SET KHIMAR</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button onclick="selectSizeHandler(400000, 'XXS SET KHIMAR', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">XXS SET KHIMAR</button>
+                        <button onclick="selectSizeHandler(470000, 'XS SET KHIMAR', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">XS SET KHIMAR</button>
+                        <button onclick="selectSizeHandler(470000, 'S SET KHIMAR', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">S SET KHIMAR</button>
+                        <button onclick="selectSizeHandler(470000, 'M SET KHIMAR', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">M SET KHIMAR</button>
+                        <button onclick="selectSizeHandler(510000, 'L SET KHIMAR', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">L SET KHIMAR</button>
+                        <button onclick="selectSizeHandler(510000, 'XL SET KHIMAR', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">XL SET KHIMAR</button>
+                        <button onclick="selectSizeHandler(510000, 'XXL SET KHIMAR', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">XXL SET KHIMAR</button>
+                    </div>
+
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600">&gt; HIJAB ONLY</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button onclick="selectSizeHandler(195000, 'SCARF (ONLY)', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">SCARF (ONLY)</button>
+                        <button onclick="selectSizeHandler(195000, 'KHIMAR (ONLY)', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">KHIMAR (ONLY)</button>
+                        <button onclick="selectSizeHandler(175000, 'SEGIEMPAT OVAL (ONLY)', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">SEGIEMPAT OVAL (ONLY)</button>
+                        <button onclick="selectSizeHandler(100000, 'KHIMAR TOODLER (ONLY)XXS', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">KHIMAR TOODLER (ONLY) XXS</button>
+                        <button onclick="selectSizeHandler(125000, 'KHIMAR KIDS (ONLY) SIZE 1 XS-M', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">KHIMAR KIDS (ONLY) SIZE 1 XS-M</button>
+                        <button onclick="selectSizeHandler(145000, 'KHIMAR KIDS (ONLY) SIZE 2 L-XXL', this)" data-stock="12" class="size-btn py-2.5 lg:py-3 border border-stone-200 text-[10px] hover:border-stone-800 transition-all">KHIMAR KIDS (ONLY) SIZE 2 L-XXL</button>
+                    </div>
+                </div>
+
+                <!-- QUANTITY SELECTION -->
+                <div class="space-y-1 lg:space-y-2 mt-2 lg:mt-4">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-600 hidden lg:block">Quantity</p>
+                    <div class="flex items-center justify-between lg:justify-start gap-4 lg:gap-8">
+                        <div class="flex items-center border border-stone-200 bg-white">
+                            <button onclick="changeQty(-1)" class="px-3 lg:px-5 py-1.5 lg:py-2.5 text-stone-500 hover:text-stone-800 transition-colors">-</button>
+                            <span id="qty-count" class="w-8 lg:w-10 text-center text-xs font-bold">1</span>
+                            <button id="btn-plus" onclick="changeQty(1)" class="px-3 lg:px-5 py-1.5 lg:py-2.5 text-stone-500 hover:text-stone-800 transition-all">+</button>
+                        </div>
+                        <p class="text-[12px] lg:text-[14px] text-stone-600"><span id="current-stock-text">12</span> Stocks Available</p>
+                    </div>
+                </div> 
+
+                <!-- ACTION BUTTONS -->
+                <div class="flex flex-col gap-2 pt-3 lg:pt-4">
+                    <button onclick="confirmAddToCart()" class="w-full bg-[#90753a] text-white py-3 lg:py-5 text-[10px] font-bold uppercase tracking-[0.3em] lg:tracking-[0.4em] hover:bg-[#765919] transition-all shadow-sm">
+                        Add To Cart
+                    </button>
+                    <button id="detail-wishlist-btn" onclick="addToWishlist()" class="w-full border border-stone-200 text-stone-800 py-2.5 lg:py-5 text-[10px] font-bold uppercase tracking-[0.3em] lg:tracking-[0.4em] hover:bg-[#aaa595] hover:text-white transition-all">
+                        Save To Wishlist
+                    </button>
+                </div>
             </div>
-            <div class="space-y-1">
-            <h1 class="text-[14px] font-bold text-[#514136]">Detail Product :</h1>
-            <ul class="list-disc list-inside space-y-1 text-[13px] font-normal text-[#514136]">
-  <li>Material utama bahan Olfara yang halus, ringan, lembut, dan nyaman dipakai.</li>
-  <li>Menggunakan garis leher bulat.</li>
-  <li>Bukaan resleting depan.</li>
-  <li>Variasi outer menyatu dari bahan Ceruty Baby Doll.</li>
-  <li>Lengan balon dengan kerut di bagian atas dan bawah.</li>
-  <li>Manset kerut dengan bukaan kancing (wudhu-friendly).</li>
-  <li>Terdapat Saku di sisi kanan</li>
-  <li>Terdapat Metal tag A.D.E.N</li>
-</ul>
+
+            <!-- DETAIL DESKRIPSI PRODUK -->
+            <div class="space-y-1 pt-2">
+                <h1 class="text-[14px] font-bold text-[#514136]">Detail Product :</h1>
+                <ul class="list-disc list-inside space-y-1 text-[13px] font-normal text-[#514136]">
+                    <li>Material utama bahan Olfara yang halus, ringan, lembut, dan nyaman dipakai.</li>
+                    <li>Menggunakan garis leher bulat.</li>
+                    <li>Bukaan resleting depan.</li>
+                    <li>Variasi outer menyatu dari bahan Ceruty Baby Doll.</li>
+                    <li>Lengan balon dengan kerut di bagian atas dan bawah.</li>
+                    <li>Manset kerut dengan bukaan kancing (wudhu-friendly).</li>
+                    <li>Terdapat Saku di sisi kanan</li>
+                    <li>Terdapat Metal tag A.D.E.N</li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 
-    <div class="pt-10 border-t border-stone-200">
+<div class="pt-10 border-t border-stone-200">
     <h3 class="text-[12px] font-bold uppercase tracking-[0.2em] text-center mb-16 text-stone-600">You May Also Like</h3>
     
-    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5 mobile-drag-scroll">
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5">
 
-<div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Dress Kids Lengan Panjang Amerta Laksmi Straw" data-price="100000-480000" data-category="dress">
-                <a href="../products/amerta-laksmi-dress-kids-lengan-panjang=straw.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="../../images/amerta-laksmi/straw-dress-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="../../images/amerta-laksmi/straw-dress-kids2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Straw</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 100.000 - Rp 480.000</p>
-            </div>
-                </a>
-            </div>
+        <div class="group cursor-pointer h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group">
+            <a href="../products/amerta-laksmi-dress-kids-lengan-pendek.html" class="flex flex-col h-full">
+        <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+            <img src="https://i.ibb.co.com/Mk3rdPB9/Screenshot-2026-01-22-at-01-47-38-Instagram.png" 
+                 class="w-full h-full object-cover transition duration-500">
+            
+            <img src="https://i.ibb.co.com/nN0TbRbv/Screenshot-2026-01-22-at-20-57-25-Instagram.png" 
+                 class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+        </div>
 
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Dress Kids Lengan Panjang Amerta Laksmi Nature Black" data-price="100000-480000" data-category="dress">
-                <a href="../products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="../../images/amerta-laksmi/nature-black-dress-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="../../images/amerta-laksmi/nature-black-dress-kids2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Nature Black</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 100.000 - Rp 480.000</p>
-            </div>
-                </a>
-            </div>
+        <div class="p-2 md:p-4 flex flex-col flex-grow">
+            <h2 class="text-[10px] md:text-sm font-medium text-stone-800 leading-tight line-clamp-2">
+                Dress Kids Lengan Pendek Amerta Laksmi
+            </h2>
+        <div class="mt-auto pt-1">
+            <p class="text-stone-400 text-[9px] md:text-xs">Available 5 Colours</p>
+            <p class="text-stone-800 text-[9px] md:text-sm font-medium mt-1 tracking-tight">
+                    Rp 100.000 - 480.000
+            </p>
+        </div>
+        </div>
+            </a>
+        </div>
+        
+        <div class="group cursor-pointer h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group">
+            <a href="../products/amerta-laksmi-dress-mom-style1.html" class="flex flex-col h-full">
+        <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+            <img src="https://i.ibb.co.com/fY7r9zS9/Screenshot-2026-01-16-at-13-54-35-Instagram.png" 
+                 class="w-full h-full object-cover transition duration-500">
+            
+            <img src="https://i.ibb.co.com/gLYfWLzq/Screenshot-2026-01-16-at-13-55-38-Instagram.png" 
+                 class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+        </div>
 
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Dress Kids Lengan Panjang Amerta Laksmi Indian Tan" data-price="100000-480000" data-category="dress">
-                <a href="../products/amerta-laksmi-dress-kids-lengan-panjang=indian-tan.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="../../images/amerta-laksmi/indian-dress-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="../../images/amerta-laksmi/indian-dress-kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Indian Tan</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 100.000 - Rp 480.000</p>
-            </div>
-                </a>
-            </div>
+        <div class="p-2 md:p-4 flex flex-col flex-grow">
+            <h2 class="text-[10px] md:text-sm font-medium text-stone-800 leading-tight line-clamp-2">
+                Dress Mom Style 1 Amerta Laksmi
+            </h2>
+        <div class="mt-auto pt-1">
+            <p class="text-stone-400 text-[9px] md:text-xs">Available 5 Colours</p>
+            <p class="text-stone-800 text-[9px] md:text-sm font-medium mt-1 tracking-tight">
+                    Rp 545.000 - 675.000
+            </p>
+        </div>
+        </div>
+            </a>
+        </div>
 
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Dress Kids Lengan Panjang Amerta Laksmi Heliotrope" data-price="100000-480000" data-category="dress">
-                <a href="../products/amerta-laksmi-dress-kids-lengan-panjang=heliotrope.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="../../images/amerta-laksmi/heliotrope-dress-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="../../images/amerta-laksmi/heliotrope-dress-kids2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Heliotrope</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 100.000 - Rp 480.000</p>
-            </div>
-                </a>
-            </div>
 
-            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
-                 data-name="Dress Kids Lengan Pendek Amerta Laksmi Dark Crimson" data-price="100000-480000" data-category="dress">
-                <a href="../products/amerta-laksmi-dress-kids-lengan-pendek=dark-crimson.html" class="flex flex-col h-full">
-            <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="../../images/amerta-laksmi/crimson-dress-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="../../images/amerta-laksmi/crimson-dress-kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
-            </div>
-            <div class="p-3 md:p-4">
-                <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Pendek Amerta Laksmi</h4>
-                <p class="text-stone-400 text-[9px] md:text-sm mt-1">Dark Crimson</p>
-                <p class="text-stone-800 text-[10px] md:text-sm font-medium mt-1 tracking-tight">Rp 100.000 - Rp 480.000</p>
-            </div>
-                </a>
-            </div>
+        <div class="group cursor-pointer h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group">
+            <a href="../products/amerta-laksmi-dress-mom-style2.html" class="flex flex-col h-full">
+        <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+            <img src="https://i.ibb.co.com/5Wp4dVFQ/Screenshot-2026-01-16-at-14-00-37-Instagram.png" 
+                 class="w-full h-full object-cover transition duration-500">
+            
+            <img src="https://i.ibb.co.com/W4MkQG3K/Screenshot-2026-01-16-at-14-02-09-Instagram.png" 
+                 class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+        </div>
+
+        <div class="p-2 md:p-4 flex flex-col flex-grow">
+            <h2 class="text-[10px] md:text-sm font-medium text-stone-800 leading-tight line-clamp-2">
+                Dress Mom Style 2 Amerta Laksmi
+            </h2>
+        <div class="mt-auto pt-1">
+            <p class="text-stone-400 text-[9px] md:text-xs">Available 5 Colours</p>
+            <p class="text-stone-800 text-[9px] md:text-sm font-medium mt-1 tracking-tight">
+                    Rp 445.000 - 1.025.000
+            </p>
+        </div>
+        </div>
+            </a>
+        </div>
+
+        <div class="group cursor-pointer h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group">
+            <a href="../products/amerta-laksmi-koko-kids-lengan-panjang.html" class="flex flex-col h-full">
+        <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+            <img src="https://i.ibb.co.com/r9Vh1bC/Screenshot-2026-01-16-at-14-26-04-Instagram.png" 
+                 class="w-full h-full object-cover transition duration-500">
+            
+            <img src="https://i.ibb.co.com/MDJgGK42/Screenshot-2026-01-16-at-14-26-50-Instagram.png" 
+                 class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+        </div>
+
+        <div class="p-2 md:p-4 flex flex-col flex-grow">
+            <h2 class="text-[10px] md:text-sm font-medium text-stone-800 leading-tight line-clamp-2">
+                Koko Kids Lengan Panjang Amerta Laksmi
+            </h2>
+        <div class="mt-auto pt-1">
+            <p class="text-stone-400 text-[9px] md:text-xs">Available 5 Colours</p>
+            <p class="text-stone-800 text-[9px] md:text-sm font-medium mt-1 tracking-tight">
+                    Rp 275.000 - 305.000
+            </p>
+        </div>
+        </div>
+            </a>
+        </div>
+
+        <div class="group cursor-pointer h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group">
+            <a href="../products/amerta-laksmi-koko-kids-lengan-pendek.html" class="flex flex-col h-full">
+        <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
+            <img src="https://i.ibb.co.com/SXmcpMSz/Screenshot-2026-01-21-at-23-13-58-Instagram.png" 
+                 class="w-full h-full object-cover transition duration-500">
+            
+            <img src="https://i.ibb.co.com/Mxw92PNk/Screenshot-2026-01-22-at-20-54-49-Instagram.png" 
+                 class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+        </div>
+
+        <div class="p-2 md:p-4 flex flex-col flex-grow">
+            <h2 class="text-[10px] md:text-sm font-medium text-stone-800 leading-tight line-clamp-2">
+                Koko Kids Lengan Pendek Amerta Laksmi
+            </h2>
+        <div class="mt-auto pt-1">
+            <p class="text-stone-400 text-[9px] md:text-xs">Available 5 Colours</p>
+            <p class="text-stone-800 text-[9px] md:text-sm font-medium mt-1 tracking-tight">
+                    Rp 250.000 - 280.000
+            </p>
+        </div>
+        </div>
+            </a>
+        </div>
 
         </div>
     </div>
+
 </main>
 
 <script>
     // --- INITIAL DATA ---
 const productImages = [
-    "../../images/amerta-laksmi/crimson-dress-kids.jpg",
-    "../../images/amerta-laksmi/crimson-dress-kids1.jpg",
-    "../../images/amerta-laksmi/crimson-dress-kids2.jpg",
-    "../../images/amerta-laksmi/crimson-dress-kids3.jpg",
-    "../../images/amerta-laksmi/filosofi-warna-dark-crimson.jpg",
-    "../../images/amerta-laksmi/kolase-dress-kids.jpg",
-    "../../images/amerta-laksmi/Pricelist-DressKids_Amerta-Laksmi.jpg",
+    "https://i.ibb.co.com/fYTM9MQY/crimson-dress-kids.jpg",
+    "https://i.ibb.co.com/8L60YR85/crimson-dress-kids1.jpg",
+    "https://i.ibb.co.com/MkHDmK5b/crimson-dress-kids2.jpg",
+    "https://i.ibb.co.com/VcKpZVbs/crimson-dress-kids3.jpg",
+    "https://i.ibb.co.com/vn6KWN6/filosofi-warna-dark-crimson.jpg",
+    "https://i.ibb.co.com/TqcyYHgr/kolase-dress-kids.jpg",
+    "https://i.ibb.co.com/qFrtWRT1/Pricelist-Dress-Kids-Amerta-Laksmi.jpg",
 ];
 
 // --- DRESS KIDS LENGAN PANJANG AMERTA LAKSMI DARK CRIMSON---
@@ -963,6 +1006,39 @@ let activeSize = 'XXS';
 let activeColor = 'Dark Crimson';
 let currentAvailableStock = 12; // ---
 let currentMaxStock = 12;
+
+// Function untuk toggle/dropdown pilihan size di mobile
+function toggleMobileSizeDrawer() {
+    const sizePanel = document.getElementById('size-options-panel');
+    const arrowIcon = document.getElementById('arrow-icon');
+    
+    if (sizePanel.classList.contains('hidden')) {
+        sizePanel.classList.remove('hidden');
+        arrowIcon.classList.remove('rotate-180');
+    } else {
+        sizePanel.classList.add('hidden');
+        arrowIcon.classList.add('rotate-180');
+    }
+}
+
+// Wrapper function saat memilih size (update harga + perbarui indikator badge mobile)
+function selectSizeHandler(price, sizeLabel, element) {
+    // Memanggil fungsi kalkulasi bawaan milik Anda
+    if (typeof updatePriceSize === 'function') {
+        updatePriceSize(price, sizeLabel, element);
+    }
+    
+    // Update tampilan text badge size di mobile
+    const badge = document.getElementById('selected-size-badge');
+    if (badge) {
+        badge.textContent = sizeLabel;
+    }
+
+    // Menutup kembali dropdown size di mobile setelah memilih opsi
+    if (window.innerWidth < 1024) {
+        toggleMobileSizeDrawer();
+    }
+}
 </script>
 
 <!-------------------------------------------------------------------------FOOTER-------------------------------------------------------------------------------->
