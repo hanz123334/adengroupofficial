@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin Aden Group Official</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800">
+
+    <!-- TOP BRAND BAR -->
+    <div class="w-full bg-white border-b border-stone-200 px-4 py-2 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto no-scrollbar gap-2">
+            <button onclick="switchBrand('Aden Hijab')" id="tab-Aden Hijab" class="brand-tab flex-1 py-2 px-4 rounded-t-lg font-bold text-xs uppercase tracking-wider text-white bg-[#90753a] transition-all">Aden Hijab</button>
+            <button onclick="switchBrand('Aden Signature')" id="tab-Aden Signature" class="brand-tab flex-1 py-2 px-4 rounded-t-lg font-bold text-xs uppercase tracking-wider text-white bg-[#ccb47b] opacity-60 transition-all">Aden Signature</button>
+            <button onclick="switchBrand('Aden Basic')" id="tab-Aden Basic" class="brand-tab flex-1 py-2 px-4 rounded-t-lg font-bold text-xs uppercase tracking-wider text-white bg-[#c09a5e] opacity-60 transition-all">Aden Basic</button>
+            <button onclick="switchBrand('Aden Beauty')" id="tab-Aden Beauty" class="brand-tab flex-1 py-2 px-4 rounded-t-lg font-bold text-xs uppercase tracking-wider text-white bg-[#cfa395] opacity-60 transition-all">Aden Beauty</button>
+            <button onclick="switchBrand('Glenice')" id="tab-Glenice" class="brand-tab flex-1 py-2 px-4 rounded-t-lg font-bold text-xs uppercase tracking-wider text-white bg-stone-800 opacity-60 transition-all">Glenice</button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+
+        <!-- HEADER & BRAND TITLE -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+            <div>
+                <span id="activeBrandBadge" class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white rounded-full bg-[#90753a]">Aden Hijab</span>
+                <h1 class="text-2xl font-bold mt-2 text-stone-900">Dashboard Admin & Manajemen Produk</h1>
+                <p class="text-xs text-stone-500 mt-1">Kelola stok, penjualan, pengiriman, dan katalog produk terintegrasi.</p>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="syncFromAmertaLaksmiPage()" class="bg-amber-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-amber-700 transition-all shadow-md flex items-center gap-2">
+                    <i class="fa fa-refresh"></i> Sinkronkan Amerta Laksmi
+                </button>
+                <button onclick="openProductModal()" class="bg-stone-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-stone-800 transition-all shadow-md flex items-center gap-2">
+                    <i class="fa fa-plus"></i> Tambah Produk Baru
+                </button>
+            </div>
+        </div>
+
+        <!-- STATS & REPORT CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Total Stok Brand</p>
+                    <h3 id="statTotalStock" class="text-2xl font-bold text-stone-800 mt-1">0 Pcs</h3>
+                </div>
+                <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 text-xl"><i class="fa fa-cubes"></i></div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Total Penjualan</p>
+                    <h3 id="statTotalSales" class="text-2xl font-bold text-stone-800 mt-1">Rp 0</h3>
+                </div>
+                <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 text-xl"><i class="fa fa-line-chart"></i></div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Pengiriman Active / Checkout</p>
+                    <h3 id="statTotalShipments" class="text-2xl font-bold text-stone-800 mt-1">0 Resi</h3>
+                </div>
+                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 text-xl"><i class="fa fa-truck"></i></div>
+            </div>
+        </div>
+
+        <!-- SECTION TAB SELECTION -->
+        <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+            <div class="border-b border-stone-100 flex px-6 pt-4 gap-6 text-xs font-bold uppercase tracking-wider">
+                <button onclick="toggleAdminTab('products')" id="adminTabProd" class="pb-4 border-b-2 border-stone-900 text-stone-900">Katalog & Stok Produk</button>
+                <button onclick="toggleAdminTab('shipments')" id="adminTabShip" class="pb-4 text-stone-400 hover:text-stone-700">Laporan Pengiriman Customer</button>
+            </div>
+
+            <!-- PRODUCT MANAGEMENT TABLE -->
+            <div id="viewProducts" class="p-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="text-[10px] uppercase tracking-widest text-stone-400 border-b border-stone-100 pb-3">
+                                <th class="pb-3">Produk & Varian</th>
+                                <th class="pb-3">Size & Harga</th>
+                                <th class="pb-3">Stok Total</th>
+                                <th class="pb-3">URL Link Otomatis</th>
+                                <th class="pb-3 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="divide-y divide-stone-100 text-xs">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SHIPMENT REPORT TABLE -->
+            <div id="viewShipments" class="p-6 hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="text-[10px] uppercase tracking-widest text-stone-400 border-b border-stone-100 pb-3">
+                                <th class="pb-3">ID Order / Resi</th>
+                                <th class="pb-3">Customer</th>
+                                <th class="pb-3">Produk & Qty</th>
+                                <th class="pb-3">Status Pengiriman</th>
+                                <th class="pb-3 text-right">Update Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shipmentTableBody" class="divide-y divide-stone-100 text-xs">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL FORM TAMBAH/EDIT PRODUK -->
+    <div id="productModal" class="fixed inset-0 bg-black/50 z-[999] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 space-y-5 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 id="modalTitle" class="font-bold text-lg text-stone-900">Tambah Produk Baru</h3>
+                <button onclick="closeProductModal()" class="text-stone-400 hover:text-stone-800 text-lg">✕</button>
+            </div>
+
+            <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-4 text-xs">
+                <input type="hidden" id="editProductId">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="font-bold text-stone-600 uppercase tracking-wider block mb-1">Pilih Brand</label>
+                        <select id="formBrand" class="w-full border rounded-xl p-2.5 focus:ring-1 focus:ring-stone-400 outline-none">
+                            <option value="Aden Hijab">Aden Hijab</option>
+                            <option value="Aden Signature">Aden Signature</option>
+                            <option value="Aden Basic">Aden Basic</option>
+                            <option value="Aden Beauty">Aden Beauty</option>
+                            <option value="Glenice">Glenice</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-bold text-stone-600 uppercase tracking-wider block mb-1">Kategori Halaman</label>
+                        <select id="formCategory" class="w-full border rounded-xl p-2.5 focus:ring-1 focus:ring-stone-400 outline-none">
+                            <option value="amerta-laksmi">amerta-laksmi.html</option>
+                            <option value="dress">dress</option>
+                            <option value="koko">koko</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="font-bold text-stone-600 uppercase tracking-wider block mb-1">Nama Produk</label>
+                        <input type="text" id="formName" required placeholder="Contoh: Dress Kids Lengan Panjang Amerta Laksmi" class="w-full border rounded-xl p-2.5 outline-none">
+                    </div>
+                    <div>
+                        <label class="font-bold text-stone-600 uppercase tracking-wider block mb-1">Warna Produk</label>
+                        <input type="text" id="formColor" required placeholder="Contoh: Dark Crimson" class="w-full border rounded-xl p-2.5 outline-none">
+                    </div>
+                </div>
+
+                <!-- VARIANT SIZE & HARGA -->
+                <div class="border p-4 rounded-xl space-y-3 bg-stone-50">
+                    <div class="flex justify-between items-center">
+                        <label class="font-bold text-stone-700 uppercase tracking-wider">Variasi Size, Harga & Stok</label>
+                        <button type="button" onclick="addSizeRow()" class="text-[#90753a] font-bold hover:underline">+ Tambah Size</button>
+                    </div>
+                    <div id="sizeRowsContainer" class="space-y-2">
+                        <!-- Rows Size -->
+                    </div>
+                </div>
+
+                <!-- IMPORT FOTO PRODUK -->
+                <div class="border p-4 rounded-xl space-y-3 bg-stone-50">
+                    <label class="font-bold text-stone-700 uppercase tracking-wider block">Import Foto Produk (Maksimal 10 Foto)</label>
+                    <p class="text-[10px] text-stone-500">
+                        • Foto 1: Foto Utama<br>
+                        • Foto 2: Foto Hover<br>
+                        • Foto 3 - 10: Gallery Detail
+                    </p>
+                    <input type="file" id="imageInput" multiple accept="image/*" onchange="handleImageUpload(event)" class="w-full border bg-white p-2 rounded-xl">
+                    <div id="imagePreviewContainer" class="grid grid-cols-5 gap-2 mt-2">
+                        <!-- Image Previews -->
+                    </div>
+                </div>
+
+                <div>
+                    <label class="font-bold text-stone-600 uppercase tracking-wider block mb-1">Keterangan / Deskripsi Produk</label>
+                    <textarea id="formDescription" rows="3" class="w-full border rounded-xl p-2.5 outline-none" placeholder="Masukkan deskripsi detail bahan..."></textarea>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                    <button type="button" onclick="closeProductModal()" class="px-5 py-2.5 rounded-xl border font-bold uppercase">Batal</button>
+                    <button type="submit" id="submitBtn" class="px-5 py-2.5 rounded-xl bg-stone-900 text-white font-bold uppercase hover:bg-stone-800">Simpan & Sync</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const BRAND_COLORS = {
+            'Aden Hijab': '#90753a',
+            'Aden Signature': '#ccb47b',
+            'Aden Basic': '#c09a5e',
+            'Aden Beauty': '#cfa395',
+            'Glenice': '#292524'
+        };
+
+        let currentBrand = 'Aden Hijab';
+        let products = JSON.parse(localStorage.getItem('aden_products')) || [];
+        let shipments = JSON.parse(localStorage.getItem('aden_shipments')) || [
+            { id: 'ORD-1001', customer: 'Siti Rahma', product: 'Dress Kids Dark Crimson (M)', qty: 1, status: 'Diproses' },
+            { id: 'ORD-1002', customer: 'Budi Santoso', product: 'Koko Amerta Laksmi Straw (L)', qty: 2, status: 'Dikirim' }
+        ];
+
+        let currentUploadedImages = [];
+
+        // DATA INITIAL PRODUK DARI HALAMAN AMERTA-LAKSMI.HTML
+        const AMERTA_LAKSMI_PRODUCTS = [
+            {
+                id: 'amerta-straw',
+                brand: 'Aden Hijab',
+                category: 'amerta-laksmi',
+                name: 'Dress Kids Lengan Panjang Amerta Laksmi',
+                color: 'Straw',
+                sizes: [{ size: 'S', price: 100000, stock: 15 }, { size: 'M', price: 480000, stock: 20 }],
+                images: [
+                    '../../images/amerta-laksmi/straw-dress-kids.jpg',
+                    '../../images/amerta-laksmi/straw-dress-kids2.jpg'
+                ],
+                description: 'Dress Kids Lengan Panjang Amerta Laksmi varian Straw dengan bahan kualitas tinggi.',
+                url: 'Adengroupofficial.com/aden-hijab/produk/amerta-laksmi-dress-kids-lengan-panjang=straw.html'
+            },
+            {
+                id: 'amerta-nature-black',
+                brand: 'Aden Hijab',
+                category: 'amerta-laksmi',
+                name: 'Dress Kids Lengan Panjang Amerta Laksmi',
+                color: 'Nature Black',
+                sizes: [{ size: 'S', price: 100000, stock: 12 }, { size: 'M', price: 480000, stock: 18 }],
+                images: [
+                    '../../images/amerta-laksmi/nature-black-dress-kids1.jpg',
+                    '../../images/amerta-laksmi/nature-black-dress-kids2.jpg'
+                ],
+                description: 'Dress Kids Lengan Panjang Amerta Laksmi warna Nature Black.',
+                url: 'Adengroupofficial.com/aden-hijab/produk/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html'
+            },
+            {
+                id: 'amerta-indian-tan',
+                brand: 'Aden Hijab',
+                category: 'amerta-laksmi',
+                name: 'Dress Kids Lengan Panjang Amerta Laksmi',
+                color: 'Indian Tan',
+                sizes: [{ size: 'S', price: 100000, stock: 10 }, { size: 'M', price: 480000, stock: 15 }],
+                images: [
+                    '../../images/amerta-laksmi/indian-dress-kids.jpg',
+                    '../../images/amerta-laksmi/indian-dress-kids1.jpg'
+                ],
+                description: 'Dress Kids Lengan Panjang Amerta Laksmi warna Indian Tan.',
+                url: 'Adengroupofficial.com/aden-hijab/produk/amerta-laksmi-dress-kids-lengan-panjang=indian-tan.html'
+            },
+            {
+                id: 'amerta-heliotrope',
+                brand: 'Aden Hijab',
+                category: 'amerta-laksmi',
+                name: 'Dress Kids Lengan Panjang Amerta Laksmi',
+                color: 'Heliotrope',
+                sizes: [{ size: 'S', price: 100000, stock: 8 }, { size: 'M', price: 480000, stock: 14 }],
+                images: [
+                    '../../images/amerta-laksmi/heliotrope-dress-kids.jpg',
+                    '../../images/amerta-laksmi/heliotrope-dress-kids2.jpg'
+                ],
+                description: 'Dress Kids Lengan Panjang Amerta Laksmi warna Heliotrope.',
+                url: 'Adengroupofficial.com/aden-hijab/produk/amerta-laksmi-dress-kids-lengan-panjang=heliotrope.html'
+            },
+            {
+                id: 'amerta-dark-crimson',
+                brand: 'Aden Hijab',
+                category: 'amerta-laksmi',
+                name: 'Dress Kids Lengan Panjang Amerta Laksmi',
+                color: 'Dark Crimson',
+                sizes: [{ size: 'S', price: 100000, stock: 15 }, { size: 'M', price: 480000, stock: 20 }],
+                images: [
+                    '../../images/amerta-laksmi/crimson-dress-kids.jpg',
+                    '../../images/amerta-laksmi/crimson-dress-kids1.jpg'
+                ],
+                description: 'Dress Kids Lengan Panjang Amerta Laksmi warna Dark Crimson.',
+                url: 'Adengroupofficial.com/aden-hijab/produk/amerta-laksmi-dress-kids-lengan-panjang=dark-crimson.html'
+            }
+        ];
+
+        window.onload = function() {
+            if(products.length === 0) {
+                syncFromAmertaLaksmiPage(false);
+            }
+            switchBrand('Aden Hijab');
+            renderShipments();
+        };
+
+        // FUNGSI UNTUK MENYSINKRONKAN PRODUK SECARA DINAMIS DARI HALAMAN AMERTA-LAKSMI.HTML
+async function syncFromAmertaLaksmiPage(showAlert = true) {
+    const targetUrl = 'adenhijab/collections/amerta-laksmi.html';
+
+    try {
+        // 1. Ambil dokumen HTML amerta-laksmi.html
+        const response = await fetch(targetUrl);
+        if (!response.ok) {
+            throw new Error(`Gagal mengambil halaman: ${response.statusText}`);
+        }
+
+        const htmlText = await response.text();
+
+        // 2. Parse HTML text menjadi Document DOM
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+
+        // 3. Ambil seluruh elemen produk (.product-item)
+        const productElements = doc.querySelectorAll('.product-item');
+
+        if (productElements.length === 0) {
+            if (showAlert) alert('Tidak ada elemen produk (.product-item) yang ditemukan di amerta-laksmi.html');
+            return;
+        }
+
+        let addedCount = 0;
+
+        // 4. Extract data dari tiap elemen produk
+        productElements.forEach((el) => {
+            const linkEl = el.querySelector('a');
+            const imgEls = el.querySelectorAll('img');
+            const titleEl = el.querySelector('h4');
+            const colorEl = el.querySelector('p.text-stone-400');
+            const priceEl = el.querySelector('p.text-stone-800');
+
+            const name = titleEl ? titleEl.innerText.trim() : 'Produk Amerta Laksmi';
+            const color = colorEl ? colorEl.innerText.trim() : 'Standard';
+            const category = el.getAttribute('data-category') || 'amerta-laksmi';
+            
+            // Ambil URL link href dan sesuaikan path
+            let rawHref = linkEl ? linkEl.getAttribute('href') : '#';
+            let formattedUrl = rawHref.replace('../products/', 'Adengroupofficial.com/aden-hijab/produk/');
+
+            // Ambil array path gambar
+            const images = [];
+            imgEls.forEach(img => {
+                let src = img.getAttribute('src');
+                if (src) {
+                    // Konversi relative path '../../images/...' menjadi path relatif dari root dashboard 'adenhijab/images/...'
+                    let cleanSrc = src.replace('../../', 'adenhijab/');
+                    images.push(cleanSrc);
+                }
+            });
+
+            // Parsing harga dari string (contoh: "Rp 100.000 - Rp 480.000")
+            let minPrice = 100000;
+            let maxPrice = 480000;
+            if (priceEl) {
+                const prices = priceEl.innerText.replace(/[^0-9-]/g, '').split('-');
+                if (prices.length > 0 && prices[0]) minPrice = parseInt(prices[0]);
+                if (prices.length > 1 && prices[1]) maxPrice = parseInt(prices[1]);
+            }
+
+            // ID Unik berdasarkan nama dan warna
+            const generatedId = `amerta-${name.toLowerCase().replace(/\s+/g, '-')}-${color.toLowerCase().replace(/\s+/g, '-')}`;
+
+            // Cek apakah produk sudah ada di array products
+            const existingIndex = products.findIndex(p => p.id === generatedId || (p.name === name && p.color === color));
+
+            if (existingIndex === -1) {
+                products.push({
+                    id: generatedId,
+                    brand: 'Aden Hijab',
+                    category: category,
+                    name: name,
+                    color: color,
+                    sizes: [
+                        { size: 'S', price: minPrice, stock: 10 },
+                        { size: 'M', price: maxPrice, stock: 15 }
+                    ],
+                    images: images.length > 0 ? images : ['https://via.placeholder.com/300'],
+                    description: `${name} varian ${color} dari koleksi Amerta Laksmi.`,
+                    url: formattedUrl
+                });
+                addedCount++;
+            }
+        });
+
+        // 5. Simpan ke LocalStorage & Update Tampilan
+        saveProducts();
+
+        if (showAlert) {
+            alert(`Sinkronisasi berhasil! ${addedCount} produk baru ditambahkan dari amerta-laksmi.html.`);
+        }
+    } catch (error) {
+        console.error('Error Syncing:', error);
+        if (showAlert) {
+            alert('Gagal membaca halaman amerta-laksmi.html! Pastikan dijalankan melalui web server (bukan file://).');
+        }
+    }
+}
+        function saveProducts() {
+            try {
+                localStorage.setItem('aden_products', JSON.stringify(products));
+                renderProducts();
+                updateStats();
+            } catch (e) {
+                alert('Gagal menyimpan! Ukuran foto terlalu besar untuk penyimpanan lokal (LocalStorage). Coba gunakan foto berukuran lebih kecil.');
+            }
+        }
+
+        function switchBrand(brandName) {
+            currentBrand = brandName;
+            document.querySelectorAll('.brand-tab').forEach(tab => {
+                tab.classList.add('opacity-60');
+            });
+            const activeTab = document.getElementById(`tab-${brandName}`);
+            if(activeTab) activeTab.classList.remove('opacity-60');
+
+            const badge = document.getElementById('activeBrandBadge');
+            badge.innerText = brandName;
+            badge.style.backgroundColor = BRAND_COLORS[brandName];
+
+            renderProducts();
+            updateStats();
+        }
+
+        function toggleAdminTab(tab) {
+            if(tab === 'products') {
+                document.getElementById('viewProducts').classList.remove('hidden');
+                document.getElementById('viewShipments').classList.add('hidden');
+                document.getElementById('adminTabProd').className = 'pb-4 border-b-2 border-stone-900 text-stone-900';
+                document.getElementById('adminTabShip').className = 'pb-4 text-stone-400 hover:text-stone-700';
+            } else {
+                document.getElementById('viewProducts').classList.add('hidden');
+                document.getElementById('viewShipments').classList.remove('hidden');
+                document.getElementById('adminTabShip').className = 'pb-4 border-b-2 border-stone-900 text-stone-900';
+                document.getElementById('adminTabProd').className = 'pb-4 text-stone-400 hover:text-stone-700';
+            }
+        }
+
+        function renderProducts() {
+            const tbody = document.getElementById('productTableBody');
+            tbody.innerHTML = '';
+
+            const filtered = products.filter(p => p.brand === currentBrand);
+
+            if(filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-stone-400">Belum ada produk untuk brand ${currentBrand}</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(p => {
+                const totalStock = p.sizes.reduce((acc, curr) => acc + parseInt(curr.stock || 0), 0);
+                const priceRange = getPriceRangeStr(p.sizes);
+                const mainImg = p.images && p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/80';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-stone-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="py-3 flex items-center gap-3">
+                        <img src="${mainImg}" class="w-12 h-14 object-cover rounded-lg border">
+                        <div>
+                            <p class="font-bold text-stone-900">${p.name}</p>
+                            <p class="text-[10px] text-stone-400">Warna: <span class="text-stone-700 font-medium">${p.color}</span></p>
+                        </div>
+                    </td>
+                    <td class="py-3">
+                        <p class="font-bold">${priceRange}</p>
+                        <p class="text-[10px] text-stone-400">${p.sizes.map(s => s.size).join(', ')}</p>
+                    </td>
+                    <td class="py-3">
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateStock('${p.id}', -1)" class="w-6 h-6 border rounded bg-white hover:bg-stone-100 font-bold">-</button>
+                            <span class="font-bold">${totalStock} Pcs</span>
+                            <button onclick="updateStock('${p.id}', 1)" class="w-6 h-6 border rounded bg-white hover:bg-stone-100 font-bold">+</button>
+                        </div>
+                    </td>
+                    <td class="py-3">
+                        <a href="javascript:void(0)" onclick="openSimulatedProductLink('${p.id}')" class="text-blue-600 underline text-[10px] block truncate max-w-[200px]" title="${p.url}">
+                            ${p.url}
+                        </a>
+                    </td>
+                    <td class="py-3 text-right">
+                        <button onclick="editProduct('${p.id}')" class="px-3 py-1 bg-amber-100 text-amber-800 rounded-lg text-[10px] font-bold mr-1">Edit</button>
+                        <button onclick="deleteProduct('${p.id}')" class="px-3 py-1 bg-rose-100 text-rose-800 rounded-lg text-[10px] font-bold">Hapus</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function getPriceRangeStr(sizes) {
+            if(!sizes || sizes.length === 0) return 'Rp 0';
+            const prices = sizes.map(s => parseInt(s.price || 0));
+            const min = Math.min(...prices);
+            const max = Math.max(...prices);
+            if(min === max) return `Rp ${min.toLocaleString('id-ID')}`;
+            return `Rp ${min.toLocaleString('id-ID')} - Rp ${max.toLocaleString('id-ID')}`;
+        }
+
+        function updateStock(id, change) {
+            const index = products.findIndex(p => p.id == id);
+            if(index !== -1) {
+                if(products[index].sizes.length > 0) {
+                    let newStock = parseInt(products[index].sizes[0].stock || 0) + change;
+                    products[index].sizes[0].stock = newStock < 0 ? 0 : newStock;
+                    saveProducts();
+                }
+            }
+        }
+
+        function updateStats() {
+            const brandProds = products.filter(p => p.brand === currentBrand);
+            let totalStock = 0;
+            brandProds.forEach(p => {
+                p.sizes.forEach(s => totalStock += parseInt(s.stock || 0));
+            });
+            document.getElementById('statTotalStock').innerText = `${totalStock} Pcs`;
+            document.getElementById('statTotalSales').innerText = `Rp ${(totalStock * 150000).toLocaleString('id-ID')}`;
+            document.getElementById('statTotalShipments').innerText = `${shipments.length} Resi`;
+        }
+
+        function addSizeRow(size = '', price = '', stock = '') {
+            const container = document.getElementById('sizeRowsContainer');
+            const row = document.createElement('div');
+            row.className = 'flex items-center gap-2 size-row';
+            row.innerHTML = `
+                <input type="text" placeholder="Size (cth: XL)" value="${size}" class="w-1/4 border p-2 rounded-lg outline-none input-size" required>
+                <input type="number" placeholder="Harga (Rp)" value="${price}" class="w-2/4 border p-2 rounded-lg outline-none input-price" required>
+                <input type="number" placeholder="Stok" value="${stock}" class="w-1/4 border p-2 rounded-lg outline-none input-stock" required>
+                <button type="button" onclick="this.parentElement.remove()" class="text-rose-500 font-bold px-2">✕</button>
+            `;
+            container.appendChild(row);
+        }
+
+        async function handleImageUpload(e) {
+            const files = Array.from(e.target.files);
+            if(currentUploadedImages.length + files.length > 10) {
+                alert('Maksimal foto yang dapat diimport adalah 10 foto!');
+                e.target.value = '';
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = "Membaca Foto...";
+
+            const filePromises = files.map(file => {
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (evt) => resolve(evt.target.result);
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            const loadedImages = await Promise.all(filePromises);
+            currentUploadedImages.push(...loadedImages);
+            renderImagePreviews();
+
+            btn.disabled = false;
+            btn.innerText = "Simpan & Sync";
+            e.target.value = '';
+        }
+
+        function renderImagePreviews() {
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = '';
+            currentUploadedImages.forEach((src, idx) => {
+                const div = document.createElement('div');
+                div.className = 'relative border rounded-lg overflow-hidden group h-16 bg-white';
+                div.innerHTML = `
+                    <img src="${src}" class="w-full h-full object-cover">
+                    <span class="absolute top-0 left-0 bg-stone-900/80 text-white text-[8px] px-1">${idx === 0 ? 'Utama' : idx === 1 ? 'Hover' : idx + 1}</span>
+                    <button type="button" onclick="removeImage(${idx})" class="absolute bottom-0 right-0 bg-rose-600 text-white text-[8px] px-1">✕</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function removeImage(idx) {
+            currentUploadedImages.splice(idx, 1);
+            renderImagePreviews();
+        }
+
+        function openProductModal() {
+            document.getElementById('editProductId').value = '';
+            document.getElementById('productForm').reset();
+            document.getElementById('sizeRowsContainer').innerHTML = '';
+            document.getElementById('imagePreviewContainer').innerHTML = '';
+            currentUploadedImages = [];
+            addSizeRow();
+            document.getElementById('formBrand').value = currentBrand;
+            document.getElementById('modalTitle').innerText = 'Tambah Produk Baru';
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+
+            const editId = document.getElementById('editProductId').value;
+            const brand = document.getElementById('formBrand').value;
+            const category = document.getElementById('formCategory').value;
+            const name = document.getElementById('formName').value;
+            const color = document.getElementById('formColor').value;
+            const description = document.getElementById('formDescription').value;
+
+            const sizeRows = document.querySelectorAll('.size-row');
+            const sizes = [];
+            sizeRows.forEach(row => {
+                sizes.push({
+                    size: row.querySelector('.input-size').value,
+                    price: row.querySelector('.input-price').value,
+                    stock: row.querySelector('.input-stock').value
+                });
+            });
+
+            const formattedBrand = brand.toLowerCase().replace(/\s+/g, '-');
+            const formattedName = name.toLowerCase().replace(/\s+/g, '-');
+            const formattedColor = color.toLowerCase().replace(/\s+/g, '-');
+            const generatedUrl = `Adengroupofficial.com/${formattedBrand}/produk/${formattedName}=${formattedColor}.html`;
+
+            if(editId) {
+                const idx = products.findIndex(p => p.id == editId);
+                if(idx !== -1) {
+                    products[idx] = {
+                        ...products[idx],
+                        brand, category, name, color, description, sizes,
+                        images: currentUploadedImages.length > 0 ? [...currentUploadedImages] : products[idx].images,
+                        url: generatedUrl
+                    };
+                }
+            } else {
+                const newProd = {
+                    id: Date.now(),
+                    brand,
+                    category,
+                    name,
+                    color,
+                    description,
+                    sizes,
+                    images: currentUploadedImages.length > 0 ? [...currentUploadedImages] : ['https://via.placeholder.com/300'],
+                    url: generatedUrl
+                };
+                products.push(newProd);
+            }
+
+            saveProducts();
+            closeProductModal();
+            alert('Produk berhasil disimpan dan disinkronkan!');
+        }
+
+        function editProduct(id) {
+            const p = products.find(prod => prod.id == id);
+            if(!p) return;
+
+            document.getElementById('editProductId').value = p.id;
+            document.getElementById('formBrand').value = p.brand;
+            document.getElementById('formCategory').value = p.category;
+            document.getElementById('formName').value = p.name;
+            document.getElementById('formColor').value = p.color;
+            document.getElementById('formDescription').value = p.description || '';
+
+            const container = document.getElementById('sizeRowsContainer');
+            container.innerHTML = '';
+            p.sizes.forEach(s => addSizeRow(s.size, s.price, s.stock));
+
+            currentUploadedImages = [...p.images];
+            renderImagePreviews();
+
+            document.getElementById('modalTitle').innerText = 'Edit Produk';
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function deleteProduct(id) {
+            if(confirm('Yakin ingin menghapus produk ini?')) {
+                products = products.filter(p => p.id != id);
+                saveProducts();
+            }
+        }
+
+        function renderShipments() {
+            const tbody = document.getElementById('shipmentTableBody');
+            tbody.innerHTML = '';
+            shipments.forEach((s, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="py-3 font-bold">${s.id}</td>
+                    <td class="py-3">${s.customer}</td>
+                    <td class="py-3">${s.product} (x${s.qty})</td>
+                    <td class="py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">${s.status}</span></td>
+                    <td class="py-3 text-right">
+                        <button onclick="updateShipmentStatus(${idx})" class="px-2 py-1 bg-stone-200 rounded font-bold text-[10px]">Ubah Status</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateShipmentStatus(idx) {
+            const statuses = ['Diproses', 'Dikirim', 'Selesai'];
+            let current = statuses.indexOf(shipments[idx].status);
+            shipments[idx].status = statuses[(current + 1) % statuses.length];
+            localStorage.setItem('aden_shipments', JSON.stringify(shipments));
+            renderShipments();
+        }
+
+        function openSimulatedProductLink(id) {
+            const p = products.find(item => item.id == id);
+            if(!p) return;
+
+            const newWin = window.open("", "_blank");
+            newWin.document.write(`
+                <!DOCTYPE html>
+                <html lang="id">
+                <head>
+                    <title>${p.name} - ${p.color}</title>
+                    <script src="https://cdn.tailwindcss.com"><\/script>
+                </head>
+                <body class="bg-stone-50 p-8 text-stone-800">
+                    <div class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-lg border grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <img src="${p.images[0]}" class="w-full rounded-xl object-cover mb-4">
+                            <div class="grid grid-cols-5 gap-2">
+                                ${p.images.map(img => `<img src="${img}" class="h-16 w-full object-cover rounded border">`).join('')}
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <span class="text-xs font-bold uppercase tracking-widest text-amber-700">${p.brand}</span>
+                            <h1 class="text-2xl font-bold">${p.name}</h1>
+                            <p class="text-stone-500 text-sm">Warna: ${p.color}</p>
+                            <p class="text-xl font-bold text-stone-900">${getPriceRangeStr(p.sizes)}</p>
+                            <div class="border-t border-b py-4 space-y-2">
+                                <label class="text-xs font-bold uppercase">Pilih Size:</label>
+                                <div class="flex gap-2">
+                                    ${p.sizes.map(s => `<button class="px-4 py-2 border rounded-lg font-bold hover:bg-stone-900 hover:text-white">${s.size} (Stok: ${s.stock})</button>`).join('')}
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase">Keterangan Produk</h4>
+                                <p class="text-xs text-stone-600 mt-1">${p.description || 'Tidak ada deskripsi.'}</p>
+                            </div>
+                            <button class="w-full bg-[#90753a] text-white py-3 rounded-xl font-bold uppercase tracking-wider">Tambah Ke Keranjang</button>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `);
+        }
+    </script>
+</body>
+</html>
