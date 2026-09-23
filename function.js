@@ -1,160 +1,251 @@
 //Navbar
-////////////////////////////////////////////////////////////////////////* SCRIPT TOMBOL SEARCH//////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////* SCRIPT TOMBOL SEARCH *//////////////////////////////////////////////////////////////////////////
 const products = [
     { 
         name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=straw.html', 
         img: '../../images/amerta-laksmi/straw-dress-kids.jpg',
         imgHover: '../../images/amerta-laksmi/straw-dress-kids2.jpg',
         colour: 'Straw', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=nature-black.html', 
         img: '../../images/amerta-laksmi/nature-black-dress-kids1.jpg',
         imgHover: '../../images/amerta-laksmi/nature-black-dress-kids2.jpg',
         colour: 'Nature Black', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=indian-tan.html', 
         img: '../../images/amerta-laksmi/indian-dress-kids.jpg',
         imgHover: '../../images/amerta-laksmi/indian-dress-kids1.jpg',
         colour: 'Indian Tan', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=heliotrope.html', 
         img: '../../images/amerta-laksmi/heliotrope-dress-kids.jpg',
         imgHover: '../../images/amerta-laksmi/heliotrope-dress-kids2.jpg',
         colour: 'Heliotrope', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-pendek=straw.html', 
         img: '../../images/amerta-laksmi/crimson-dress-kids.jpg',
         imgHover: '../../images/amerta-laksmi/crimson-dress-kids1.jpg',
         colour: 'Dark Crimson', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Pendek Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-panjang=dark-crimson.html', 
         img: '../../images/amerta-laksmi/straw-dress-kids.jpg',
         imgHover: '../../images/amerta-laksmi/straw-dress-kids2.jpg',
         colour: 'Straw', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Pendek Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-pendek=nature-black.html', 
         img: '../../images/amerta-laksmi/nature-black-dress-kids1.jpg',
         imgHover: '../../images/amerta-laksmi/nature-black-dress-kids2.jpg',
         colour: 'Nature Black', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Pendek Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-pendek=indian-tan.html', 
         img: '../../images/amerta-laksmi/indian-dress-kids.jpg',
         imgHover: '../../images/amerta-laksmi/indian-dress-kids1.jpg',
         colour: 'Indian Tan', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Pendek Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-pendek=heliotrope.html', 
         img: '../../images/amerta-laksmi/heliotrope-dress-kids.jpg',
         imgHover: '../../images/amerta-laksmi/heliotrope-dress-kids2.jpg',
         colour: 'Heliotrope', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Kids Lengan Pendek Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-kids-lengan-pendek=dark-crimson.html', 
         img: '../../images/amerta-laksmi/crimson-dress-kids.jpg',
         imgHover: '../../images/amerta-laksmi/crimson-dress-kids1.jpg',
         colour: 'Dark Crimson', 
         price: 'Rp 100.000 - Rp 480.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=straw.html', 
         img: '../../images/amerta-laksmi/straw-style-14.jpg',
         imgHover: '../../images/amerta-laksmi/straw-style-15.jpg',
         colour: 'Straw', 
         price: 'Rp 545.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=nature-black.html', 
         img: '../../images/amerta-laksmi/nature-black-style-1.jpg',
         imgHover: '../../images/amerta-laksmi/nature-black-style-11.jpg',
         colour: 'Nature Black', 
         price: 'Rp 545.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
         url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=indian-tan.html', 
         img: '../../images/amerta-laksmi/indian-style-1.jpg',
         imgHover: '../../images/amerta-laksmi/indian-style-12.jpg',
         colour: 'Indian Tan', 
         price: 'Rp 545.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
-        // Gunakan path dari root folder project Anda
-        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=indian-tan.html', 
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-style-16.jpg',
+        imgHover: '../../images/amerta-laksmi/heliotrope-style-17.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 545.000'
+    },
+    { 
+        name: 'Dress Mom Style 1 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/crimson-dress-style-14.jpg',
+        imgHover: '../../images/amerta-laksmi/crimson-dress-style-15.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 545.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1-set-scarf=straw.html', 
+        img: '../../images/amerta-laksmi/straw-style-12.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-style-11.jpg',
+        colour: 'Straw', 
+        price: 'Rp 740.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1-set-scarf=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-style-1.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-style-11.jpg',
+        colour: 'Nature Black', 
+        price: 'Rp 740.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1-set-scarf=indian-tan.html', 
         img: '../../images/amerta-laksmi/indian-style-1.jpg',
         imgHover: '../../images/amerta-laksmi/indian-style-12.jpg',
         colour: 'Indian Tan', 
-        price: 'Rp 545.000'
+        price: 'Rp 740.000'
     },
-      
+
+    { 
+        name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1-set-scarf=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-style-1.jpg',
+        imgHover: '../../images/amerta-laksmi/heliotrope-style-12.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 740.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1-set-scarf=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/crimson-dress-style-1.jpg',
+        imgHover: '../../images/amerta-laksmi/crimson-dress-style-12.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 740.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 2 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2=straw.html', 
+        img: '../../images/amerta-laksmi/straw-style-2.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-style-21.jpg',
+        colour: 'Straw', 
+        price: 'Rp 345.000 - Rp 880.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 2 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-style-24.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-style-25.jpg',
+        colour: 'Nature Black', 
+        price: 'Rp 345.000 - Rp 880.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 2 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-style-26.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-style-25.jpg',
+        colour: 'Indian Tan', 
+        price: 'Rp 345.000 - Rp 880.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 2 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-style-2.jpg',
+        imgHover: '../../images/amerta-laksmi/heliotrope-style-23.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 345.000 - Rp 880.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 2 Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/crimson-dress-style-21.jpg',
+        imgHover: '../../images/amerta-laksmi/crimson-dress-style-22.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 345.000 - Rp 880.000'
+    },
+
+    { 
+        name: 'Dress Mom Style 2 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2-set-scarf=straw.html', 
+        img: '../../images/amerta-laksmi/straw-style-2.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-style-21.jpg',
+        colour: 'Straw', 
+        price: 'Rp 640.000 - Rp 1.025.000'
+    },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -165,52 +256,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const backdrop = document.getElementById('search-backdrop');
     let scrollPos = 0;
 
-    // FUNGSI RENDER (DIPERBAIKI: Menggunakan p.url langsung)
+    // FUNGSI RENDER
     function render(data, gridId, isTyping) {
-    const targetGrid = document.getElementById(gridId);
-    if (!targetGrid) return;
+        const targetGrid = document.getElementById(gridId);
+        if (!targetGrid) return;
 
-    if (!isTyping) {
-        targetGrid.innerHTML = `
-            <div class="col-span-full py-10 flex flex-col items-center justify-center text-stone-300">
-                <svg class="w-12 h-12 mb-3 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" stroke-width="1.5"/>
-                </svg>
-                <p class="text-[10px] uppercase tracking-[0.2em]">Type product name to search...</p>
-            </div>`;
-        return;
-    }
+        if (!isTyping) {
+            targetGrid.innerHTML = `
+                <div class="col-span-full py-10 flex flex-col items-center justify-center text-stone-300">
+                    <svg class="w-12 h-12 mb-3 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" stroke-width="1.5"/>
+                    </svg>
+                    <p class="text-[10px] uppercase tracking-[0.2em]">Type product name or color to search...</p>
+                </div>`;
+            return;
+        }
 
-    if (data.length === 0) {
-        targetGrid.innerHTML = `<p class="col-span-full py-10 text-center text-stone-300 text-[10px] uppercase tracking-widest">No results found</p>`;
-        return;
-    }
+        if (data.length === 0) {
+            targetGrid.innerHTML = `<p class="col-span-full py-10 text-center text-stone-300 text-[10px] uppercase tracking-widest">No results found</p>`;
+            return;
+        }
 
-    targetGrid.innerHTML = data.map(p => `
-        <div class="product-item h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group animate-fade-up relative z-50">
-            <a href="${p.url}" class="flex flex-col h-full cursor-pointer">
-                <div class="relative bg-stone-200 overflow-hidden aspect-[3/4]">
-                    <img src="${p.img}" 
-                         class="w-full h-full transition duration-500 group-hover:scale-105">
+        targetGrid.innerHTML = data.map(p => `
+            <div class="product-item h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group animate-fade-up relative z-50">
+                <a href="${p.url}" class="flex flex-col h-full cursor-pointer">
+                    <div class="relative bg-stone-200 overflow-hidden">
+                        <img src="${p.img}" 
+                             class="w-full h-full transition duration-500 group-hover:scale-105">
+                        
+                        <img src="${p.imgHover || p.img}" 
+                             class="absolute inset-0 w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105">
+                    </div>
                     
-                    <img src="${p.imgHover || p.img}" 
-                         class="absolute inset-0 w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105">
-                </div>
-                
-                <div class="p-3 md:p-4">
-                    <p class="text-stone-400 text-[10px] uppercase tracking-widest mb-1">${p.brand}</p>
-                    <h4 class="text-[8px] md:text-sm font-medium text-stone-800 line-clamp-2 h-[2.8em] leading-tight">
-                        ${p.name}
-                    </h4>
-                    <p class="text-stone-400 text-[11px] md:text-[11px] mt-1">${p.colour}</p>
-                    <p class="text-stone-800 text-[7px] md:text-sm font-medium mt-1 tracking-tight">
-                        ${p.price}
-                    </p>
-                </div>
-            </a>
-        </div>
-    `).join('');
-}
+                    <div class="p-3 md:p-4">
+                        <p class="text-stone-400 text-[10px] uppercase tracking-widest mb-1">${p.brand}</p>
+                        <h4 class="text-[8px] md:text-sm font-medium text-stone-800 line-clamp-2 h-[2.8em] leading-tight">
+                            ${p.name}
+                        </h4>
+                        <p class="text-stone-400 text-[11px] md:text-[11px] mt-1">${p.colour}</p>
+                        <p class="text-stone-800 text-[7px] md:text-sm font-medium mt-1 tracking-tight">
+                            ${p.price}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        `).join('');
+    }
+
+    // LOGIKA PENCARIAN (Bisa berdasarkan Nama atau Warna)
     const handleSearchLogic = (e, gridId, labelId) => {
         const val = e.target.value.toLowerCase().trim();
         const labelStatus = document.getElementById(labelId);
@@ -219,30 +312,37 @@ document.addEventListener('DOMContentLoaded', () => {
             labelStatus.innerText = "Find Products";
             render([], gridId, false);
         } else {
-            const filtered = products.filter(p => p.name.toLowerCase().includes(val));
+            // Memeriksa pencocokan pada Nama Produk ATAU Warna Produk
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(val) || 
+                p.colour.toLowerCase().includes(val)
+            );
             labelStatus.innerText = `Result for: "${val}"`;
             render(filtered, gridId, true);
         }
     };
 
-    // FUNGSI HANDLE FORM (DIPERBAIKI: Mengarahkan ke list pencarian atau link spesifik)
+    // HANDLE SUBMIT FORM
     const handleForm = (e, inp, gridId) => {
-    e.preventDefault();
-    const query = inp.value.toLowerCase().trim();
+        e.preventDefault();
+        const query = inp.value.toLowerCase().trim();
 
-    if (query) {
-        const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-        if (filtered.length > 0) {
-            // Jika user menekan ENTER dan hanya ada 1 hasil, langsung pindah
-            if (filtered.length === 1) {
-                window.location.href = filtered[0].url;
-            } else {
-                // Jika banyak hasil, arahkan ke halaman pencarian dengan query
-                window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+        if (query) {
+            // Memeriksa pencocokan pada Nama Produk ATAU Warna Produk
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.colour.toLowerCase().includes(query)
+            );
+            
+            if (filtered.length > 0) {
+                if (filtered.length === 1) {
+                    window.location.href = filtered[0].url;
+                } else {
+                    window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+                }
             }
         }
-    }
-};
+    };
 
     // EVENT LISTENERS
     inputDT.addEventListener('input', (e) => handleSearchLogic(e, 'grid-suggestion', 'label-status'));
