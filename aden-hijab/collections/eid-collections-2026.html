@@ -767,81 +767,126 @@ function toggleWA() {
   <div class="flex flex-col lg:flex-row gap-8">
     
 <!-- SIDEBAR FILTER (KIRI) -->
-    <aside class="w-full lg:w-64 xl:w-72 flex-shrink-0 space-y-6">
-      <div class="bg-white p-5 rounded-lg border border-stone-200 shadow-sm space-y-6 sticky top-6">
-        
-        <!-- Input Pencarian dengan Tombol Clear (X) -->
-<div>
-  <div class="relative">
-    <!-- Ikon Kaca Pembesar (Kiri) -->
-    <svg class="w-4 h-4 text-stone-400 absolute left-3 top-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-    </svg>
-
-    <!-- Input Text -->
-    <input 
-      type="text" 
-      id="searchInput"
-      placeholder="Cari produk..." 
-      class="w-full pl-10 pr-10 py-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#90753a] focus:border-[#90753a]"
-    >
-
-    <!-- Tombol Hapus / X (Kanan) -->
+<aside class="w-full lg:w-64 xl:w-72 flex-shrink-0">
+  <!-- Container Utama dengan Sticky di Desktop -->
+  <div class="bg-white rounded-lg border border-stone-200 shadow-sm sticky top-6">
+    
+    <!-- Header Filter Mobile (Hanya tampil di Layar Kecil) -->
     <button 
       type="button" 
-      id="clearSearch" 
-      class="hidden absolute right-3 top-2.5 text-stone-400 hover:text-stone-600 focus:outline-none"
-      aria-label="Hapus pencarian"
+      id="toggleFilterBtn"
+      class="w-full flex items-center justify-between p-4 lg:hidden font-semibold text-stone-800 border-b border-stone-100"
+      aria-expanded="false"
     >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      <div class="flex items-center space-x-2">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.5 6.5H6m4 0h7.5M2.5 13.5H10m4 0h3.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round">
+      </path>
+      <circle cx="8" cy="6.5" r="2" stroke="currentColor" stroke-width="1.25"></circle>
+      <circle cx="12" cy="13.5" r="2" stroke="currentColor" stroke-width="1.25"></circle>
+      </svg>
+        </svg>
+        <span class="tracking-wider text-[12px]">Filter</span>
+      </div>
+      <!-- Ikon Panah Dropdown -->
+      <svg id="filterArrow" class="w-4 h-4 text-stone-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
       </svg>
     </button>
-  </div>
-</div>
 
-        <!-- Filter Koleksi / Kategori -->
-        <div>
-          <h4 class="text-sm font-semibold text-stone-800 uppercase tracking-wider mb-3">CATEGORY</h4>
-          <div class="space-y-2 text-sm text-stone-600">
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" value="amerta-laksmi" class="category-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
-              <span>Amerta Laksmi</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" value="sandhangan-jiwa" class="category-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
-              <span>Sandhangan Jiwa</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" value="rambat-raya" class="category-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
-              <span>Rambat Raya</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" value="larasmaya" class="category-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
-              <span>Larasmaya</span>
-            </label>
-          </div>
+    <!-- Content Filter (Sembunyi di Mobile secara default, Tampil Penuh di Desktop) -->
+    <div id="filterContent" class="hidden lg:block p-5 space-y-6">
+      
+      <!-- Input Pencarian -->
+      <div>
+        <div class="relative">
+          <svg class="w-4 h-4 text-stone-400 absolute left-3 top-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+
+          <input 
+            type="text" 
+            id="searchInput"
+            placeholder="Cari produk..." 
+            class="w-full pl-10 pr-10 py-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#90753a] focus:border-[#90753a]"
+          >
+
+          <button 
+            type="button" 
+            id="clearSearch" 
+            class="hidden absolute right-3 top-2.5 text-stone-400 hover:text-stone-600 focus:outline-none"
+            aria-label="Hapus pencarian"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
         </div>
-
-        <hr class="border-stone-200">
-
-        <!-- Filter Jenis Pakaian -->
-        <div>
-          <h4 class="text-sm font-semibold text-stone-800 uppercase tracking-wider mb-3">Type Product</h4>
-          <div class="space-y-2 text-sm text-stone-600">
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" value="dress" class="type-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
-              <span>Dress</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" value="koko" class="type-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
-              <span>Koko</span>
-            </label>
-          </div>
-        </div>
-
       </div>
-    </aside>
+
+      <!-- Filter Koleksi / Kategori -->
+      <div>
+        <h4 class="text-sm font-semibold text-stone-800 uppercase tracking-wider mb-3">CATEGORY</h4>
+        <div class="space-y-2 text-sm text-stone-600">
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input type="checkbox" value="amerta-laksmi" class="category-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
+            <span>Amerta Laksmi</span>
+          </label>
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input type="checkbox" value="sandhangan-jiwa" class="category-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
+            <span>Sandhangan Jiwa</span>
+          </label>
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input type="checkbox" value="rambat-raya" class="category-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
+            <span>Rambat Raya</span>
+          </label>
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input type="checkbox" value="larasmaya" class="category-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
+            <span>Larasmaya</span>
+          </label>
+        </div>
+      </div>
+
+      <hr class="border-stone-200">
+
+      <!-- Filter Jenis Pakaian -->
+      <div>
+        <h4 class="text-sm font-semibold text-stone-800 uppercase tracking-wider mb-3">Type Product</h4>
+        <div class="space-y-2 text-sm text-stone-600">
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input type="checkbox" value="dress" class="type-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
+            <span>Dress</span>
+          </label>
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input type="checkbox" value="koko" class="type-filter rounded border-stone-300 text-[#90753a] focus:ring-[#90753a]">
+            <span>Koko</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</aside>
+
+<!-- SCRIPT DROPDOWN TOGGLE -->
+<script>
+  const toggleBtn = document.getElementById('toggleFilterBtn');
+  const filterContent = document.getElementById('filterContent');
+  const filterArrow = document.getElementById('filterArrow');
+
+  toggleBtn.addEventListener('click', () => {
+    // Toggle sembunyi/tampil konten di mobile
+    filterContent.classList.toggle('hidden');
+    
+    // Diputar panahnya saat terbuka
+    filterArrow.classList.toggle('rotate-180');
+    
+    // Perbarui aksesibilitas
+    const isExpanded = filterContent.classList.contains('hidden') ? 'false' : 'true';
+    toggleBtn.setAttribute('aria-expanded', isExpanded);
+  });
+</script>
 
     <!-- DAFTAR PRODUK (KANAN - EXPAND FULL) -->
     <section class="flex-grow w-full">
