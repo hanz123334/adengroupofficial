@@ -1,6 +1,9 @@
 //Navbar
 ////////////////////////////////////////////////////////////////////////* SCRIPT TOMBOL SEARCH *//////////////////////////////////////////////////////////////////////////
 const products = [
+
+    // AMERTA LAKSMI
+
     { 
         name: 'Dress Kids Lengan Panjang Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -136,7 +139,6 @@ const products = [
         colour: 'Dark Crimson', 
         price: 'Rp 545.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -146,7 +148,6 @@ const products = [
         colour: 'Straw', 
         price: 'Rp 740.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -156,7 +157,6 @@ const products = [
         colour: 'Nature Black', 
         price: 'Rp 740.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -166,7 +166,6 @@ const products = [
         colour: 'Indian Tan', 
         price: 'Rp 740.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -176,17 +175,15 @@ const products = [
         colour: 'Heliotrope', 
         price: 'Rp 740.000'
     },
-
     { 
         name: 'Dress Mom Style 1 Set Scarf Amerta Laksmi', 
         brand: 'ADEN HIJAB',
         url: '/aden-hijab/products/amerta-laksmi-dress-mom-style1-set-scarf=dark-crimson.html', 
-        img: '../../images/amerta-laksmi/crimson-dress-style-1.jpg',
+        img: '../../images/amerta-laksmi/crimson-dress-style-1_.jpg',
         imgHover: '../../images/amerta-laksmi/crimson-dress-style-12.jpg',
         colour: 'Dark Crimson', 
         price: 'Rp 740.000'
     },
-
     { 
         name: 'Dress Mom Style 2 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -196,7 +193,6 @@ const products = [
         colour: 'Straw', 
         price: 'Rp 345.000 - Rp 880.000'
     },
-
     { 
         name: 'Dress Mom Style 2 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -206,7 +202,6 @@ const products = [
         colour: 'Nature Black', 
         price: 'Rp 345.000 - Rp 880.000'
     },
-
     { 
         name: 'Dress Mom Style 2 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -216,7 +211,6 @@ const products = [
         colour: 'Indian Tan', 
         price: 'Rp 345.000 - Rp 880.000'
     },
-
     { 
         name: 'Dress Mom Style 2 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -226,7 +220,6 @@ const products = [
         colour: 'Heliotrope', 
         price: 'Rp 345.000 - Rp 880.000'
     },
-
     { 
         name: 'Dress Mom Style 2 Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -236,7 +229,6 @@ const products = [
         colour: 'Dark Crimson', 
         price: 'Rp 345.000 - Rp 880.000'
     },
-
     { 
         name: 'Dress Mom Style 2 Set Scarf Amerta Laksmi', 
         brand: 'ADEN HIJAB',
@@ -245,6 +237,234 @@ const products = [
         imgHover: '../../images/amerta-laksmi/straw-style-21.jpg',
         colour: 'Straw', 
         price: 'Rp 640.000 - Rp 1.025.000'
+    },
+    { 
+        name: 'Dress Mom Style 2 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2-set-scarf=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-style-2.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-style-21.jpg',
+        colour: 'Nature Black', 
+        price: 'Rp 640.000 - Rp 1.025.000'
+    },
+    { 
+        name: 'Dress Mom Style 2 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2-set-scarf=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-style-21.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-style-23.jpg',
+        colour: 'Indian Tan', 
+        price: 'Rp 640.000 - Rp 1.025.000'
+    },
+    { 
+        name: 'Dress Mom Style 2 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2-set-scarf=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-style-29.jpg',
+        imgHover: '../../images/amerta-laksmi/heliotrope-style-27.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 640.000 - Rp 1.025.000'
+    },
+    { 
+        name: 'Dress Mom Style 2 Set Scarf Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-dress-mom-style2-set-scarf=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/crimson-dress-style-21.jpg',
+        imgHover: '../../images/amerta-laksmi/crimson-dress-style-22.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 640.000 - Rp 1.025.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-panjang=straw.html', 
+        img: '../../images/amerta-laksmi/straw-koko-dad-panjang2.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-koko-dad-panjang3.jpg',
+        colour: 'Straw', 
+        price: 'Rp 350.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-panjang=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-koko-dad-panjang1.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-koko-dad-panjang5.jpg',
+        colour: 'Nature Black', 
+        price: 'Rp 350.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-panjang=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-tan-koko-dad-panjang1.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-tan-koko-dad-panjang3.jpg',
+        colour: 'Indian Tan', 
+        price: 'Rp 350.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-panjang=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-koko-dad-panjang.jpg',
+        imgHover: '../../images/amerta-laksmi/heliotrope-koko-dad-panjang4.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 350.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-panjang=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/dark-crimson-koko-dad-panjang.jpg',
+        imgHover: '../../images/amerta-laksmi/dark-crimson-koko-dad-panjang4.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 350.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-pendek=straw.html', 
+        img: '../../images/amerta-laksmi/straw-koko-dad-pendek1.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-koko-dad-pendek3.jpg',
+        colour: 'Straw', 
+        price: 'Rp 330.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-pendek=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-dad-pendek1.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-dad-pendek4.jpg',
+        colour: 'Nature Black', 
+        price: 'Rp 330.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-pendek=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-tan-koko-dad-pendek.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-tan-koko-dad-pendek3.jpg',
+        colour: 'Indian Tan', 
+        price: 'Rp 330.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-pendek=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-koko-dad-pendek.jpg',
+        imgHover: '../../images/amerta-laksmi/heliotrope-koko-dad-pendek3.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 330.000'
+    },
+    { 
+        name: 'Koko Dewasa Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-dewasa-lengan-pendek=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/dark-crimson-koko-dad-pendek2.jpg',
+        imgHover: '../../images/amerta-laksmi/dark-crimson-koko-dad-pendek3.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 330.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-panjang=straw.html', 
+        img: '../../images/amerta-laksmi/straw-koko-kids2.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-koko-kids4.jpg',
+        colour: 'Straw', 
+        price: 'Rp 275.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-panjang=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-koko-kids-panjang.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-koko-kids-panjang4.jpg',
+        colour: 'Nature Black', 
+        price: 'Rp 275.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-panjang=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-tan-koko-kids1.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-tan-koko-kids4.jpg',
+        colour: 'Indian Tan', 
+        price: 'Rp 275.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-panjang=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-koko-kids1.jpg',
+        imgHover: '../../images/amerta-laksmi/6heliotrope-koko-kids3.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 275.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Panjang Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-panjang=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/dark-crimson-koko-kids.jpg',
+        imgHover: '../../images/amerta-laksmi/dark-crimson-koko-kids3.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 275.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-pendek=straw.html', 
+        img: '../../images/amerta-laksmi/straw-koko-kids2.jpg',
+        imgHover: '../../images/amerta-laksmi/straw-koko-kids4.jpg',
+        colour: 'Straw', 
+        price: 'Rp 250.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-pendek=nature-black.html', 
+        img: '../../images/amerta-laksmi/nature-black-koko-kids-panjang.jpg',
+        imgHover: '../../images/amerta-laksmi/nature-black-koko-kids-panjang4.jpg',
+        colour: 'Nature Black', 
+        price: 'Rp 250.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-pendek=indian-tan.html', 
+        img: '../../images/amerta-laksmi/indian-tan-koko-kids1.jpg',
+        imgHover: '../../images/amerta-laksmi/indian-tan-koko-kids4.jpg',
+        colour: 'Indian Tan', 
+        price: 'Rp 250.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-pendek=heliotrope.html', 
+        img: '../../images/amerta-laksmi/heliotrope-koko-kids1.jpg',
+        imgHover: '../../images/amerta-laksmi/heliotrope-koko-kids3.jpg',
+        colour: 'Heliotrope', 
+        price: 'Rp 250.000'
+    },
+    { 
+        name: 'Koko Kids Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-pendek=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/dark-crimson-koko-kids.jpg',
+        imgHover: '../../images/amerta-laksmi/dark-crimson-koko-kids.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 250.000'
+    },
+
+        // RAMBAT RAYA
+
+    { 
+        name: 'Koko Kids Lengan Pendek Amerta Laksmi', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-pendek=dark-crimson.html', 
+        img: '../../images/amerta-laksmi/dark-crimson-koko-kids.jpg',
+        imgHover: '../../images/amerta-laksmi/dark-crimson-koko-kids.jpg',
+        colour: 'Dark Crimson', 
+        price: 'Rp 250.000'
     },
 ];
 
