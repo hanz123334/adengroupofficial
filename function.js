@@ -458,13 +458,139 @@ const products = [
         // RAMBAT RAYA
 
     { 
-        name: 'Koko Kids Lengan Pendek Amerta Laksmi', 
+        name: 'Dress Kids Lengan Panjang Rambat Raya', 
         brand: 'ADEN HIJAB',
-        url: '/aden-hijab/products/amerta-laksmi-koko-kids-lengan-pendek=dark-crimson.html', 
-        img: '../../images/amerta-laksmi/dark-crimson-koko-kids.jpg',
-        imgHover: '../../images/amerta-laksmi/dark-crimson-koko-kids.jpg',
-        colour: 'Dark Crimson', 
-        price: 'Rp 250.000'
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-panjang=ivory.html', 
+        img: '../../images/rambat-raya/ivory-dress-kids1.jpg',
+        imgHover: '../../images/rambat-raya/ivory-dress-kids.jpg',
+        colour: 'Ivory', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Panjang Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-panjang=dark-mahogany.html', 
+        img: '../../images/rambat-raya/darkkids-1.jpg',
+        imgHover: '../../images/rambat-raya/darkkids_.jpg',
+        colour: 'Dark Mahogany', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Panjang Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-panjang=Maple.html', 
+        img: '../../images/rambat-raya/maple-dress-kids2.jpg',
+        imgHover: '../../images/rambat-raya/maple-dress-kids.jpg',
+        colour: 'Maple', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Panjang Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-panjang=shadow.html', 
+        img: '../../images/rambat-raya/shadow-dress-kids.jpg',
+        imgHover: '../../images/rambat-raya/shadow-kids4.jpg',
+        colour: 'Shadow', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Panjang Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-panjang=sky-blue.html', 
+        img: '../../images/rambat-raya/sky-blue-dress-kids1.jpg',
+        imgHover: '../../images/rambat-raya/sky-blue-dress-kids.jpg',
+        colour: 'Sky Blue', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Pendek Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-pendek=ivory.html', 
+        img: '../../images/rambat-raya/ivory-dress-kids1.jpg',
+        imgHover: '../../images/rambat-raya/ivory-dress-kids.jpg',
+        colour: 'Ivory', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Pendek Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-pendek=dark-mahogany.html', 
+        img: '../../images/rambat-raya/darkkids-1.jpg',
+        imgHover: '../../images/rambat-raya/darkkids_.jpg',
+        colour: 'Dark Mahogany', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Pendek Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-pendek=Maple.html', 
+        img: '../../images/rambat-raya/maple-dress-kids2.jpg',
+        imgHover: '../../images/rambat-raya/maple-dress-kids.jpg',
+        colour: 'Maple', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Pendek Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-pendek=shadow.html', 
+        img: '../../images/rambat-raya/shadow-dress-kids.jpg',
+        imgHover: '../../images/rambat-raya/shadow-kids4.jpg',
+        colour: 'Shadow', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Pendek Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-kids-lengan-pendek=sky-blue.html', 
+        img: '../../images/rambat-raya/sky-blue-dress-kids1.jpg',
+        imgHover: '../../images/rambat-raya/sky-blue-dress-kids.jpg',
+        colour: 'Sky Blue', 
+        price: 'Rp 125.000 - Rp 540.000'
+    },
+    { 
+        name: 'Dress Kids Lengan Pendek Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-style1=ivory.html', 
+        img: '../../images/rambat-raya/ivory-style-1-4.jpg',
+        imgHover: '../../images/rambat-raya/ivory-style-1-5.jpg',
+        colour: 'Ivory', 
+        price: 'Rp 645.000'
+    },
+    { 
+        name: 'Dress Style 1 Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-style1=dark-mahogany.html', 
+        img: '../../images/rambat-raya/dark-style-1-4.jpg',
+        imgHover: '../../images/rambat-raya/dark-style-1-5.jpg',
+        colour: 'Dark Mahogany', 
+        price: 'Rp 645.000'
+    },
+    { 
+        name: 'Dress Style 1 Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-style1=Maple.html', 
+        img: '../../images/rambat-raya/maple-st-15.jpg',
+        imgHover: '../../images/rambat-raya/maple-st-17.jpg',
+        colour: 'Maple', 
+        price: 'Rp 645.000'
+    },
+    { 
+        name: 'Dress Style 1 Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-style1=shadow.html', 
+        img: '../../images/rambat-raya/shadow-sty-11.jpg',
+        imgHover: '../../images/rambat-raya/shadow-sty-1.jpg',
+        colour: 'Shadow', 
+        price: 'Rp 645.000'
+    },
+    { 
+        name: 'Dress Style 1 Rambat Raya', 
+        brand: 'ADEN HIJAB',
+        url: '/aden-hijab/products/rambat-raya-dress-style1=sky-blue.html', 
+        img: '../../images/rambat-raya/sky-blue-st-14.jpg',
+        imgHover: '../../images/rambat-raya/sky-blue-st-15.jpg',
+        colour: 'Sky Blue', 
+        price: 'Rp 645.000'
     },
 ];
 
