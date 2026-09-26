@@ -644,10 +644,10 @@ function toggleSubMenu(id) {
 <!-------------------------------------------------------------------------TOMBOL WHATSAPP-------------------------------------------------------------------------------->
 <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
     <div id="wa-contact-list" 
-         class="hidden opacity-0 translate-y-4 transition-all duration-500 bg-white shadow-2xl border border-white p-5 w-[280px] flex flex-col gap-4 rounded-t-2xl border-b-0">
+         class="hidden opacity-0 translate-y-4 transition-all duration-500 bg-white shadow-2xl border border-stone-100 p-5 w-[280px] flex flex-col gap-4 rounded-t-2xl">
         
-        <a href="https://api.whatsapp.com/send/?phone=6287716224545" target="_blank" class="flex items-center gap-4 hover:bg-stone-100 p-3 rounded-xl transition-colors group">
-            <div class="w-10 h-10 rounded-full flex items-center text-green-600 justify-center">
+        <a href="https://api.whatsapp.com/send/?phone=6287716224545" target="_blank" class="flex items-center gap-4 hover:bg-stone-50 p-3 rounded-xl transition-colors group">
+            <div class="w-10 h-10 rounded-full flex items-center text-green-600 justify-center bg-green-50">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.672 1.433 5.66 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
@@ -661,19 +661,19 @@ function toggleSubMenu(id) {
     <div id="wa-container" 
          onclick="toggleWA()"
          class="flex items-center bg-[#90753a] text-white shadow-xl hover:bg-[#765919] transition-all duration-500 border border-white/20 overflow-hidden w-[60px] h-[60px] cursor-pointer rounded-full" 
-         style="transition: width 0.5s ease, border-radius 0.5s ease;">
+         style="transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
         
-        <div class="flex items-center h-full">
-            <div id="wa-icon-toggle" class="px-[14px] h-full flex items-center justify-center">
+        <div class="flex items-center h-full min-w-[60px] justify-center">
+            <div id="wa-icon-toggle" class="flex items-center justify-center">
                 <div id="icon-wrapper" class="w-8 h-8 flex items-center justify-center">
-                    <img src="https://i.ibb.co.com/HLGfWDJD/whatsapp-line-5.png" class="w-8 h-8 object-contain grayscale brightness-200">
+                    <img src="../../images/whatsapp-white-icon.png" class="w-7 h-7 object-contain grayscale brightness-200">
                 </div>
             </div>
-            <span id="wa-text" 
-               class="pr-8 py-4 text-[11px] uppercase tracking-[0.2em] font-bold whitespace-nowrap opacity-0 transition-all duration-500 pointer-events-none">
-                Contact Us
-            </span>
         </div>
+        <span id="wa-text" 
+           class="pr-10 text-[11px] uppercase tracking-[0.2em] font-bold whitespace-nowrap opacity-0 transition-opacity duration-300 pointer-events-none">
+            Contact Us
+        </span>
     </div>
 </div>
 
@@ -681,38 +681,40 @@ function toggleSubMenu(id) {
 let isWAOpen = false;
 const waContainer = document.getElementById('wa-container');
 const waText = document.getElementById('wa-text');
-const iconWrapper = document.getElementById('icon-wrapper');
 const waContactList = document.getElementById('wa-contact-list');
-
-// Tetap menggunakan ikon WA yang sama baik buka maupun tutup
-const waIcon = `
-    <img src="https://i.ibb.co.com/HLGfWDJD/whatsapp-line-5.png" class="w-6 h-6 object-contain grayscale brightness-200 animate-reveal">
-`;
 
 function toggleWA() {
     isWAOpen = !isWAOpen;
 
     if (isWAOpen) {
+        // Tampilkan List
         waContactList.classList.remove('hidden');
         setTimeout(() => {
             waContactList.classList.remove('opacity-0', 'translate-y-4');
             waContactList.classList.add('opacity-100', 'translate-y-0');
         }, 10);
 
+        // Animasi Tombol Jadi Panjang
         waContainer.style.width = '280px';
         waContainer.style.borderRadius = '0 0 1rem 1rem'; 
-        waText.style.opacity = '1';
-        // Ikon tetap WA, tidak berubah jadi X
-        iconWrapper.innerHTML = waIcon; 
+        
+        // Munculkan Teks
+        setTimeout(() => {
+            waText.style.opacity = '1';
+        }, 200);
+
     } else {
+        // Sembunyikan Teks dulu agar tidak berantakan saat menciut
+        waText.style.opacity = '0';
+
+        // Sembunyikan List
         waContactList.classList.remove('opacity-100', 'translate-y-0');
         waContactList.classList.add('opacity-0', 'translate-y-4');
         setTimeout(() => waContactList.classList.add('hidden'), 500);
 
-        waContainer.style.width = '56px';
+        // Kembalikan Tombol ke Bulat Semula (60px x 60px)
+        waContainer.style.width = '60px';
         waContainer.style.borderRadius = '9999px'; 
-        waText.style.opacity = '0';
-        iconWrapper.innerHTML = waIcon;
     }
 }
 </script>
@@ -720,7 +722,7 @@ function toggleWA() {
 <!-------------------------------------------------------------------------RAMBAT RAYA-------------------------------------------------------------------------------->
 <main class="max-w-9xl mx-auto px-2 py-2 sm:px-6 lg:px-0">
     <div class="w-full overflow-hidden fade-up-element" style="aspect-ratio: 2000 / 700;">
-        <img src="https://i.ibb.co.com/67gYkCRZ/banner-rambat-raya.jpg" class="w-full h-full object-cover" alt="Scarf Collection">
+        <img src="../../images/banner_rambat_raya.webp" class="w-full h-full object-cover" alt="Scarf Collection">
     </div>
         <div class="max-w-8xl mx-auto px-6 h-14 flex items-center justify-between text-[11px] font-medium uppercase tracking-widest">
            <div class="flex space-x-4">
@@ -756,8 +758,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Panjang Rambat Raya Ivory" data-price="365000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-panjang=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/YBzn84x3/ivory-dress-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/DD7B4v5m/ivory-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-dress-kids1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-dress-kids.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Rambat Raya</h4>
@@ -771,8 +773,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Panjang Rambat Raya Dark Mahogany" data-price="365000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-panjang=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/j9T0tFfY/darkkids-1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/qFchd7Gb/darkkids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/darkkids-1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/darkkids_.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Rambat Raya</h4>
@@ -786,8 +788,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Panjang Rambat Raya Maple" data-price="365000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-panjang=Maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/q4sYRqx/maple-dress-kids2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/mV5jNsGd/maple-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-dress-kids2.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-dress-kids.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Rambat Raya</h4>
@@ -801,8 +803,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Panjang Rambat Raya" data-price="365000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-panjang=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/5XxqNwSx/shadow-dress-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/fGBCyXYj/shadow-kids4.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-dress-kids.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-kids4.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Rambat Raya</h4>
@@ -816,8 +818,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Panjang Rambat Raya Sky Blue" data-price="365000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-panjang=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/Gfjfz5HW/sky-blue-dress-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/fz20HLvy/sky-blue-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-blue-dress-kids1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-blue-dress-kids.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Panjang Rambat Raya</h4>
@@ -831,8 +833,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Pendek Rambat Raya Ivory" data-price="345000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-pendek=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/YBzn84x3/ivory-dress-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/DD7B4v5m/ivory-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-dress-kids1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-dress-kids.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Pendek Rambat Raya</h4>
@@ -846,8 +848,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Pendek Rambat Raya Dark Mahogany" data-price="345000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-pendek=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/j9T0tFfY/darkkids-1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/qFchd7Gb/darkkids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/darkkids-1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/darkkids_.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Pendek Rambat Raya</h4>
@@ -861,8 +863,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Pendek Rambat Raya Maple" data-price="345000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-pendek=Maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/q4sYRqx/maple-dress-kids2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/mV5jNsGd/maple-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-dress-kids2.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-dress-kids.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Pendek Rambat Raya</h4>
@@ -876,8 +878,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Pendek Rambat Raya Shadow" data-price="345000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-pendek=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/5XxqNwSx/shadow-dress-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/fGBCyXYj/shadow-kids4.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-dress-kids.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-kids4.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Pendek Rambat Raya</h4>
@@ -891,8 +893,8 @@ function toggleWA() {
                  data-name="Dress Kids Lengan Pendek Rambat Raya Sky Blue" data-price="345000" data-category="dress">
                 <a href="../products/rambat-raya-dress-kids-lengan-pendek=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/Gfjfz5HW/sky-blue-dress-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/fz20HLvy/sky-blue-dress-kids.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-blue-dress-kids1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-blue-dress-kids.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Kids Lengan Pendek Rambat Raya</h4>
@@ -902,12 +904,12 @@ function toggleWA() {
                 </a>
             </div>
 
-                        <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
+            <div class="product-item swiper-slide h-auto bg-white overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.05)] flex flex-col group" 
                  data-name="Dress Style 1 Rambat Raya Ivory" data-price="645000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/MkTVryWS/ivory-style-1-4.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/9DB7QRp/ivory-style-1-5.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-style-1-4.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-style-1-5.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Rambat Raya</h4>
@@ -921,8 +923,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Rambat Raya Dark Mahogany" data-price="645000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/k6B0RcHj/dark-style-1-4.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/XfLzj2sF/dark-style-1-5.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/dark-style-1-4.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/dark-style-1-5.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Rambat Raya</h4>
@@ -936,8 +938,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Rambat Raya Maple" data-price="645000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1=Maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/ycB03Ybq/maple-st-15.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/7PgjCkC/maple-st-17.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-st-15.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-st-17.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Rambat Raya</h4>
@@ -951,8 +953,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Rambat Raya Shadow" data-price="645000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/QvpVkmnZ/shadow-sty-11.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/8nhZN67w/shadow-sty-1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-sty-11.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-sty-1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Rambat Raya</h4>
@@ -966,8 +968,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Rambat Raya Sky Blue" data-price="645000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/W40gWCwv/sky-blue-st-14.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/zHtrkzxW/sky-blue-st-15.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-blue-st-14.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-blue-st-15.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Rambat Raya</h4>
@@ -981,8 +983,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Set Scarf Rambat Raya Ivory" data-price="790000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1-set-scarf=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/ycXTGQwh/ivory-style-1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/KzGFkFLs/ivory-style-1-2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-style-1_.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-style-1-2.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Set Scarf Rambat Raya</h4>
@@ -996,8 +998,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Set Scarf Rambat Raya Dark Mahogany" data-price="790000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1-set-scarf=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/d04dRB39/dark-style-1-2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/Kj0PdPZh/dark-style-1-1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/dark-style-1-2.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/dark-style-1-1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Set Scarf Rambat Raya</h4>
@@ -1011,8 +1013,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Set Scarf Rambat Raya Maple" data-price="790000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1-set-scarf=Maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/WqyqRTx/maple-st-1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/b5wY714T/maple-st-12.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-st-1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-st-12.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Set Scarf Rambat Raya</h4>
@@ -1026,8 +1028,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Set Scarf Rambat Raya Shadow" data-price="790000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1-set-scarf=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/XrL7dnvF/shadow-sty-13.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/QFyqz5SL/shadow-sty-14.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-sty-13.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-sty-14.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Set Scarf Rambat Raya</h4>
@@ -1041,8 +1043,8 @@ function toggleWA() {
                  data-name="Dress Style 1 Set Scarf Rambat Raya Sky Blue" data-price="790000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style1-set-scarf=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/7J8jDBtw/sky-blue-st-1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/PsQ3zVKS/sky-blue-st-12.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-blue-st-1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-blue-st-12.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 1 Set Scarf Rambat Raya</h4>
@@ -1056,8 +1058,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Rambat Raya Ivory" data-price="595000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/fVMNF2Qf/ivory-style-2-4.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/gbg9hyfX/ivory-style-2-5.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-style-2-4.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-style-2-5.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Rambat Raya</h4>
@@ -1071,8 +1073,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Rambat Raya Dark Mahogany" data-price="595000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/rKzy6B5z/dark-style-2-7.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/zTcZksz4/dark-style-2-6.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/dark-style-2-7.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/dark-style-2-6.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Rambat Raya</h4>
@@ -1086,8 +1088,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Rambat Raya Maple" data-price="595000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2=Maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/rRWCVMFd/maple-st-2-4.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/dJW8QH7Z/maple-st-2-6.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-st-2-4.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-st-2-6.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Rambat Raya</h4>
@@ -1101,8 +1103,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Rambat Raya Shadow" data-price="595000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/spcYtX7d/shadow-sty-24.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/YTLB1HxP/shadow-sty-25.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-sty-24.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-sty-25.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Rambat Raya</h4>
@@ -1116,8 +1118,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Rambat Raya Sky Blue" data-price="595000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/G4bgF4Sg/sky-blue-st-21.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/tPQP4Wt0/sky-blue-st-2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-blue-st-21.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-blue-st-2.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Rambat Raya</h4>
@@ -1131,8 +1133,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Set Scarf Rambat Raya Ivory" data-price="740000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2-set-scarf=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/4w8jTQbt/ivory-style-2-1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/dJ59v0YB/ivory-style-2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-style-2-1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-style-2_.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Set Scarf Rambat Raya</h4>
@@ -1146,8 +1148,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Set Scarf Rambat Raya Dark Mahogany" data-price="740000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2-set-scarf=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/MDqt8NrD/dark-style-2-1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/kgRxXH16/dark-style-2-3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/dark-style-2-1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/dark-style-2-3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Set Scarf Rambat Raya</h4>
@@ -1161,8 +1163,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Set Scarf Rambat Raya Maple" data-price="740000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2-set-scarf=Maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/GvzBbVvK/maple-st-2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/ZRFk1W3C/maple-st-2-1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-st-2_.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-st-2-1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Set Scarf Rambat Raya</h4>
@@ -1176,8 +1178,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Set Scarf Rambat Raya Shadow" data-price="740000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2-set-scarf=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/prQtBBvf/shadow-sty-2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/HLPPPNpf/shadow-sty-22.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-sty-2.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-sty-22.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Set Scarf Rambat Raya</h4>
@@ -1191,8 +1193,8 @@ function toggleWA() {
                  data-name="Dress Style 2 Set Scarf Rambat Raya Sky Blue" data-price="740000" data-category="dress">
                 <a href="../products/rambat-raya-dress-style2-set-scarf=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/Sjxm2NF/sky-blue-st-24.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/DgDbR1P9/sky-blue-st-23.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-blue-st-24.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-blue-st-23.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Dress Style 2 Set Scarf Rambat Raya</h4>
@@ -1206,8 +1208,8 @@ function toggleWA() {
                  data-name="Koko Lengan Panjang Rambat Raya Ivory" data-price="415000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-panjang=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/0p6NSpvS/ivory-koko-panjang.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/Y9hb7HF/ivory-koko-panjang2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-koko-panjang.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-koko-panjang2.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Panjang Rambat Raya</h4>
@@ -1221,8 +1223,8 @@ function toggleWA() {
                  data-name="Koko Lengan Panjang Rambat Raya Dark Mahogany" data-price="415000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-panjang=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/jv3fDRSd/koko-mahogani-panjang.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/23FdxJkR/koko-mahogani-panjang3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/koko-mahogani-panjang.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/koko-mahogani-panjang3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Panjang Rambat Raya</h4>
@@ -1236,8 +1238,8 @@ function toggleWA() {
                  data-name="Koko Lengan Panjang Rambat Raya Maple" data-price="415000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-panjang=maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/Zpp3XKXs/maple-lengan-panjang2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/S4CxtRbD/maple-lengan-panjang.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-lengan-panjang2.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-lengan-panjang.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Panjang Rambat Raya</h4>
@@ -1251,8 +1253,8 @@ function toggleWA() {
                  data-name="Koko Lengan Panjang Rambat Raya Shadow" data-price="415000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-panjang=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/nN7NFL7W/shadow-lengan-panjang.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/TM3hBV7q/shadow-lengan-panjang2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-lengan-panjang.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-lengan-panjang2.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Panjang Rambat Raya</h4>
@@ -1266,8 +1268,8 @@ function toggleWA() {
                  data-name="Koko Lengan Panjang Rambat Raya Sky Blue" data-price="415000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-panjang=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/tTQZ3nYN/sky-koko-dad-panjang1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/4DK6Kcz/sky-koko-dad-panjang3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-koko-dad-panjang1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-koko-dad-panjang3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Panjang Rambat Raya</h4>
@@ -1281,8 +1283,8 @@ function toggleWA() {
                  data-name="Koko Lengan Pendek Rambat Raya Ivory" data-price="405000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-pendek=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/NdtrcRsY/ivory-koko-pendek.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/KQ6cpxy/ivory-koko-pendek2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-koko-pendek.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-koko-pendek2.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Pendek Rambat Raya</h4>
@@ -1296,8 +1298,8 @@ function toggleWA() {
                  data-name="Koko Lengan Pendek Rambat Raya Dark Mahogany" data-price="405000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-pendek=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/d0tQ0ypQ/koko-mahogani-pdk.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/d0JwxfM8/koko-mahogani-pdk1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/koko-mahogani-pdk.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/koko-mahogani-pdk1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Pendek Rambat Raya</h4>
@@ -1311,8 +1313,8 @@ function toggleWA() {
                  data-name="Koko Lengan Pendek Rambat Raya Maple" data-price="405000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-pendek=maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/spnTgXc9/maple-lengan-pendek1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/mCPbhtzQ/maple-lengan-pendek3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-lengan-pendek1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-lengan-pendek3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Pendek Rambat Raya</h4>
@@ -1326,8 +1328,8 @@ function toggleWA() {
                  data-name="Koko Lengan Pendek Rambat Raya Shadow" data-price="405000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-pendek=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/W4MBxfgV/shadow-lengan-pendek.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/rGF2HDRV/shadow-lengan-pendek1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-lengan-pendek.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-lengan-pendek1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Pendek Rambat Raya</h4>
@@ -1341,8 +1343,8 @@ function toggleWA() {
                  data-name="Koko Lengan Pendek Rambat Raya Sky Blue" data-price="405000" data-category="koko">
                 <a href="../products/rambat-raya-koko-lengan-pendek=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/MyJ7vVnv/sky-pendek1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/Nd2M30d7/sky-pendek3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-pendek1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-pendek3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Lengan Pendek Rambat Raya</h4>
@@ -1356,8 +1358,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Panjang Rambat Raya Ivory" data-price="320000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-panjang=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/YTknMMmz/ivory-koko-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/Ldvqwr83/ivory-koko-kids2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-koko-kids.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-koko-kids2.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Panjang Rambat Raya</h4>
@@ -1371,8 +1373,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Panjang Rambat Raya Dark Mahogany" data-price="320000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-panjang=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/LXtBxnMQ/koko-mahogani-Kids3.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/G39R2CJV/koko-mahogani-Kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/koko-mahogani-Kids3.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/koko-mahogani-Kids1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Panjang Rambat Raya</h4>
@@ -1386,8 +1388,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Panjang Rambat Raya Maple" data-price="320000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-panjang=maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/TDPSbgPs/maple-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/QjpWXFHf/maple-kids3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-kids.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-kids3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Panjang Rambat Raya</h4>
@@ -1401,8 +1403,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Panjang Rambat Raya Shadow" data-price="320000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-panjang=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/C5QTwt2w/shadow-kids2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/pB0ZPRQX/shadow-kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-kids2.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-kids1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Panjang Rambat Raya</h4>
@@ -1416,8 +1418,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Panjang Rambat Raya Sky Blue" data-price="320000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-panjang=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/tFnKnRR/sky-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/Gvjj2nhR/sky-kids3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-kids1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-kids3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Panjang Rambat Raya</h4>
@@ -1431,8 +1433,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Pendek Rambat Raya Ivory" data-price="310000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-pendek=ivory.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/YTknMMmz/ivory-koko-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/Ldvqwr83/ivory-koko-kids2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/ivory-koko-kids.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/ivory-koko-kids2.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Pendek Rambat Raya</h4>
@@ -1446,8 +1448,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Pendek Rambat Raya Dark Mahogany" data-price="310000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-pendek=dark-mahogany.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/LXtBxnMQ/koko-mahogani-Kids3.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/G39R2CJV/koko-mahogani-Kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/koko-mahogani-Kids3.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/koko-mahogani-Kids1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Pendek Rambat Raya</h4>
@@ -1461,8 +1463,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Pendek Rambat Raya Maple" data-price="310000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-pendek=maple.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/TDPSbgPs/maple-kids.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/QjpWXFHf/maple-kids3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/maple-kids.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/maple-kids3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Pendek Rambat Raya</h4>
@@ -1476,8 +1478,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Pendek Rambat Raya Shadow" data-price="310000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-pendek=shadow.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/C5QTwt2w/shadow-kids2.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/pB0ZPRQX/shadow-kids1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/shadow-kids2.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/shadow-kids1.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Pendek Rambat Raya</h4>
@@ -1491,8 +1493,8 @@ function toggleWA() {
                  data-name="Koko Kids Lengan Pendek Rambat Raya Sky Blue" data-price="310000" data-category="koko">
                 <a href="../products/rambat-raya-koko-kids-lengan-pendek=sky-blue.html" class="flex flex-col h-full">
             <div class="relative bg-stone-200 overflow-hidden md:aspect-auto">
-                <img src="https://i.ibb.co.com/tFnKnRR/sky-kids1.jpg" class="w-full h-full object-cover transition duration-500">
-                <img src="https://i.ibb.co.com/Gvjj2nhR/sky-kids3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
+                <img src="../../images/rambat-raya/sky-kids1.webp" class="w-full h-full object-cover transition duration-500">
+                <img src="../../images/rambat-raya/sky-kids3.webp" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-400 group-hover:opacity-100">
             </div>
             <div class="p-3 md:p-4">
                 <h4 class="text-[11px] md:text-sm font-medium">Koko Kids Lengan Pendek Rambat Raya</h4>
