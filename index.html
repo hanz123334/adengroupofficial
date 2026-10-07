@@ -795,13 +795,17 @@ function scrollToTop() {
     </div>
 </div>
 
+<!-- SKRIP 1: MAIN HERO BANNER SLIDER -->
 <script>
+(() => {
     const slider = document.getElementById('slider');
     const dots = document.querySelectorAll('.dot');
     let currentIndex = 0;
     const totalSlides = 4;
+    let autoSlideTimer;
 
     function updateSlider() {
+        if (!slider) return;
         slider.style.transform = `translateX(-${currentIndex * 100}%)`;
         
         dots.forEach((dot, index) => {
@@ -830,51 +834,68 @@ function scrollToTop() {
         updateSlider();
     }
 
-    let autoSlide = setInterval(nextSlide, 5000);
+    function startAutoSlide() {
+        autoSlideTimer = setInterval(nextSlide, 5000);
+    }
 
     function resetTimer() {
-        clearInterval(autoSlide);
-        autoSlide = setInterval(nextSlide, 5000);
+        clearInterval(autoSlideTimer);
+        startAutoSlide();
     }
+
+    // Jalankan auto-slide
+    startAutoSlide();
+})();
 </script>
 
+
+<!-- SKRIP 2: PRODUCT CARD CAROUSEL (DRAG & SCROLL) -->
 <script>
+(() => {
     const slider = document.getElementById('sliderContainer');
     const leftBtn = document.getElementById('slideLeft');
     const rightBtn = document.getElementById('slideRight');
-    
-    // 1. FUNGSI HITUNG JARAK (Dinamis: Lebar Card + Gap)
+    let autoSlideTimer;
+
+    if (!slider) return;
+
+    // 1. FUNGSI HITUNG JARAK
     function getScrollStep() {
         const card = slider.querySelector('.product-card');
+        if (!card) return 300; // nilai default jika card tidak ditemukan
         const style = window.getComputedStyle(slider);
         const gap = parseInt(style.columnGap) || 20; 
         return card.offsetWidth + gap;
     }
 
     // 2. LOGIKA TOMBOL PANAH
-    rightBtn.addEventListener('click', () => {
-        slider.style.scrollBehavior = 'smooth'; // Pastikan halus saat klik tombol
-        slider.scrollLeft += getScrollStep();
-        resetTimer();
-    });
+    if (rightBtn) {
+        rightBtn.addEventListener('click', () => {
+            slider.style.scrollBehavior = 'smooth';
+            slider.scrollLeft += getScrollStep();
+            resetTimer();
+        });
+    }
 
-    leftBtn.addEventListener('click', () => {
-        slider.style.scrollBehavior = 'smooth';
-        slider.scrollLeft -= getScrollStep();
-        resetTimer();
-    });
+    if (leftBtn) {
+        leftBtn.addEventListener('click', () => {
+            slider.style.scrollBehavior = 'smooth';
+            slider.scrollLeft -= getScrollStep();
+            resetTimer();
+        });
+    }
 
-    // 3. LOGIKA MOUSE DRAG (Perbaikan Detail)
+    // 3. LOGIKA MOUSE DRAG
     let isDown = false;
     let startX;
     let scrollLeftPos;
 
     slider.addEventListener('mousedown', (e) => {
         isDown = true;
-        resetTimer(); // Berhentikan timer saat user mulai drag
-        slider.classList.add('active'); // Opsional: untuk styling kursor di CSS
-        slider.style.scrollBehavior = 'auto'; // Matikan smooth agar tarikan instan
-        slider.style.scrollSnapType = 'none'; // Matikan magnet snap agar tidak melawan tarikan
+        resetTimer();
+        slider.classList.add('active');
+        slider.style.scrollBehavior = 'auto';
+        slider.style.scrollSnapType = 'none';
         
         startX = e.pageX - slider.offsetLeft;
         scrollLeftPos = slider.scrollLeft;
@@ -885,8 +906,8 @@ function scrollToTop() {
         isDown = false;
         slider.classList.remove('active');
         slider.style.scrollBehavior = 'smooth'; 
-        slider.style.scrollSnapType = 'x mandatory'; // Hidupkan kembali snap
-        resetTimer(); // Mulai lagi timer auto-slide
+        slider.style.scrollSnapType = 'x mandatory';
+        resetTimer();
     };
 
     slider.addEventListener('mouseleave', endDragging);
@@ -894,17 +915,15 @@ function scrollToTop() {
 
     slider.addEventListener('mousemove', (e) => {
         if (!isDown) return;
-        e.preventDefault(); // Cegah seleksi teks/gambar
+        e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; // Sensitivitas (bisa diubah)
+        const walk = (x - startX) * 2;
         slider.scrollLeft = scrollLeftPos - walk;
     });
 
-    // 4. LOGIKA AUTO SLIDE (Lebih Stabil)
-    let autoSlide;
-
+    // 4. LOGIKA AUTO SLIDE
     function startAutoSlide() {
-        autoSlide = setInterval(() => {
+        autoSlideTimer = setInterval(() => {
             const isAtEnd = slider.scrollLeft + slider.offsetWidth >= slider.scrollWidth - 10;
             
             if (isAtEnd) {
@@ -916,18 +935,18 @@ function scrollToTop() {
     }
 
     function resetTimer() {
-        clearInterval(autoSlide);
+        clearInterval(autoSlideTimer);
         startAutoSlide();
     }
 
-    // Jalankan pertama kali
     startAutoSlide();
 
-    // Tambahan: Pastikan gambar tidak bisa di-drag secara default browser
+    // Prevent drag bawaan browser pada gambar
     slider.querySelectorAll('img').forEach(img => {
         img.style.userSelect = 'none';
         img.setAttribute('draggable', 'false');
     });
+})();
 </script>
 
 <!-------------------------------------------------------------------------NEW RELEASE PRODUCT FLYER ADEN HIJAB-------------------------------------------------------------------------------->
